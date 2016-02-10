@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="android:timePickerStyle">@style/Widget.TimePicker</item>
+    </style>
+    <style name="Widget.TimePicker">
+        <item name="android:timePickerMode">spinner</item>
+    </style>
+
+    <style name="Widget"></style>>
+            <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+    </style>
+</resources>

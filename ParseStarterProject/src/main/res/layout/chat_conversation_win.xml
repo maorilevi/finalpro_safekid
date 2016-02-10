@@ -1,0 +1,74 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context="com.example.admin.modulo_chat.MainChatWindow"
+    android:background="#6f73e0">
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:inputType="textMultiLine"
+        android:ems="10"
+        android:id="@+id/chat"
+        android:layout_alignParentLeft="true"
+        android:layout_toLeftOf="@+id/btnsend"
+        android:layout_alignParentBottom="true"
+        android:background="@android:drawable/editbox_background_normal"
+        android:textColor="#ff000000" />
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:id="@+id/btnsend"
+        android:layout_alignBottom="@+id/chat"
+        android:layout_alignParentRight="true"
+        android:background="@android:drawable/editbox_background_normal"
+        android:textSize="20sp"
+        android:text="Send" />
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
+        android:id="@+id/listmessage"
+        android:layout_alignParentStart="true"
+        android:background="@android:drawable/editbox_background_normal"
+        android:layout_below="@+id/ConversationUserImage"
+        android:layout_above="@+id/btnsend" />
+
+    <Button
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:id="@+id/cht2list"
+        android:background="@android:drawable/editbox_background_normal"
+        android:textSize="10sp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:text="back"
+        android:layout_above="@+id/listmessage" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/user_name_chat_win"
+        android:textSize="25sp"
+        android:background="@android:drawable/editbox_background_normal"
+        android:gravity="center"
+        android:layout_above="@+id/listmessage"
+        android:layout_toLeftOf="@+id/ConversationUserImage"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/cht2list"
+        android:layout_toEndOf="@+id/cht2list" />
+
+    <ImageView
+        android:layout_width="40dp"
+        android:layout_height="80dp"
+        android:id="@+id/ConversationUserImage"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_toRightOf="@+id/chat"
+        android:layout_toEndOf="@+id/chat" />
+
+</RelativeLayout>

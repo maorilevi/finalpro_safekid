@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/scrollView2" >
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#6f73e0">
+
+            <ImageView
+                android:layout_width="123dp"
+                android:layout_height="169dp"
+                android:id="@+id/AddKid_Image"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentTop="true"
+                android:layout_toEndOf="@+id/textView11"
+                android:layout_above="@+id/AddKid_SaveDetails"
+                android:background="@drawable/shado" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Choose Image"
+                android:id="@+id/AddKid_ChooseImage"
+                android:onClick="loadImagefromGallery"
+                android:layout_above="@+id/textView5" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="First name"
+                android:id="@+id/textView5"
+                android:layout_gravity="center_horizontal"
+                android:layout_above="@+id/Add_Kid_F_Name"
+                android:layout_alignStart="@+id/textView6"
+                android:textStyle="bold"
+                android:textColor="#000000"
+                android:textSize="20sp" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:id="@+id/AddKid_Fname"
+                android:background="@android:drawable/bottom_bar"
+                android:layout_above="@+id/save_signup_btn"
+                android:layout_alignParentEnd="true" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Last name"
+                android:id="@+id/textView6"
+                android:layout_gravity="center_horizontal"
+                android:layout_alignStart="@+id/textView9"
+                android:textStyle="bold"
+                android:textColor="#000000"
+                android:textSize="20sp" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:id="@+id/AddKid_Lname"
+                android:background="@android:drawable/bottom_bar"
+                android:layout_above="@+id/textView8"
+                android:layout_alignParentStart="true" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="user name"
+                android:id="@+id/textView7"
+                android:layout_gravity="center_horizontal"
+                android:layout_above="@+id/Add_Kid_User_Name"
+                android:layout_alignStart="@+id/textView10"
+                android:textStyle="bold"
+                android:textColor="#000000"
+                android:textSize="20sp" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:id="@+id/AddKid_UserName"
+                android:background="@android:drawable/bottom_bar"
+                android:layout_above="@+id/textView9"
+                android:layout_alignParentStart="true" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Password"
+                android:id="@+id/textView8"
+                android:layout_gravity="center_horizontal"
+                android:layout_above="@+id/Add_Kid_Password"
+                android:layout_centerHorizontal="true"
+                android:textStyle="bold"
+                android:textColor="#000000"
+                android:textSize="20sp" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:id="@+id/AddKid_Pass"
+                android:background="@android:drawable/bottom_bar"
+                android:layout_above="@+id/textView10"
+                android:layout_alignParentStart="true" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Confraim Password"
+                android:id="@+id/textView9"
+                android:layout_gravity="center_horizontal"
+                android:layout_above="@+id/Add_Kid_Confirm_Password"
+                android:layout_centerHorizontal="true"
+                android:textStyle="bold"
+                android:textColor="#000000"
+                android:textSize="20sp" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:id="@+id/AddKid_ConfPass"
+                android:background="@android:drawable/bottom_bar"
+                android:layout_above="@+id/textView15"
+                android:layout_alignParentStart="true" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Birthday"
+                android:id="@+id/textView10"
+                android:layout_gravity="center_horizontal"
+                android:layout_above="@+id/Add_Kid_Birthday"
+                android:layout_centerHorizontal="true"
+                android:textStyle="bold"
+                android:textColor="#000000"
+                android:textSize="20sp" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:id="@+id/AddKid_Birthday"
+                android:background="@android:drawable/bottom_bar"
+                android:layout_above="@+id/textView12"
+                android:layout_alignParentStart="true" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Addres"
+                android:id="@+id/textView11"
+                android:layout_gravity="center_horizontal"
+                android:layout_above="@+id/Add_Kid_Address"
+                android:layout_centerHorizontal="true"
+                android:textStyle="bold"
+                android:textColor="#000000"
+                android:textSize="20sp" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:inputType="textPassword"
+                android:ems="10"
+                android:id="@+id/AddKid_Address"
+                android:background="@android:drawable/bottom_bar"
+                android:layout_above="@+id/textView7"
+                android:layout_alignParentStart="true" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="E-mail"
+                android:id="@+id/textView15"
+                android:layout_gravity="center_horizontal"
+                android:layout_above="@+id/Add_Kid_Email"
+                android:layout_centerHorizontal="true"
+                android:textStyle="bold"
+                android:textColor="#000000"
+                android:textSize="20sp" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:id="@+id/AddKid_Email"
+                android:background="@android:drawable/bottom_bar"
+                android:layout_above="@+id/textView6"
+                android:layout_alignParentStart="true" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Phone namber"
+                android:id="@+id/textView12"
+                android:layout_gravity="center_horizontal"
+                android:layout_above="@+id/Add_Kid_Phone_Number"
+                android:layout_alignEnd="@+id/save_signup_btn"
+                android:textStyle="bold"
+                android:textColor="#000000"
+                android:textSize="20sp" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:inputType="textPassword"
+                android:ems="10"
+                android:id="@+id/AddKid_Phone"
+                android:layout_gravity="center_horizontal"
+                android:background="@android:drawable/bottom_bar"
+                android:layout_above="@+id/textView11"
+                android:layout_alignParentStart="true" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Save"
+                android:id="@+id/AddKid_SaveDetails"
+                android:onClick="onClick"
+                android:layout_gravity="center_horizontal"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true" />
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout><!-- From: file:/C:/Users/Admin/AndroidStudioProjects/finalpro_safekid/ParseStarterProject/src/main/res/layout/add__kid.xml -->
