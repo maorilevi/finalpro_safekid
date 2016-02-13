@@ -31,7 +31,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.parse.FindCallback;
@@ -130,7 +129,9 @@ public class Main2Activity extends AppCompatActivity implements NavigationView.O
                                 if(Getchatromsid&&Updateuser){
                                     Log.i("openfram", "3");
                                     openFram();
-                                    getSupportActionBar().show();
+                                    if(getSupportActionBar().isShowing()){
+                                        getSupportActionBar().show();
+                                    }
                                     run[0] =false;
                                 }
                             } catch (InterruptedException e1) {
@@ -377,6 +378,7 @@ public class Main2Activity extends AppCompatActivity implements NavigationView.O
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
     @Override
     protected void onResume() {
         super.onResume();
@@ -387,6 +389,7 @@ public class Main2Activity extends AppCompatActivity implements NavigationView.O
             bindService(intent, mConnection, Context.BIND_ALLOW_OOM_MANAGEMENT);
         }
     }
+
     @Override
     protected void onPause() {
         super.onPause();
@@ -499,120 +502,5 @@ public class Main2Activity extends AppCompatActivity implements NavigationView.O
         textView=(TextView) findViewById(R.id.ListEvent_Today);
         textView.setText(Schedule_Mange.Current_day);
         Schedule_Mange.setallevent(Main2Activity.this);
-    }
-    ///singel event function
-    //choose time function
-    public void savetime(View view){
-        TimePicker mytime=new TimePicker(this);
-        int Hours_int=((TimePicker)findViewById(R.id.timePicker)).getCurrentHour();
-        int Minute_int=((TimePicker)findViewById(R.id.timePicker)).getCurrentMinute();
-        String Hours="";
-        String Minute="";
-        if(Hours_int<10){
-            Hours=("0"+Integer.toString(Hours_int));
-        }else{
-            Hours=(Integer.toString(Hours_int));
-        }
-        if(Minute_int<10){
-            Minute=("0"+Integer.toString(Minute_int));
-        }else{
-            Minute=(Integer.toString(Minute_int));
-        }
-        Toast.makeText(getApplication(), Hours + ":" + Minute, Toast.LENGTH_SHORT).show();
-        if(view==findViewById(R.id.Event_Show_startbtn)) {
-            Schedule_SingelEvent.Set_Start_Time.setText(Hours + ":" + Minute);
-        }else{
-            Schedule_SingelEvent.Set_End_Time.setText(Hours + ":" + Minute);
-        }
-    }
-    public void saveevent(final View view){
-        if(Schedule_SingelEvent.newevent){
-            //Create new event
-            Toast.makeText(getApplication(), "new", Toast.LENGTH_SHORT).show();
-            ParseObject newevent = new ParseObject("Event");
-            newevent.put("NameEvent", Schedule_SingelEvent.NameEvent.getText().toString());
-            newevent.put("Address",Schedule_SingelEvent.AddressEvent.getText().toString());
-            newevent.put("StartEvent",Schedule_SingelEvent.Set_Start_Time.getText().toString());
-            newevent.put("EndEvent", Schedule_SingelEvent.Set_End_Time.getText().toString());
-            newevent.put("Day", Schedule_Mange.Current_day);
-            newevent.put("Kid_ID", Schedule_Mange.kidID);
-            newevent.saveInBackground();
-            Schedule_Mange.newevent=false;
-        }else{
-            final ParseQuery<ParseObject> getevent = ParseQuery.getQuery("Event");
-            getevent.getInBackground(Schedule_SingelEvent.CurrentEvent.getParseid(), new GetCallback<ParseObject>() {
-                @Override
-                public void done(final ParseObject parseObject, ParseException e2) {
-                    if (e2 == null) {
-                        Toast.makeText(getApplication(), "old", Toast.LENGTH_SHORT).show();
-                        parseObject.put("NameEvent", Schedule_SingelEvent.NameEvent.getText().toString());
-                        parseObject.put("Address", Schedule_SingelEvent.AddressEvent.getText().toString());
-                        parseObject.put("StartEvent", Schedule_SingelEvent.Set_Start_Time.getText().toString());
-                        parseObject.put("EndEvent", Schedule_SingelEvent.Set_End_Time.getText().toString());
-                        parseObject.put("Day", Schedule_SingelEvent.day.getText().toString());
-                        parseObject.saveInBackground();
-                        AlertDialog alertDialog = new AlertDialog.Builder(Main2Activity.this).create();
-                        alertDialog.setTitle("successful update");
-                        alertDialog.setMessage("your changes is update");
-                        alertDialog.setButton("OK", new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int which) {
-                                Lest_Fram = current_Fram;
-                                current_Fram = Schedule_Fram;
-                                FragmentTransaction mytransaction2 = myFramManager.beginTransaction();
-                                mytransaction2.remove(Main2Activity.Lest_Fram);
-                                mytransaction2.show(current_Fram);
-                                mytransaction2.commit();
-                            }
-                        });
-                        alertDialog.show();
-                    } else {
-                    }
-                }
-            });
-        }
-    }
-    //back to main list event
-    public void backtolistevent(View view){
-        Lest_Fram=current_Fram;
-        current_Fram=Schedule_Fram;
-        FragmentTransaction mytransaction2 = myFramManager.beginTransaction();
-        mytransaction2.remove(Main2Activity.Lest_Fram);
-        mytransaction2.show(current_Fram);
-        mytransaction2.commit();
-    }
-    public void DeleteEvent(View view){
-        AlertDialog.Builder builder  =new AlertDialog.Builder(Main2Activity.this);
-        builder.setTitle("Are you sure you want to delete the event");
-        builder.setPositiveButton("yse", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                Lest_Fram = current_Fram;
-                current_Fram = Schedule_Fram;
-                FragmentTransaction mytransaction2 = myFramManager.beginTransaction();
-                mytransaction2.remove(Main2Activity.Lest_Fram);
-                mytransaction2.show(current_Fram);
-                mytransaction2.commit();
-                delete();
-            }
-        });
-        builder.setNegativeButton("no", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
-            }
-        });
-        builder.show();
-    }
-    public void delete() {
-        final ParseQuery<ParseObject> getevent = ParseQuery.getQuery("Event");
-        getevent.getInBackground(Schedule_SingelEvent.CurrentEvent.getParseid(), new GetCallback<ParseObject>() {
-            @Override
-            public void done(final ParseObject parseObject, ParseException e2) {
-                if (e2 == null)
-                    parseObject.deleteInBackground();
-                else
-                    delete();
-            }
-        });
     }
 }

@@ -2240,6 +2240,7 @@ containing a value of this type.
         public static final int Add_Kid_Password=0x7f0c007f;
         public static final int Add_Kid_Phone_Number=0x7f0c008b;
         public static final int Add_Kid_User_Name=0x7f0c007c;
+        public static final int BackToManageEvent=0x7f0c00b8;
         public static final int ConversationUserImage=0x7f0c0094;
         public static final int Event_Save_btn=0x7f0c00bb;
         public static final int Event_Show_endtime=0x7f0c00c5;
@@ -2316,7 +2317,6 @@ containing a value of this type.
         public static final int beginning=0x7f0c0030;
         public static final int bottom=0x7f0c001c;
         public static final int btnsend=0x7f0c0092;
-        public static final int button3=0x7f0c00b8;
         public static final int button4=0x7f0c00e1;
         public static final int button6=0x7f0c00e6;
         public static final int button7=0x7f0c00ee;

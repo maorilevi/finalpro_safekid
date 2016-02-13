@@ -70,8 +70,7 @@ public class Chat_Contact_List extends Fragment {
 
             LinearLayout name_and_lest_message = new LinearLayout(activity);
             name_and_lest_message.setOrientation(LinearLayout.VERTICAL);
-            name_and_lest_message.setLayoutParams(new ViewGroup.
-                    LayoutParams((int) (contectrel.getWidth() * 0.6), ViewGroup.LayoutParams.MATCH_PARENT));
+            name_and_lest_message.setLayoutParams(new ViewGroup.LayoutParams((int) (Main2Activity.Mainwidth * 0.5), ViewGroup.LayoutParams.MATCH_PARENT));
             ImageView userImage = new ImageView(activity);
             userImage.setImageBitmap(allusers.get(CpyUndx).getUserImage());
 
@@ -81,7 +80,7 @@ public class Chat_Contact_List extends Fragment {
             TextView LestMessage = new TextView(activity);
             LestMessage.setTextSize(30);
             TextView messagetime = new TextView(activity);
-            messagetime.setTextSize(30);
+            messagetime.setTextSize(20);
             MessageDataSourse mmdb = new MessageDataSourse(activity);
             mmdb.open();
             ArrayList<Message> mmlist = mmdb.getAllMessage(allusers.get(CpyUndx).getChatroom());
@@ -119,7 +118,6 @@ public class Chat_Contact_List extends Fragment {
             contectrel.addView(mainlayout);
         }
         //UserDB.close();
-        TextView textView;
         return Main2Activity.Mainuserlist.size();
     }
     ///////////////////////////////////////////////////////////////////////////////////////////////

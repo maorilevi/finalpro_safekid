@@ -34,6 +34,7 @@ public class Schedule_Mange extends Fragment {
     static protected boolean newevent=false;
     private UsersDataSource UserDB;//user database
 
+    static protected TextView userName;
     static protected ArrayList<User> users = new ArrayList<User>();
     static protected Button newEventbtn;
     //event Variable
@@ -56,7 +57,8 @@ public class Schedule_Mange extends Fragment {
         UserDB.open();
         users = UserDB.getAllUsers();
         UserDB.close();
-
+        userName=new TextView(getActivity());
+        userName=(TextView)schedule.findViewById(R.id.kidNameListEvent);
         //set default day
         SimpleDateFormat dayFormat = new SimpleDateFormat("EEEE", Locale.US);
         Calendar calendar = Calendar.getInstance();
@@ -92,6 +94,7 @@ public class Schedule_Mange extends Fragment {
                 mytransaction2.add(R.id.MainRelative, Main2Activity.current_Fram, "newfram");
                 mytransaction2.commit();
                 Schedule_SingelEvent.CurrentEvent=event1;
+                Schedule_SingelEvent.newevent=true;
             }
         });
         return schedule;
@@ -99,6 +102,12 @@ public class Schedule_Mange extends Fragment {
     protected static void SetImageeUsers(final Activity activity){
         LayotKidImage.removeAllViews();
         for (int indx=1;indx<users.size();indx++){
+            if(indx==1){
+                userName.setText(users.get(indx).getFirstname());
+                kidname_STR=users.get(indx).getFirstname();
+                kidID=users.get(indx).getUserParseID();
+                setallevent(activity);
+            }
             LinearLayout lay=new LinearLayout(activity);
             lay.setOrientation(LinearLayout.VERTICAL);
             lay.setLayoutParams(new ViewGroup.LayoutParams((int) (Main2Activity.Mainwidth * 0.3), (int) (Main2Activity.Mainwidth * 0.3)));
@@ -168,7 +177,6 @@ public class Schedule_Mange extends Fragment {
                                     mytransaction2.add(R.id.MainRelative, Main2Activity.current_Fram, "newMessage");
                                     mytransaction2.commit();
                                     Schedule_SingelEvent.CurrentEvent = event1;
-
                                 }
                             });
                             LayoutEvent.addView(event);
