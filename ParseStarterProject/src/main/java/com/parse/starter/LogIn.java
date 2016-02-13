@@ -21,6 +21,7 @@ import com.parse.ParseObject;
 import com.parse.ParsePush;
 import com.parse.ParseQuery;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -70,7 +71,8 @@ public class LogIn extends Fragment {
                                                 UserDB = new UsersDataSource(getActivity());
                                                 UserDB.open();
                                                 UserDB.DeleteAllUsers();
-                                                Bitmap btm = BitmapFactory.decodeFile(Main.imgDecodableString);
+                                                Main2Activity.parent=Listobject.get(finalIndx).getBoolean("Parent");
+                                                Bitmap btm = BitmapFactory.decodeFile(Main2Activity.imgDecodableString);
                                                 btm = BitmapFactory.decodeByteArray(data, 0, data.length);
                                                 User user = new User();
                                                 user.setUserImage(btm);
@@ -86,7 +88,7 @@ public class LogIn extends Fragment {
                                                 user.setEmail(Listobject.get(finalIndx).getString("Email"));
                                                 UserDB.createUSER(user);
                                                 UserDB.close();
-                                                Main.users.add(user);
+                                                Main2Activity.Mainuserlist.add(user);
                                             }
                                         }
                                     });
@@ -110,7 +112,7 @@ public class LogIn extends Fragment {
                                                                 if (e4 == null) {
                                                                     UserDB = new UsersDataSource(getActivity());
                                                                     UserDB.open();
-                                                                    Bitmap btm = BitmapFactory.decodeFile(Main.imgDecodableString);
+                                                                    Bitmap btm = BitmapFactory.decodeFile(Main2Activity.imgDecodableString);
                                                                     btm = BitmapFactory.decodeByteArray(data, 0, data.length);
                                                                     User user = new User();
                                                                     user.setUserImage(btm);
@@ -126,7 +128,7 @@ public class LogIn extends Fragment {
                                                                     user.setEmail(objects.get(finalIndx3).getString("Email"));
                                                                     UserDB.createUSER(user);
                                                                     UserDB.close();
-                                                                    Main.users.add(user);
+                                                                    Main2Activity.Mainuserlist.add(user);
                                                                 }
                                                             }
                                                         });
@@ -152,7 +154,7 @@ public class LogIn extends Fragment {
                                                                 if (e6 == null) {
                                                                     UserDB = new UsersDataSource(getActivity());
                                                                     UserDB.open();
-                                                                    Bitmap btm = BitmapFactory.decodeFile(Main.imgDecodableString);
+                                                                    Bitmap btm = BitmapFactory.decodeFile(Main2Activity.imgDecodableString);
                                                                     btm = BitmapFactory.decodeByteArray(data, 0, data.length);
                                                                     User user = new User();
                                                                     user.setUserImage(btm);
@@ -168,7 +170,7 @@ public class LogIn extends Fragment {
                                                                     user.setEmail(objects.get(finalIndx1).getString("Email"));
                                                                     UserDB.createUSER(user);
                                                                     UserDB.close();
-                                                                    Main.users.add(user);
+                                                                    Main2Activity.Mainuserlist.add(user);
                                                                 }
                                                             }
                                                         });
@@ -193,7 +195,7 @@ public class LogIn extends Fragment {
                                                                     if (e8 == null) {
                                                                         UserDB = new UsersDataSource(getActivity());
                                                                         UserDB.open();
-                                                                        Bitmap btm = BitmapFactory.decodeFile(Main.imgDecodableString);
+                                                                        Bitmap btm = BitmapFactory.decodeFile(Main2Activity.imgDecodableString);
                                                                         btm = BitmapFactory.decodeByteArray(data, 0, data.length);
                                                                         User user = new User();
                                                                         user.setUserImage(btm);
@@ -209,7 +211,7 @@ public class LogIn extends Fragment {
                                                                         user.setEmail(object.get(finalIndx1).getString("Email"));
                                                                         UserDB.createUSER(user);
                                                                         UserDB.close();
-                                                                        Main.users.add(user);
+                                                                        Main2Activity.Mainuserlist.add(user);
                                                                     }
                                                                 }
                                                             });
@@ -221,7 +223,7 @@ public class LogIn extends Fragment {
                                         });
                                     }
                                 }
-                                //Main.Openafterlogin(getActivity());
+                                getchatids();
                             } else {
                                 Toast.makeText(getActivity(), "user not exist", Toast.LENGTH_SHORT).show();
                             }
@@ -232,5 +234,32 @@ public class LogIn extends Fragment {
             }
         });
         return LoginView;
+    }
+    public void getchatids(){
+        UserDB = new UsersDataSource(getActivity());
+        UserDB.open();
+        final ArrayList<User> users=UserDB.getAllUsers();
+        UserDB.close();
+        for(int usindx=1;usindx<users.size();usindx++){
+            final int cpyusindx=usindx;
+            ArrayList<String> starray=new ArrayList<String>();
+            starray.add(users.get(0).getUserParseID());
+            starray.add(users.get(usindx).getUserParseID());
+            ParseQuery<ParseObject> connectiontable = ParseQuery.getQuery("ChatRoom");
+            connectiontable.whereContainedIn("usersid", starray);
+            connectiontable.findInBackground(new FindCallback<ParseObject>() {
+                @Override
+                public void done(final List<ParseObject> objects, ParseException e3) {
+                    if (e3 == null) {
+                        for (int indx = 0; indx < objects.size(); indx++) {
+                            UserDB.open();
+                            users.get(cpyusindx).setChatroom(objects.get(indx).getObjectId());
+                            UserDB.UpdateUser(users.get(cpyusindx));
+                            UserDB.close();
+                        }
+                    }
+                }
+            });
+        }
     }
 }

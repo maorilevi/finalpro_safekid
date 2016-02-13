@@ -16,14 +16,13 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseFile;
 import com.parse.ParseObject;
-import com.parse.ParseQuery;
+import com.parse.SaveCallback;
 
 import java.io.ByteArrayOutputStream;
-import java.util.List;
+import java.util.ArrayList;
 
 
 @TargetApi(Build.VERSION_CODES.HONEYCOMB)
@@ -61,6 +60,7 @@ public class Add_Kid extends Fragment {
                              Bundle savedInstanceState) {
 
         final View Kid=inflater.inflate(R.layout.add__kid, container, false);
+        Main2Activity.Addkidscreen=true;
         //Saving al the kid details on parse kids Table..................
         Kid.findViewById(R.id.AddKid_SaveDetails).setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -89,7 +89,7 @@ public class Add_Kid extends Fragment {
                     if (!(First_Name_STR.isEmpty() || Last_Name_STR.isEmpty() || User_Name_STR.isEmpty()
                             || Password_STR.isEmpty() || Phone_NUmber_STR.isEmpty() || Address_STR.isEmpty()
                             || Email_STR.isEmpty() || Birthday_STR.isEmpty())) {
-                        Bitmap bitmap = BitmapFactory.decodeFile(Main.imgDecodableString);
+                        Bitmap bitmap = BitmapFactory.decodeFile(Main2Activity.imgDecodableString);
 
                         ByteArrayOutputStream stream = new ByteArrayOutputStream();
 
@@ -102,7 +102,7 @@ public class Add_Kid extends Fragment {
                         ParseFile file = new ParseFile("androidbegin.png", image);
                         file.saveInBackground();
                         //create new kid rew in parse user table
-                        ParseObject addkid = new ParseObject("USER");
+                        final ParseObject addkid = new ParseObject("USER");
                         //set all details on parse
                         addkid.put("F_name", First_Name_STR);
                         addkid.put("L_name", Last_Name_STR);
@@ -114,7 +114,33 @@ public class Add_Kid extends Fragment {
                         addkid.put("Email", Email_STR);
                         addkid.put("Birthday", Birthday_STR);
                         addkid.put("Parent", false);
-                        addkid.saveInBackground();
+                        addkid.saveInBackground(new SaveCallback() {
+                            @Override
+                            public void done(ParseException e) {
+                                if (e == null) {
+                                    ParseObject conaction = new ParseObject("Parent_Kid");
+                                    conaction.put("Parent_ID", Main2Activity.Mainuserlist.get(0).getUserParseID());
+                                    conaction.put("Kid_ID", addkid.getObjectId());
+                                    conaction.saveInBackground();
+                                    UserDB = new UsersDataSource(getActivity());
+                                    UserDB.open();
+                                    UserDB.close();
+                                    ArrayList<User> users = UserDB.getAllUsers();
+                                    for (int indx2 = 0; indx2 < users.size() - 1; indx2++) {
+                                        ArrayList<String> str = new ArrayList<String>();
+                                        str.add(users.get(indx2).getUserParseID());
+                                        str.add(addkid.getObjectId());
+                                        ParseObject newchatroom = new ParseObject("ChatRoom");
+                                        newchatroom.put("usersid", str);
+                                        newchatroom.saveInBackground();
+                                    }
+                                    Chat_Contact_List.fulllist(getActivity());
+                                    Schedule_Mange.SetImageeUsers(getActivity());
+                                } else {
+
+                                }
+                            }
+                        });
                         //
                         UserDB = new UsersDataSource(getActivity());
                         UserDB.open();
@@ -139,7 +165,6 @@ public class Add_Kid extends Fragment {
                         alertDialog.setButton("OK", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
                                 //geting this kid parse object id to create a relationship between parent and kid
-                                checkingupdateukid();
                             }
                         });
                         alertDialog.show();
@@ -160,42 +185,10 @@ public class Add_Kid extends Fragment {
                 } else {
                     Toast.makeText(getActivity(), "The passowrd are not matches", Toast.LENGTH_SHORT).show();
                 }
-                Chat_Contact_List.fulllist();
+                Chat_Contact_List.fulllist(getActivity());
                 Schedule_Mange.SetImageeUsers(getActivity());
             }
         });
         return Kid;
-    }
-    public void checkingupdateukid(){
-
-        threadRunning=true;
-        mythread = new Thread() {
-            public void run() {
-                while (threadRunning){
-                    try {
-                        Thread.sleep(500);
-                        ParseQuery<ParseObject> getthiskidid = ParseQuery.getQuery("USER");
-                        getthiskidid.whereMatches("User_Name", User_Name_STR);
-                        getthiskidid.whereMatches("Password", Password_STR);
-                        getthiskidid.findInBackground(new FindCallback<ParseObject>() {
-                            @Override
-                            public void done(List<ParseObject> object, ParseException e) {
-                                if (e == null) {
-                                    for (int indx = 0; indx < object.size(); indx++) {
-                                        //create relationship between parent and kid
-                                        ParseObject conaction = new ParseObject("Parent_Kid");
-                                        conaction.put("Parent_ID",Main.users.get(0).getUserParseID());
-                                        conaction.put("Kid_ID", object.get(indx).getObjectId());
-                                        conaction.saveInBackground();
-                                        threadRunning = false;
-                                    }
-                                }
-                            }
-                        });
-                    }catch (InterruptedException ex) {
-                    }
-                }
-            }
-        };mythread.start();
     }
 }

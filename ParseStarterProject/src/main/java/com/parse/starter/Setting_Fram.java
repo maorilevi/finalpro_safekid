@@ -76,7 +76,7 @@ public class Setting_Fram extends Fragment {
     //this function are to open all the user details on the screen
     public void OpenDetails(){
         User user=new User();
-        user=Main.users.get(0);
+        user=Main2Activity.Mainuserlist.get(0);
         UserName_STR=user.getUserName();
         FirstName_STR=user.getFirstname();
         LastName_STR=user.getLestName();

@@ -5,16 +5,27 @@ package com.parse.starter;
  */
 public class Message {
     private long id;
-    protected boolean left;
+    protected boolean Side;
     private String message;
     private String Date;
     private String Sender;
     private String Receiver;
     private String Parseid;
+    private String ChatRoom_ID;
+
+    public boolean isReade() {
+        return reade;
+    }
+
+    public void setReade(boolean reade) {
+        this.reade = reade;
+    }
+
+    private boolean reade=false;
     public Message() {
     }
     public Message(Message obj) {
-        this.left = obj.left;
+        this.Side = obj.Side;
         this.message = obj.message;
         this.Date = obj.getDate();
         this.Sender = obj.getSender();
@@ -25,11 +36,11 @@ public class Message {
 
     public Message(boolean left, String message){
         super();
-        this.left=left;
+        this.Side=left;
         this.message=message;
     }
     public Message(boolean left, String message, String date, String sender, String receiver, String parseid) {
-        this.left = left;
+        this.Side = left;
         this.message = message;
         Date = date;
         Sender = sender;
@@ -67,16 +78,22 @@ public class Message {
     public void setDate(String date) {
         Date = date;
     }
-    public boolean isLeft() {
-        return left;
+    public boolean isSide() {
+        return Side;
     }
-    public void setLeft(boolean left) {
-        this.left = left;
+    public void setSide(boolean left) {
+        this.Side = left;
     }
     public long getId() {
         return id;
     }
     public void setId(long id) {
         this.id = id;
+    }
+    public String getChatRoom_ID() {
+        return ChatRoom_ID;
+    }
+    public void setChatRoom_ID(String chatRoom_ID) {
+        ChatRoom_ID = chatRoom_ID;
     }
 }

@@ -6,11 +6,10 @@ import android.graphics.Bitmap;
  * Created by Admin on 06/10/2015.
  */
 public class Singel_User {
-    String UserName;
-    Bitmap UserImage;
-    String UserParseID;
-
-
+    protected String UserName;
+    protected Bitmap UserImage;
+    protected String UserParseID;
+    protected String chatRoomID;
     public Singel_User(boolean left, String userName) {
         UserName = userName;
         this.left = left;
@@ -40,12 +39,22 @@ public class Singel_User {
     public void setLeft(boolean left) {
         this.left = left;
     }
+    public String getChatRoomID() {
+        return chatRoomID;
+    }
 
+    public void setChatRoomID(String chatRoomID) {
+        this.chatRoomID = chatRoomID;
+    }
+    public Singel_User(){
+
+    }
     public Singel_User(Singel_User p0) {
         this.left=true;
         this.UserName=p0.getUserName();
         this.UserImage=p0.getUserImage();
         this.UserParseID=p0.getUserParseID();
+        this.chatRoomID=p0.getChatRoomID();
     }
     public Singel_User(Boolean left, Bitmap bitmap, String UserName, String UserParseID){
         super();

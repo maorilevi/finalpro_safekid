@@ -25,6 +25,7 @@ public class creatingmydbSQLite extends SQLiteOpenHelper {
     public static final String COLUMN_PARENT = "parent";
     public static final String COLUMN_PASS="pass";
     public static final String COLUMN_IMAGE="image";
+    public static final String COLUMN_CHATID="chatid";
     private static final String DATABASE_NAME = "users.db";
     private static final int DATABASE_VERSION =1;
     // Database creation sql statement
@@ -51,8 +52,10 @@ public class creatingmydbSQLite extends SQLiteOpenHelper {
                     + " text,"
                     + COLUMN_PASS
                     + " text,"
-                    +COLUMN_IMAGE
-                    + " BLOB)";
+                    + COLUMN_IMAGE
+                    + " BLOB,"
+                    + COLUMN_CHATID
+                    + " text)";
     //message database
     public static final String TABLE_MESSAGE = "message";
     public static final String COLUMN_MID = "_id";
@@ -61,6 +64,10 @@ public class creatingmydbSQLite extends SQLiteOpenHelper {
     public static final String COLUMN_RECEIVER = "receiver";
     public static final String COLUMN_PARSEID = "parseid";
     public static final String COLUMN_DATE = "date";
+    public static final String COLUMN_CHATROOM="chatroom";
+    public static final String COLUMN_SIDE="side";
+    public static final String COLUMN_READE="reade";
+
     private static final String DATABASE_MESSAGE_CREATE =
             "create table " + TABLE_MESSAGE +
                     "(" + COLUMN_MID + " integer primary key autoincrement, "
@@ -73,7 +80,11 @@ public class creatingmydbSQLite extends SQLiteOpenHelper {
                     + COLUMN_PARSEID
                     + " text,"
                     + COLUMN_DATE
-                    + " text)";
+                    + " text,"
+                    + COLUMN_CHATROOM
+                    + " text,"
+                    + COLUMN_READE
+                    + " Integer)";
     //event database
     public static final String TABLE_EVENT = "event";
     public static final String COLUMN_EID = "_id";
@@ -124,6 +135,11 @@ public class creatingmydbSQLite extends SQLiteOpenHelper {
                         + newVersion + ", which will destroy all old data");
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_USERS);
         onCreate(db);
+        db.execSQL("DROP TABLE IF EXISTS " + DATABASE_MESSAGE_CREATE);
+        onCreate(db);
+        db.execSQL("DROP TABLE IF EXISTS " + DATABASE_EVENT_CREATE);
+        onCreate(db);
+
     }
 
 }

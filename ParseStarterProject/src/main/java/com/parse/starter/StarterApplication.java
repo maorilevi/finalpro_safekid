@@ -17,7 +17,6 @@ import com.parse.ParseUser;
 
 
 public class StarterApplication extends Application {
-
   @Override
   public void onCreate() {
     super.onCreate();

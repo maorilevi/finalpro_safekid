@@ -89,7 +89,7 @@ public class SignUp_Fram extends Fragment {
                     if (!(userFirstName.isEmpty() || UserLastName.isEmpty() || UserAddress.isEmpty() || UserEmail.isEmpty() || UserPhonNaber.isEmpty()
                             || UserNAME.isEmpty() || UserPassword.isEmpty() || UserConfirmPassword.isEmpty())) {
 
-                        Bitmap bitmap = BitmapFactory.decodeFile(Main.imgDecodableString);
+                        Bitmap bitmap = BitmapFactory.decodeFile(Main2Activity.imgDecodableString);
 
                         ByteArrayOutputStream stream = new ByteArrayOutputStream();
 
@@ -121,9 +121,9 @@ public class SignUp_Fram extends Fragment {
                         alertDialog.setButton("OK", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
                                 // Write your code here to execute after dialog closed
-                                FragmentTransaction mytransaction2 = Main.mymanager.beginTransaction();
-                                mytransaction2.hide(Main.SignUp_Fram);
-                                mytransaction2.show(Main.Login_Fram);
+                                FragmentTransaction mytransaction2 = Main2Activity.myFramManager.beginTransaction();
+                                mytransaction2.hide(Main2Activity.SignUp_Fram);
+                                mytransaction2.show(Main2Activity.Login_Fram);
                                 mytransaction2.commit();
                             }
                         });

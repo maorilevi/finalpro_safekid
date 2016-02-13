@@ -30,7 +30,8 @@ public class UsersDataSource {
             creatingmydbSQLite.COLUMN_PARENT,
             creatingmydbSQLite.COLUMN_BIRTHDAY,
             creatingmydbSQLite.COLUMN_PASS,
-            creatingmydbSQLite.COLUMN_IMAGE
+            creatingmydbSQLite.COLUMN_IMAGE,
+            creatingmydbSQLite.COLUMN_CHATID
     };
     public UsersDataSource(Context context) {
         dbHelper = new creatingmydbSQLite(context);
@@ -64,6 +65,7 @@ public class UsersDataSource {
         values.put(creatingmydbSQLite.COLUMN_BIRTHDAY, user.getBirthday());
         values.put(creatingmydbSQLite.COLUMN_PASS, user.getPassword());
         values.put(creatingmydbSQLite.COLUMN_IMAGE, image);
+        values.put(creatingmydbSQLite.COLUMN_CHATID, user.getChatroom());
 
 
         long insertId = database.insert(creatingmydbSQLite.TABLE_USERS, null,
@@ -132,6 +134,7 @@ public class UsersDataSource {
         values.put(creatingmydbSQLite.COLUMN_BIRTHDAY, user.getBirthday());
         values.put(creatingmydbSQLite.COLUMN_PASS, user.getPassword());
         values.put(creatingmydbSQLite.COLUMN_IMAGE, image);
+        values.put(creatingmydbSQLite.COLUMN_CHATID, user.getChatroom());
 
         database.update(creatingmydbSQLite.TABLE_USERS,
                 values, creatingmydbSQLite.COLUMN_ID + "=" + user.getId(), null);
@@ -166,6 +169,7 @@ public class UsersDataSource {
         user.setBirthday(cursor.getString(9));
         user.setPassword(cursor.getString(10));
         user.setUserImage(BitmapFactory.decodeByteArray(cursor.getBlob(11), 0, cursor.getBlob(11).length));
+        user.setChatroom(cursor.getString(12));
         return user;
     }
 }

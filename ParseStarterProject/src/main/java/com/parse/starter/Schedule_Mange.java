@@ -85,11 +85,11 @@ public class Schedule_Mange extends Fragment {
                 event1.setKidID(kidID);
                 event1.setDay(Current_day);
                 Fragment newfram=new Schedule_SingelEvent();
-                Main.Lest_Fram=Main.current_Fram;
-                Main.current_Fram=newfram;
-                FragmentTransaction mytransaction2 = Main.mymanager.beginTransaction();
-                mytransaction2.hide(Main.Lest_Fram);
-                mytransaction2.add(R.id.MainRelative, Main.current_Fram, "newfram");
+                Main2Activity.Lest_Fram=Main2Activity.current_Fram;
+                Main2Activity.current_Fram=newfram;
+                FragmentTransaction mytransaction2 = Main2Activity.myFramManager.beginTransaction();
+                mytransaction2.hide(Main2Activity.Lest_Fram);
+                mytransaction2.add(R.id.MainRelative, Main2Activity.current_Fram, "newfram");
                 mytransaction2.commit();
                 Schedule_SingelEvent.CurrentEvent=event1;
             }
@@ -101,7 +101,7 @@ public class Schedule_Mange extends Fragment {
         for (int indx=1;indx<users.size();indx++){
             LinearLayout lay=new LinearLayout(activity);
             lay.setOrientation(LinearLayout.VERTICAL);
-            lay.setLayoutParams(new ViewGroup.LayoutParams((int) (Main.Mainwidth * 0.3), (int) (Main.Mainwidth * 0.3)));
+            lay.setLayoutParams(new ViewGroup.LayoutParams((int) (Main2Activity.Mainwidth * 0.3), (int) (Main2Activity.Mainwidth * 0.3)));
             lay.setPadding(5,5,5,5);
             ImageView kidImage = new ImageView(activity);
             kidImage.setImageBitmap(users.get(indx).getUserImage());
@@ -109,7 +109,7 @@ public class Schedule_Mange extends Fragment {
             //int width = //ScrollViewKidImage.getHeight();
             //int height = //ScrollViewKidImage.getHeight();
             //LinearLayout.LayoutParams parms = new LinearLayout.LayoutParams(width, height);
-            kidImage.setLayoutParams(new ActionBar.LayoutParams((int) (Main.Mainwidth * 0.3), (int) (Main.Mainwidth * 0.3)));
+            kidImage.setLayoutParams(new ActionBar.LayoutParams((int) (Main2Activity.Mainwidth * 0.3), (int) (Main2Activity.Mainwidth * 0.3)));
             final int finalIndx = indx;
             kidImage.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -140,37 +140,39 @@ public class Schedule_Mange extends Fragment {
             @TargetApi(Build.VERSION_CODES.HONEYCOMB)
             @Override
             public void done(final List<ParseObject> results, ParseException e) {
-                if (results.size() > 0) {
-                    for (int indx = 0; indx < results.size(); indx++) {
-                        final int loc=indx;
-                        final Event event1=new Event();
-                        event1.setName(results.get(indx).getString("NameEvent"));
-                        event1.setDay(results.get(indx).getString("Day"));
-                        event1.setAddress(results.get(indx).getString("Address"));
-                        event1.setEnd_time(results.get(indx).getString("StartEvent"));
-                        event1.setEnd_time(results.get(indx).getString("EndEvent"));
-                        event1.setKidID(results.get(indx).getString("Kid_ID"));
-                        event1.setKidName(kidname_STR);
-                        event1.setParseid(results.get(indx).getObjectId());
-                        Button event = new Button(activity);
-                        event.setText(results.get(indx).getString("NameEvent") +
-                                "\nstart:" + results.get(indx).getString("StartEvent") +
-                                "\nEnd:" + results.get(indx).getString("EndEvent"));
-                        event.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                Fragment newfram=new Schedule_SingelEvent();
-                                Main.Lest_Fram=Main.current_Fram;
-                                Main.current_Fram=newfram;
-                                FragmentTransaction mytransaction2 = Main.mymanager.beginTransaction();
-                                mytransaction2.hide(Main.Lest_Fram);
-                                mytransaction2.add(R.id.MainRelative, Main.current_Fram, "newMessage");
-                                mytransaction2.commit();
-                                Schedule_SingelEvent.CurrentEvent=event1;
+                if (e == null) {
+                    if (results.size() > 0) {
+                        for (int indx = 0; indx < results.size(); indx++) {
+                            final int loc = indx;
+                            final Event event1 = new Event();
+                            event1.setName(results.get(indx).getString("NameEvent"));
+                            event1.setDay(results.get(indx).getString("Day"));
+                            event1.setAddress(results.get(indx).getString("Address"));
+                            event1.setEnd_time(results.get(indx).getString("StartEvent"));
+                            event1.setEnd_time(results.get(indx).getString("EndEvent"));
+                            event1.setKidID(results.get(indx).getString("Kid_ID"));
+                            event1.setKidName(kidname_STR);
+                            event1.setParseid(results.get(indx).getObjectId());
+                            Button event = new Button(activity);
+                            event.setText(results.get(indx).getString("NameEvent") +
+                                    "\nstart:" + results.get(indx).getString("StartEvent") +
+                                    "\nEnd:" + results.get(indx).getString("EndEvent"));
+                            event.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    Fragment newfram = new Schedule_SingelEvent();
+                                    Main2Activity.Lest_Fram = Main2Activity.current_Fram;
+                                    Main2Activity.current_Fram = newfram;
+                                    FragmentTransaction mytransaction2 = Main2Activity.myFramManager.beginTransaction();
+                                    mytransaction2.hide(Main2Activity.Lest_Fram);
+                                    mytransaction2.add(R.id.MainRelative, Main2Activity.current_Fram, "newMessage");
+                                    mytransaction2.commit();
+                                    Schedule_SingelEvent.CurrentEvent = event1;
 
-                            }
-                        });
-                        LayoutEvent.addView(event);
+                                }
+                            });
+                            LayoutEvent.addView(event);
+                        }
                     }
                 }
             }

@@ -12,16 +12,35 @@ public class User {
     private String Firstname;
 
 
-    private String Password;
-    private String LestName;
-    private String UserName;
-    private String birthday;
-    private String Email;
-    private String PhoneNumber;
-    private String Address;
-    private String UserParseID;
-    private boolean perant=false;
-    private Bitmap UserImage;
+    protected String Password;
+    protected String LestName;
+    protected String UserName;
+    protected String birthday;
+    protected String Email;
+    protected String PhoneNumber;
+    protected String Address;
+    protected String UserParseID;
+    protected boolean perant=false;
+    protected Bitmap UserImage;
+    public int getMessCounter() {
+        return MessCounter;
+    }
+
+    public void setMessCounter(int messCounter) {
+        MessCounter = messCounter;
+    }
+
+    protected int MessCounter=0;
+
+    protected String getChatroom() {
+        return chatroom;
+    }
+
+    public void setChatroom(String chatroom) {
+        this.chatroom = chatroom;
+    }
+
+    private String chatroom;
 
     public User(User user) {
         this.Firstname=user.getFirstname();
