@@ -53,20 +53,7 @@ public class Chat_Contact_List extends Fragment {
     }
 
     //open contact list.....................
-    static public int fulllist(final Activity activity) {
-        final boolean[] run = {true};
-        Thread thread=new Thread(){
-            public void run(){
-                while (run[0]){
-                    try {
-                        sleep(1000);
-                        run[0] =false;
-                    } catch (InterruptedException e1) {
-                        e1.printStackTrace();
-                    }
-                }
-            }
-        };thread.start();
+    static public int fulllist(Activity activity) {
         UserDB=new UsersDataSource(activity);
         UserDB.open();
         final ArrayList<User> allusers =UserDB.getAllUsers();
