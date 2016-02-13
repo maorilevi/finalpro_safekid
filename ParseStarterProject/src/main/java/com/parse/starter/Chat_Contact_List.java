@@ -119,6 +119,7 @@ public class Chat_Contact_List extends Fragment {
             contectrel.addView(mainlayout);
         }
         //UserDB.close();
+        TextView textView;
         return Main2Activity.Mainuserlist.size();
     }
     ///////////////////////////////////////////////////////////////////////////////////////////////
