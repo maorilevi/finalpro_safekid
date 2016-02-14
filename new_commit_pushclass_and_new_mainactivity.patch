@@ -1,0 +1,29 @@
+Index: ParseStarterProject/src/main/java/com/parse/starter/Chat_Contact_List.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- ParseStarterProject/src/main/java/com/parse/starter/Chat_Contact_List.java	(date 1455387342000)
++++ ParseStarterProject/src/main/java/com/parse/starter/Chat_Contact_List.java	(revision )
+@@ -53,20 +53,7 @@
+     }
+ 
+     //open contact list.....................
+-    static public int fulllist(final Activity activity) {
+-        final boolean[] run = {true};
+-        Thread thread=new Thread(){
+-            public void run(){
+-                while (run[0]){
+-                    try {
+-                        sleep(1000);
+-                        run[0] =false;
+-                    } catch (InterruptedException e1) {
+-                        e1.printStackTrace();
+-                    }
+-                }
+-            }
+-        };thread.start();
++    static public int fulllist(Activity activity) {
+         UserDB=new UsersDataSource(activity);
+         UserDB.open();
+         final ArrayList<User> allusers =UserDB.getAllUsers();
