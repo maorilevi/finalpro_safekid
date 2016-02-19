@@ -3,11 +3,11 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/Kchat"
-            android:icon="@drawable/chat"
+            android:icon="@drawable/menu_item_chat"
             android:title="chat" />
         <item
             android:id="@+id/Ksetting"
-            android:icon="@drawable/setting"
+            android:icon="@drawable/menu_item_setting"
             android:title="setting" />
         <item
             android:id="@+id/Kalarm"

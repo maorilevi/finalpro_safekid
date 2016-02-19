@@ -1,13 +1,15 @@
 package com.parse.starter;
 
 import android.annotation.TargetApi;
-import android.app.AlertDialog;
+import android.app.Activity;
+import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.app.TimePickerDialog;
 import android.content.ComponentName;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.database.Cursor;
@@ -21,6 +23,7 @@ import android.provider.MediaStore;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -29,8 +32,11 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.parse.FindCallback;
@@ -43,12 +49,18 @@ import com.parse.ParseObject;
 import com.parse.ParseQuery;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
+import java.util.TimeZone;
 
 @TargetApi(Build.VERSION_CODES.HONEYCOMB)
 public class Main2Activity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
 
+    static protected TextView text_date;
+    static protected TextView text_Time;
+    private Button choosedate;
+    static protected ActionBar MainActionBar;
     //database values
     private static UsersDataSource UserDB;//user database
     static protected NavigationView navigationView;
@@ -57,12 +69,14 @@ public class Main2Activity extends AppCompatActivity implements NavigationView.O
 
     static protected ArrayList<User> Mainuserlist=new ArrayList<User>();
     static protected boolean parent=true;
+    static protected int screncount=0;
     static protected boolean Addkidscreen = false;
     static protected boolean Updateuser=false;
     static protected boolean Getchatromsid=false;
     static protected boolean isInForeground = false;
     static protected boolean Chatwinopen = false;
     static protected boolean ContactList = false;
+    static protected Activity Mainact;
     private static int RESULT_LOAD_IMG = 1;
     protected static String imgDecodableString;
     private CheckEventService s;
@@ -88,7 +102,9 @@ public class Main2Activity extends AppCompatActivity implements NavigationView.O
         setContentView(R.layout.activity_main2);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
+        Mainact=Main2Activity.this;
+        text_date = new TextView(this);
+        text_Time=new TextView(this);
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -98,13 +114,13 @@ public class Main2Activity extends AppCompatActivity implements NavigationView.O
         getWindowManager().getDefaultDisplay().getMetrics(dm);
         Mainheight=dm.heightPixels;
         Mainwidth=dm.widthPixels;
-
         myFramManager=getFragmentManager();
         FragmentTransaction mytransaction1 = myFramManager.beginTransaction();
         mytransaction1.add(R.id.MainRelative, Splach_Fram, "Splach_Fram");
         mytransaction1.commit();
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        MainActionBar=getSupportActionBar();
         getSupportActionBar().setTitle("SAFE KID"); // set the top title
         getSupportActionBar().hide();
         //gat user list from db
@@ -113,33 +129,11 @@ public class Main2Activity extends AppCompatActivity implements NavigationView.O
         Mainuserlist=UserDB.getAllUsers();
         UserDB.close();
         if(Mainuserlist.size()>0){
+            parent=Mainuserlist.get(0).isPerant();
             if(Mainuserlist.get(0).isPerant()){//case user is parent
-                UpdateUserDetails();
-                getchatids();
-                userstatus();
-                Log.i("openfram", "1");
-
-                final boolean[] run = {true};
-                Thread thread=new Thread(){
-                    public void run(){
-                        while (run[0]){
-                            try {
-                                Log.i("openfram","2");
-                                sleep(2000);
-                                if(Getchatromsid&&Updateuser){
-                                    Log.i("openfram", "3");
-                                    openFram();
-                                    if(getSupportActionBar().isShowing()){
-                                        getSupportActionBar().show();
-                                    }
-                                    run[0] =false;
-                                }
-                            } catch (InterruptedException e1) {
-                                e1.printStackTrace();
-                            }
-                        }
-                    }
-                };thread.start();
+                getin();
+            }else{
+                getin();
             }
         }else {
             FragmentTransaction mytransaction2 = myFramManager.beginTransaction();
@@ -149,6 +143,37 @@ public class Main2Activity extends AppCompatActivity implements NavigationView.O
             mytransaction2.hide(SignUp_Fram);
             mytransaction2.commit();
         }
+
+    }
+    public void getin(){
+        UpdateUserDetails();
+        getchatids();
+        userstatus();
+        Log.i("openfram", "1");
+        final boolean[] run = {true};
+        Thread thread=new Thread(){
+            public void run(){
+                while (run[0]){
+                    try {
+                        Log.i("openfram","2");
+                        sleep(2000);
+                        if(Getchatromsid&&Updateuser){
+                            Log.i("openfram", "3");
+                            openFram();
+                            sleep(1000);
+                            Log.i("openfram", "4");
+                            if(!getSupportActionBar().isShowing()){
+                                getSupportActionBar().show();
+                            }
+                            run[0] =false;
+                        }
+                    } catch (InterruptedException e1) {
+                        e1.printStackTrace();
+                    }
+                }
+            }
+        };
+        thread.start();
     }
     public void UpdateUserDetails(){
         final ArrayList<String> allids = new ArrayList<String>();
@@ -160,17 +185,16 @@ public class Main2Activity extends AppCompatActivity implements NavigationView.O
         usertable.findInBackground(new FindCallback<ParseObject>() {
             @Override
             public void done(final List<ParseObject> objects, ParseException e) {
-                if(e==null){
-                    for(int indx=0;indx<objects.size();indx++){
+                if (e == null) {
+                    for (int indx = 0; indx < objects.size(); indx++) {
                         ParseFile fileObject = objects.get(indx).getParseFile("Image");
                         final int finalIndx1 = indx;
                         fileObject.getDataInBackground(new GetDataCallback() {
                             public void done(byte[] data, ParseException e2) {
                                 if (e2 == null) {
                                     Bitmap btm = BitmapFactory.decodeByteArray(data, 0, data.length);
-                                    User newuser=new User();
-                                    for(int x=0;x<Mainuserlist.size();x++){
-                                        if(Mainuserlist.get(x).getUserParseID().matches(objects.get(finalIndx1).getObjectId())){
+                                    for (int x = 0; x < Mainuserlist.size(); x++) {
+                                        if (Mainuserlist.get(x).getUserParseID().matches(objects.get(finalIndx1).getObjectId())) {
                                             UserDB = new UsersDataSource(Main2Activity.this);
                                             UserDB.open();
                                             Mainuserlist.get(x).setUserImage(btm);
@@ -182,25 +206,25 @@ public class Main2Activity extends AppCompatActivity implements NavigationView.O
                                             Mainuserlist.get(x).setPhoneNumber(objects.get(finalIndx1).getString("Phone_Number"));
                                             Mainuserlist.get(x).setEmail(objects.get(finalIndx1).getString("Email"));
                                             Mainuserlist.get(x).setPerant(objects.get(finalIndx1).getBoolean("Parent"));
-                                            if(x==0){
+                                            if (x == 0) {
                                                 Mainuserlist.get(x).setPassword(objects.get(finalIndx1).getString("Password"));
                                             }
                                             UserDB.UpdateUser(Mainuserlist.get(x));
                                             UserDB.close();
                                             Log.i("openfram", "inparse");
-
                                         }
                                     }
                                 }
                             }
                         });
                     }
-                    Updateuser=true;
+                    Updateuser = true;
                 }
             }
         });
     }
     public void openFram(){
+        Log.i("openfram", "openfram");
         ChatList_Fram = new Chat_Contact_List();
         Schedule_Fram = new Schedule_Mange();
         Setting_Fram = new Setting_Fram();
@@ -221,7 +245,6 @@ public class Main2Activity extends AppCompatActivity implements NavigationView.O
         }
         mytransaction2.show(current_Fram);
         mytransaction2.commit();
-        //Chat_Contact_List.fulllist(this);
     }
     public void getchatids(){
         Log.i("openfram","chatid--"+Integer.toString(Mainuserlist.size()));
@@ -291,19 +314,12 @@ public class Main2Activity extends AppCompatActivity implements NavigationView.O
         getMenuInflater().inflate(R.menu.main2, menu);
         return true;
     }
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
         return super.onOptionsItemSelected(item);
     }
 
@@ -338,7 +354,6 @@ public class Main2Activity extends AppCompatActivity implements NavigationView.O
             mytransaction3.hide(Lest_Fram);
             mytransaction3.show(current_Fram);
             mytransaction3.commit();
-
         } else if (id == R.id.location) {
 
         } else if (id == R.id.schedule) {
@@ -373,12 +388,10 @@ public class Main2Activity extends AppCompatActivity implements NavigationView.O
         }else if (id == R.id.Kalarm) {
 
         }
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-
     @Override
     protected void onResume() {
         super.onResume();
@@ -389,7 +402,6 @@ public class Main2Activity extends AppCompatActivity implements NavigationView.O
             bindService(intent, mConnection, Context.BIND_ALLOW_OOM_MANAGEMENT);
         }
     }
-
     @Override
     protected void onPause() {
         super.onPause();
@@ -408,9 +420,13 @@ public class Main2Activity extends AppCompatActivity implements NavigationView.O
     };
     public void loadImagefromGallery(View view) {
         if (view == findViewById(R.id.SignUp_ChooseImage)) {
+            screncount = 1;
             Addkidscreen = false;
-        } else {
+        } else if(view==findViewById(R.id.AddKid_ChooseImage)){
             Addkidscreen = true;
+            screncount = 2;
+        } else {
+            screncount=3;
         }
         // Create intent to Open Image applications like Gallery, Google Photos
         Intent galleryIntent = new Intent(Intent.ACTION_PICK,
@@ -440,12 +456,21 @@ public class Main2Activity extends AppCompatActivity implements NavigationView.O
                 imgDecodableString = cursor.getString(columnIndex);
                 cursor.close();
                 // Set the Image in ImageView after decoding the String
-                if (Addkidscreen) {//in case its to add sign up screen
-                    ImageView imageView = (ImageView) findViewById(R.id.AddKid_Image);
-                    imageView.setImageBitmap(BitmapFactory.decodeFile(imgDecodableString));
-                } else {//in case its to add kid screen
-                    ImageView imageView = (ImageView) findViewById(R.id.SignUp_Image);
-                    imageView.setImageBitmap(BitmapFactory.decodeFile(imgDecodableString));
+                switch (screncount){
+                    case 1:
+                        ImageView imageView = (ImageView) findViewById(R.id.AddKid_Image);
+                        imageView.setImageBitmap(BitmapFactory.decodeFile(imgDecodableString));
+                        break;
+                    case 2:
+                        ImageView imageView2 = (ImageView) findViewById(R.id.SignUp_Image);
+                        imageView2.setImageBitmap(BitmapFactory.decodeFile(imgDecodableString));
+                        break;
+                    case 3:
+                        ImageView imageView3 = (ImageView) findViewById(R.id.Setting_User_Image);
+                        imageView3.setImageBitmap(BitmapFactory.decodeFile(imgDecodableString));
+                        break;
+                    default:
+                        break;
                 }
             } else {
                 Toast.makeText(this, "You haven't picked Image",
@@ -455,29 +480,6 @@ public class Main2Activity extends AppCompatActivity implements NavigationView.O
             Toast.makeText(this, "Something went wrong", Toast.LENGTH_LONG)
                     .show();
         }
-    }
-    public void GoToSignUp(View view) {
-        FragmentTransaction mytransaction2 = myFramManager.beginTransaction();
-        mytransaction2.hide(Login_Fram);
-        mytransaction2.show(SignUp_Fram);
-        mytransaction2.commit();
-    }
-    public void logout(View view) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setIcon(android.R.drawable.ic_dialog_info);
-        builder.setMessage("log out ?");
-        builder.setPositiveButton("yes", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface arg0, int arg1) {
-                UserDB = new UsersDataSource(Main2Activity.this);
-                UserDB.open();
-                UserDB.DeleteAllUsers();
-                UserDB.close();
-            }
-        });
-        builder.setNegativeButton("no", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface arg0, int arg1) {
-            }
-        }).show();
     }
     public void ChooseDay(View view) {
         String day = "";
@@ -503,4 +505,103 @@ public class Main2Activity extends AppCompatActivity implements NavigationView.O
         textView.setText(Schedule_Mange.Current_day);
         Schedule_Mange.setallevent(Main2Activity.this);
     }
+
+
+    private int hour=0;
+    private int minute=0;
+    private int year=0;
+    private int month=0;
+    private int day=0;
+    static final int DATE_DIALOG_ID = 100;
+    static final int TIME_DIALOG_ID = 1111;
+    public void opendatetime(View view){
+        if(view==findViewById(R.id.Event_Show_endbtn)){
+            text_Time=(TextView)findViewById(R.id.SingleEv_End);
+            showDialog(TIME_DIALOG_ID);
+        }else if(view==findViewById(R.id.Event_Show_startbtn)){
+            text_Time=(TextView)findViewById(R.id.SingleEv_Start);
+            showDialog(TIME_DIALOG_ID);
+        }else if(view==findViewById(R.id.calbtn))
+        showDialog(DATE_DIALOG_ID);
+    }
+    @Override
+    protected Dialog onCreateDialog(int id) {
+        switch (id) {
+            case DATE_DIALOG_ID:
+                // set date picker as current date
+                final Calendar DateCal = Calendar.getInstance();
+                year  = DateCal.get(Calendar.YEAR);
+                month = DateCal.get(Calendar.MONTH);
+                day   = DateCal.get(Calendar.DAY_OF_MONTH);
+                // Show current date
+                return new DatePickerDialog(this, datePickerListener, year, month,day);
+            case TIME_DIALOG_ID:
+
+                final Calendar TimeCal = Calendar.getInstance(TimeZone.getTimeZone("GMT+2:00"));
+                // Current Hour
+                hour = TimeCal.get(Calendar.HOUR_OF_DAY);
+                // Current Minute
+                minute = TimeCal.get(Calendar.MINUTE);
+                // set current time into output textview
+                // set time picker as current time
+                return new TimePickerDialog(this, timePickerListener, hour, minute,
+                        false);
+        }
+        return null;
+    }
+    private TimePickerDialog.OnTimeSetListener timePickerListener = new TimePickerDialog.OnTimeSetListener() {
+        @Override
+        public void onTimeSet(TimePicker view, int hourOfDay, int minutes) {
+            // TODO Auto-generated method stub
+            hour   = hourOfDay;
+            minute = minutes;
+
+            updateTime(hour,minute);
+        }
+    };
+
+    private static String utilTime(int value) {
+        if (value < 10)
+            return "0" + String.valueOf(value);
+        else
+            return String.valueOf(value);
+    }
+
+
+
+    // Used to convert 24hr format to 12hr format with AM/PM values
+    private void updateTime(int hours, int mins) {
+        String timeSet = "";
+        if (hours > 23) {
+            hours -= 23;
+        }
+        if(mins>60){
+            mins-=60;
+        }
+        String minutes = "";
+        if (mins < 10)
+            minutes = "0" + mins;
+        else
+            minutes = String.valueOf(mins);
+        String hoursSTR;
+        if(hours<10)
+            hoursSTR="0"+hours;
+        else{
+            hoursSTR = String.valueOf(hours);
+        }
+
+        // Append in a StringBuilder
+        String aTime = new StringBuilder().append(hoursSTR).append(':').append(minutes).toString();
+        text_Time.setText(aTime);
+    }
+
+    private DatePickerDialog.OnDateSetListener datePickerListener = new DatePickerDialog.OnDateSetListener() {
+        public void onDateSet(DatePicker view, int selectedYear,int selectedMonth, int selectedDay) {
+            year = selectedYear;
+            month = selectedMonth;
+            day = selectedDay;
+            //text_date.setText(new StringBuilder().append(month + 1).append("-").append(day).append("-").append(year).append(" "));
+            text_date.setText(Integer.toString(day)+"/"+Integer.toString(month+1)+"/"+Integer.toString(year));
+        }
+    };
 }

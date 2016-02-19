@@ -4,27 +4,27 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/chat"
-            android:icon="@drawable/chat"
+            android:icon="@drawable/menu_item_chat"
             android:title="chat" />
         <item
             android:id="@+id/schedule"
-            android:icon="@drawable/calendar"
+            android:icon="@drawable/calicon"
             android:title="schedule" />
         <item
             android:id="@+id/location"
-            android:icon="@drawable/maps"
+            android:icon="@drawable/menu_item_location"
             android:title="location" />
         <item
             android:id="@+id/statisc"
-            android:icon="@drawable/statisc"
+            android:icon="@drawable/menu_item_statisc"
             android:title="statisc" />
         <item
             android:id="@+id/setting"
-            android:icon="@drawable/setting"
+            android:icon="@drawable/menu_item_setting"
             android:title="setting" />
         <item
             android:id="@+id/addkid"
-            android:icon="@drawable/add"
+            android:icon="@drawable/menu_item_addkid"
             android:title="add kid" />
 
     </group>

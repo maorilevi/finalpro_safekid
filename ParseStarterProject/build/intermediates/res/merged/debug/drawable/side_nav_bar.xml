@@ -2,8 +2,8 @@
     android:shape="rectangle">
     <gradient
         android:angle="135"
-        android:centerColor="#4CAF50"
-        android:endColor="#2E7D32"
-        android:startColor="#81C784"
+        android:centerColor="#FF3B3E8C"
+        android:endColor="#FF152530"
+        android:startColor="#FF53A1EA"
         android:type="linear" />
 </shape><!-- From: file:/C:/Users/Admin/AndroidStudioProjects/finalpro_safekid/ParseStarterProject/src/main/res/drawable/side_nav_bar.xml -->

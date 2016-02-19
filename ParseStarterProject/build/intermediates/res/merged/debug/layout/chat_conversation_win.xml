@@ -1,9 +1,6 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:layout_height="match_parent"
     tools:context="com.example.admin.modulo_chat.MainChatWindow"
     android:background="#6f73e0">
 
@@ -35,7 +32,9 @@
         android:layout_alignParentStart="true"
         android:background="@android:drawable/editbox_background_normal"
         android:layout_below="@+id/ConversationUserImage"
-        android:layout_above="@+id/btnsend" />
+        android:layout_above="@+id/btnsend"
+        android:drawSelectorOnTop="false"
+        android:stackFromBottom="true" />
 
     <Button
         android:layout_width="50dp"
@@ -45,8 +44,7 @@
         android:textSize="10sp"
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"
-        android:text="back"
-        android:layout_above="@+id/listmessage" />
+        android:text="back" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -55,21 +53,20 @@
         android:textSize="25sp"
         android:background="@android:drawable/editbox_background_normal"
         android:gravity="center"
-        android:layout_above="@+id/listmessage"
-        android:layout_toLeftOf="@+id/ConversationUserImage"
         android:layout_alignParentTop="true"
         android:layout_toRightOf="@+id/cht2list"
-        android:layout_toEndOf="@+id/cht2list" />
+        android:layout_alignBottom="@+id/cht2list"
+        android:layout_toLeftOf="@+id/ConversationUserImage"
+        android:layout_toStartOf="@+id/ConversationUserImage" />
 
     <ImageView
-        android:layout_width="40dp"
+        android:layout_width="50dp"
         android:layout_height="80dp"
         android:id="@+id/ConversationUserImage"
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:layout_toRightOf="@+id/chat"
-        android:layout_toEndOf="@+id/chat" />
+        android:layout_alignBottom="@+id/user_name_chat_win" />
 
 </RelativeLayout>
 <!-- From: file:/C:/Users/Admin/AndroidStudioProjects/finalpro_safekid/ParseStarterProject/src/main/res/layout/chat_conversation_win.xml -->

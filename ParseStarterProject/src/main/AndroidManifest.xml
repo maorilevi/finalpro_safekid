@@ -30,7 +30,7 @@
     <application
         android:name=".StarterApplication"
         android:allowBackup="true"
-        android:icon="@mipmap/safekidicon_2"
+        android:icon="@mipmap/kid"
         android:label="@string/app_name"
         android:theme="@style/AppTheme">
         <meta-data
@@ -77,7 +77,7 @@
 
         <activity
             android:name=".Main2Activity"
-            android:label="@string/title_activity_main2"
+            android:label="safekid"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

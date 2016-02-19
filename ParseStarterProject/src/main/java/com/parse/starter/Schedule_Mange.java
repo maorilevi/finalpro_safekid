@@ -95,6 +95,11 @@ public class Schedule_Mange extends Fragment {
                 mytransaction2.commit();
                 Schedule_SingelEvent.CurrentEvent=event1;
                 Schedule_SingelEvent.newevent=true;
+                for(int indx=0;indx<Schedule_SingelEvent.days.size();indx++){
+                    if(Schedule_SingelEvent.days.get(indx).matches(Current_day)){
+                        Schedule_SingelEvent.dayposition=indx;
+                    }
+                }
             }
         });
         return schedule;
@@ -157,7 +162,7 @@ public class Schedule_Mange extends Fragment {
                             event1.setName(results.get(indx).getString("NameEvent"));
                             event1.setDay(results.get(indx).getString("Day"));
                             event1.setAddress(results.get(indx).getString("Address"));
-                            event1.setEnd_time(results.get(indx).getString("StartEvent"));
+                            event1.setStart_time(results.get(indx).getString("StartEvent"));
                             event1.setEnd_time(results.get(indx).getString("EndEvent"));
                             event1.setKidID(results.get(indx).getString("Kid_ID"));
                             event1.setKidName(kidname_STR);

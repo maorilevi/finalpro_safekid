@@ -107,9 +107,7 @@ public class EventDataSource {
     }
     public ArrayList<Event> getAllEvents() {
         ArrayList<Event> events = new ArrayList<Event>();
-
         Cursor cursor = database.query(creatingmydbSQLite.TABLE_EVENT, allColumns, null, null, null, null, null);
-
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
             Event event = cursorToUser(cursor);
@@ -135,6 +133,4 @@ public class EventDataSource {
         event.setDate(cursor.getString(9));
         return event;
     }
-
-
 }

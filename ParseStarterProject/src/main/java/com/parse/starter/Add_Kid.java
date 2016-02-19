@@ -90,13 +90,9 @@ public class Add_Kid extends Fragment {
                             || Password_STR.isEmpty() || Phone_NUmber_STR.isEmpty() || Address_STR.isEmpty()
                             || Email_STR.isEmpty() || Birthday_STR.isEmpty())) {
                         Bitmap bitmap = BitmapFactory.decodeFile(Main2Activity.imgDecodableString);
-
                         ByteArrayOutputStream stream = new ByteArrayOutputStream();
-
                         Bitmap resized = Bitmap.createScaledBitmap(bitmap, 100, 100, true);
-
                         resized.compress(Bitmap.CompressFormat.PNG, 10, stream);
-
                         byte[] image = stream.toByteArray();
 
                         ParseFile file = new ParseFile("androidbegin.png", image);

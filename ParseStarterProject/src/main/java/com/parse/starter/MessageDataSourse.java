@@ -30,15 +30,12 @@ public class MessageDataSourse {
     public MessageDataSourse(Context context) {
         dbHelper = new creatingmydbSQLite(context);
     }
-
     public void open() throws SQLException {
         database = dbHelper.getWritableDatabase();
     }
-
     public void close() {
         dbHelper.close();
     }
-
     public boolean CreateNewMessage(Message message) {
         boolean create=false;
         ContentValues values = new ContentValues();
@@ -77,7 +74,6 @@ public class MessageDataSourse {
         cursor2.close();
         return create;
     }
-
     public void DeleteMessage(Message message) {
         long id = message.getId();
         Log.i("Message deleted with id", "id:" + id);

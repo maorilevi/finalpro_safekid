@@ -40,7 +40,6 @@ public class JSONCustomReceiver extends ParsePushBroadcastReceiver  {
             alert = pushData.getString("alert");
             title = pushData.getString("title");
             Message receivemess=new Message();
-
             receivemess.setParseid(pushData.getString("PARSEID"));
             receivemess.setChatRoom_ID(pushData.getString("CHATROOMID"));
             receivemess.setReceiver(pushData.getString("RECEIVER"));
@@ -53,18 +52,23 @@ public class JSONCustomReceiver extends ParsePushBroadcastReceiver  {
             mmDB.open();
             mmDB.CreateNewMessage(receivemess);
             mmDB.close();
-            if(Main2Activity.isInForeground&&Main2Activity.Chatwinopen){
-                if(Chat_ConversationWindow.cont_user.getUserParseID().matches(receivemess.getSender())){
-                    Chat_ConversationWindow.abp.add(receivemess);
-                    receivemess.setReade(true);
-                    mmDB.open();
-                    mmDB.UpdateMessage(receivemess);
-                    mmDB.close();
+            if(Main2Activity.isInForeground&&Main2Activity.ContactList){
+                Chat_Contact_List.fulllist(Main2Activity.Mainact);
+                if(Main2Activity.Chatwinopen){
+                    if(Chat_ConversationWindow.cont_user.getUserParseID().matches(receivemess.getSender())){
+                        Chat_ConversationWindow.abp.add(receivemess);
+                        receivemess.setReade(true);
+                        mmDB.open();
+                        mmDB.UpdateMessage(receivemess);
+                        mmDB.close();
+                    }else{
+                    }
+
                 }else{
+
                 }
             }
         } catch (JSONException e) {}
-
         Log.i(TAG,"alert is " + alert);
         Log.i(TAG,"title is " + title);
 

@@ -1,0 +1,248 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="projact.finalprojact.projact.Schedule_Event1"
+    android:background="#6f73e0">
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/SingleEv_Name"
+        android:background="@android:drawable/editbox_background_normal"
+        android:textColor="#000000"
+        android:textStyle="bold"
+        android:hint="Name Event"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="50dp"
+        android:layout_alignRight="@+id/Event_Show_endbtn"
+        android:layout_alignEnd="@+id/Event_Show_endbtn" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Save event"
+        android:id="@+id/SingleEv_Savebtn"
+        android:background="@android:drawable/editbox_background_normal"
+        android:visibility="visible"
+        android:textColor="#000000"
+        android:textStyle="bold"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignRight="@+id/SingleEv_Start"
+        android:layout_alignEnd="@+id/SingleEv_Start" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/SingleEv_Address"
+        android:background="@android:drawable/editbox_background_normal"
+        android:textColor="#000000"
+        android:textStyle="bold"
+        android:hint="Address"
+        android:layout_below="@+id/SingleEv_Name"
+        android:layout_alignRight="@+id/Event_Show_endbtn"
+        android:layout_alignEnd="@+id/Event_Show_endbtn"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Delete"
+        android:id="@+id/SingleEv_Deletebtn"
+        android:background="@android:drawable/editbox_background_normal"
+        android:visibility="visible"
+        android:textColor="#000000"
+        android:textStyle="bold"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignLeft="@+id/SingleEv_End"
+        android:layout_alignStart="@+id/SingleEv_End" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New Text"
+        android:id="@+id/SingleEv_Start"
+        android:textColor="#000000"
+        android:background="@android:drawable/editbox_background_normal"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:layout_alignTop="@+id/SingleEv_End"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignRight="@+id/Event_Show_startbtn"
+        android:layout_alignEnd="@+id/Event_Show_startbtn" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New Text"
+        android:id="@+id/SingleEv_End"
+        android:textColor="#000000"
+        android:background="@android:drawable/editbox_background_normal"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:layout_below="@+id/Event_Show_endbtn"
+        android:layout_alignRight="@+id/Event_Show_endbtn"
+        android:layout_alignEnd="@+id/Event_Show_endbtn"
+        android:layout_alignLeft="@+id/Event_Show_endbtn"
+        android:layout_alignStart="@+id/Event_Show_endbtn" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/SingleEv_Menubtn"
+        android:visibility="visible"
+        android:textColor="#000000"
+        android:background="@android:drawable/editbox_background_normal"
+        android:text="back"
+        android:textStyle="bold"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:text="Choose end time"
+        android:id="@+id/Event_Show_endbtn"
+        android:textSize="16sp"
+        android:background="@android:drawable/editbox_background_normal"
+        android:textColor="#000000"
+        android:onClick="opendatetime"
+        android:layout_alignTop="@+id/Event_Show_startbtn"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <Button
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:text="Choose Start Time"
+        android:id="@+id/Event_Show_startbtn"
+        android:textSize="16sp"
+        android:background="@android:drawable/editbox_background_normal"
+        android:textColor="#000000"
+        android:onClick="opendatetime"
+        android:layout_below="@+id/SingleEv_Address"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/editText"
+        android:layout_below="@+id/SingleEv_Menubtn" />
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:text="event by day"
+        android:id="@+id/checkBoxday"
+        android:layout_below="@+id/SingleEv_End"
+        android:layout_centerHorizontal="true" />
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:text="event by date"
+        android:id="@+id/checkBoxdate"
+        android:layout_below="@+id/dayrelative"
+        android:layout_centerHorizontal="true" />
+
+    <RelativeLayout
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:id="@+id/dayrelative"
+        android:layout_below="@+id/checkBoxday"
+        android:layout_alignRight="@+id/SingleEv_End"
+        android:layout_alignEnd="@+id/SingleEv_End">
+
+        <Button
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:id="@+id/pravdaybtn"
+            android:background="@drawable/laftarrow"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:enabled="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/SingleEv_Day"
+            android:background="@android:drawable/editbox_background_normal"
+            android:hint="choose day"
+            android:textColor="#000000"
+            android:textColorHint="#695f5f"
+            android:gravity="center"
+            android:layout_alignParentBottom="true"
+            android:layout_toRightOf="@+id/pravdaybtn"
+            android:layout_toLeftOf="@+id/nextdaybtn"
+            android:layout_toStartOf="@+id/nextdaybtn"
+            android:layout_alignTop="@+id/pravdaybtn" />
+
+        <Button
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:id="@+id/nextdaybtn"
+            android:background="@drawable/rigtharrow"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:enabled="true" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:id="@+id/daterelative"
+        android:layout_below="@+id/checkBoxdate"
+        android:layout_alignRight="@+id/SingleEv_End"
+        android:layout_alignEnd="@+id/SingleEv_End">
+
+        <Button
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:id="@+id/calbtn"
+            android:background="@drawable/calicon"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:onClick="opendatetime"
+            android:enabled="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/SingleEv_Date"
+            android:background="@android:drawable/editbox_background_normal"
+            android:hint="choose date"
+            android:textColor="#000000"
+            android:textColorHint="#695f5f"
+            android:gravity="center"
+            android:layout_toRightOf="@+id/calbtn"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
+    </RelativeLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Edit Event"
+        android:id="@+id/textView"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:textColor="#000000"
+        android:textStyle="bold|italic"
+        android:textSize="30sp" />
+
+</RelativeLayout>

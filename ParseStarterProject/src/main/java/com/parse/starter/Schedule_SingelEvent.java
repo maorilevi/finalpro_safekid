@@ -11,47 +11,246 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.EditText;
+import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
-import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.parse.GetCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
+import com.parse.SaveCallback;
+
+import java.util.ArrayList;
 
 
 @TargetApi(Build.VERSION_CODES.HONEYCOMB)
 public class Schedule_SingelEvent extends Fragment {
     public Button backtomanage;
-    public Button SaveStarttime;
-    public Button SaveEndtime;
+    public Button pravdaybtn;
+    public Button nextdaybtn;
     public Button SaveEvent;
-
     public Button DeleteEventBTN;
+    public Button calbtn;
+    public CheckBox checkBoxday;
+    public CheckBox checkBoxdate;
+    static protected int dayposition=0;
+    public ScrollView scrollView;
     static protected boolean newevent=false;
     static protected Event CurrentEvent;
-    static protected TextView NameEvent;
-    static protected TextView AddressEvent;
+    static protected EditText NameEvent;
+    static protected EditText AddressEvent;
     static protected TextView day;
+    static protected TextView date;
     static protected TextView Set_Start_Time;
     static protected TextView Set_End_Time;
+    static protected ArrayList<String> days=new ArrayList<String>();
+
+
+    public RelativeLayout dayrel;
+    public RelativeLayout daterel;
+    @TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        final View singelevent = inflater.inflate(R.layout.schedule__event1, container, false);
-        NameEvent=(TextView)singelevent.findViewById(R.id.event_name);
-        AddressEvent=(TextView)singelevent.findViewById(R.id.event_address);
-        day=(TextView)singelevent.findViewById(R.id.eventday);
-        Set_Start_Time=(TextView)singelevent.findViewById(R.id.event_start_txt);
-        Set_End_Time=(TextView)singelevent.findViewById(R.id.event__end_txt);
+        final View singelevent = inflater.inflate(R.layout.schedule_singleevent, container, false);
+        if(Main2Activity.MainActionBar.isShowing()){
+            Main2Activity.MainActionBar.hide();
+        }
+        Main2Activity.text_date = (TextView) singelevent.findViewById(R.id.SingleEv_Date);
+        calbtn = (Button) singelevent.findViewById(R.id.calbtn);
+        dayrel = (RelativeLayout) singelevent.findViewById(R.id.dayrelative);
+        daterel = (RelativeLayout) singelevent.findViewById(R.id.daterelative);
+        checkBoxday = (CheckBox) singelevent.findViewById(R.id.checkBoxday);
+        checkBoxday.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    if (checkBoxdate.isEnabled()) {
+                        checkBoxdate.setEnabled(false);
+                    }
+                    if (!dayrel.isEnabled())
+                        dayrel.setEnabled(true);
+                    if (!pravdaybtn.isEnabled())
+                        pravdaybtn.setEnabled(true);
+                    if (!nextdaybtn.isEnabled())
+                        nextdaybtn.setEnabled(true);
+
+
+                    if (calbtn.isEnabled())
+                        calbtn.setEnabled(false);
+                    if (daterel.isEnabled())
+                        daterel.setEnabled(false);
+                } else {
+                    if (!checkBoxdate.isEnabled()) {
+                        checkBoxdate.setEnabled(true);
+                    }
+                    if (dayrel.isEnabled())
+                        dayrel.setEnabled(false);
+                    if (pravdaybtn.isEnabled())
+                        pravdaybtn.setEnabled(false);
+                    if (nextdaybtn.isEnabled())
+                        nextdaybtn.setEnabled(false);
+                }
+            }
+        });
+        checkBoxdate = (CheckBox) singelevent.findViewById(R.id.checkBoxdate);
+        checkBoxdate.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    if (checkBoxday.isEnabled()) {
+                        checkBoxday.setEnabled(false);
+                    }
+                    if (dayrel.isEnabled())
+                        dayrel.setEnabled(false);
+                    if (dayrel.isEnabled())
+                        dayrel.setEnabled(false);
+                    if (pravdaybtn.isEnabled())
+                        pravdaybtn.setEnabled(false);
+                    if (nextdaybtn.isEnabled())
+                        nextdaybtn.setEnabled(false);
+                    if (!daterel.isEnabled())
+                        daterel.setEnabled(true);
+                    if (!calbtn.isEnabled())
+                        calbtn.setEnabled(true);
+                } else {
+                    if (!checkBoxday.isEnabled()) {
+                        checkBoxday.setEnabled(true);
+                        if (daterel.isEnabled())
+                            daterel.setEnabled(false);
+                        if (calbtn.isEnabled())
+                            calbtn.setEnabled(false);
+                    }
+                }
+            }
+        });
+        days.add("Sunday");
+        days.add("Monday");
+        days.add("Tuesday");
+        days.add("Wednesday");
+        days.add("Thursday");
+        days.add("Friday");
+        days.add("Saturday");
+
+        scrollView = new ScrollView(getActivity());
+        scrollView = (ScrollView) singelevent.findViewById(R.id.scrollView);
+        pravdaybtn = new Button(getActivity());
+        pravdaybtn = (Button) singelevent.findViewById(R.id.pravdaybtn);
+        pravdaybtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dayposition--;
+                if(dayposition<0){
+                    dayposition=days.size()-1;
+                }else if(dayposition>days.size()-1){
+                    dayposition=0;
+                }
+                day.setText(days.get(dayposition));
+            }
+        });
+        nextdaybtn = new Button(getActivity());
+        nextdaybtn = (Button) singelevent.findViewById(R.id.nextdaybtn);
+        nextdaybtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dayposition++;
+                if(dayposition<0){
+                    dayposition=days.size()-1;
+                }else if(dayposition>days.size()-1){
+                    dayposition=0;
+                }
+                day.setText(days.get(dayposition));
+
+            }
+        });
+        if (newevent) {
+            if(!checkBoxday.isChecked()){
+                checkBoxday.setChecked(true);
+            }
+            if(checkBoxdate.isEnabled()){
+                checkBoxdate.setEnabled(false);
+            }
+            if (checkBoxdate.isEnabled())
+                checkBoxdate.setEnabled(false);
+            if (!dayrel.isEnabled())
+                dayrel.setEnabled(true);
+            if (!pravdaybtn.isEnabled())
+                pravdaybtn.setEnabled(true);
+            if (!nextdaybtn.isEnabled())
+                nextdaybtn.setEnabled(true);
+
+
+            if (calbtn.isEnabled())
+                calbtn.setEnabled(false);
+            if (daterel.isEnabled())
+                daterel.setEnabled(false);
+        }else{
+            if(CurrentEvent.getDay().isEmpty()){
+                if(!checkBoxdate.isEnabled())
+                    checkBoxdate.setEnabled(true);
+                checkBoxdate.setChecked(true);
+                    if (checkBoxday.isEnabled()) {
+                        checkBoxday.setEnabled(false);
+                    }
+                    if (dayrel.isEnabled())
+                        dayrel.setEnabled(false);
+                    if (dayrel.isEnabled())
+                        dayrel.setEnabled(false);
+                    if (pravdaybtn.isEnabled())
+                        pravdaybtn.setEnabled(false);
+                    if (nextdaybtn.isEnabled())
+                        nextdaybtn.setEnabled(false);
+                    if (!daterel.isEnabled())
+                        daterel.setEnabled(true);
+                    if (!calbtn.isEnabled())
+                        calbtn.setEnabled(true);
+            }else{
+                if(!checkBoxday.isEnabled())
+                    checkBoxday.setEnabled(true);
+                checkBoxday.setChecked(true);
+                if (checkBoxdate.isEnabled()) {
+                    checkBoxdate.setEnabled(false);
+                }
+                if (!dayrel.isEnabled())
+                    dayrel.setEnabled(true);
+                if (!pravdaybtn.isEnabled())
+                    pravdaybtn.setEnabled(true);
+                if (!nextdaybtn.isEnabled())
+                    nextdaybtn.setEnabled(true);
+
+
+                if (calbtn.isEnabled())
+                    calbtn.setEnabled(false);
+                if (daterel.isEnabled())
+                    daterel.setEnabled(false);
+            }
+        }
+        //event name
+        NameEvent=(EditText)singelevent.findViewById(R.id.SingleEv_Name);
         NameEvent.setText(CurrentEvent.getName());
+        //event address
+        AddressEvent=(EditText)singelevent.findViewById(R.id.SingleEv_Address);
         AddressEvent.setText(CurrentEvent.getAddress());
+        //event day
+        day=(TextView)singelevent.findViewById(R.id.SingleEv_Day);
         day.setText(CurrentEvent.getDay());
+        //event date
+        date=(TextView)singelevent.findViewById(R.id.SingleEv_Date);
+        date.setText(CurrentEvent.getDate());
+        //event start
+        Set_Start_Time=(TextView)singelevent.findViewById(R.id.SingleEv_Start);
         Set_Start_Time.setText(CurrentEvent.getStart_time());
+        //event end
+        Set_End_Time = (TextView)singelevent.findViewById(R.id.SingleEv_End);
         Set_End_Time.setText(CurrentEvent.getEnd_time());
+
         backtomanage=new Button(getActivity());
-        backtomanage=(Button)singelevent.findViewById(R.id.BackToManageEvent);
+        backtomanage=(Button)singelevent.findViewById(R.id.SingleEv_Menubtn);
         backtomanage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -61,10 +260,13 @@ public class Schedule_SingelEvent extends Fragment {
                 mytransaction2.remove(Main2Activity.Lest_Fram);
                 mytransaction2.show(Main2Activity.current_Fram);
                 mytransaction2.commit();
+                if(!Main2Activity.MainActionBar.isShowing()){
+                    Main2Activity.MainActionBar.show();
+                }
             }
         });
         DeleteEventBTN=new Button(getActivity());
-        DeleteEventBTN=(Button)singelevent.findViewById(R.id.Event_delete_btn);
+        DeleteEventBTN=(Button)singelevent.findViewById(R.id.SingleEv_Deletebtn);
         DeleteEventBTN.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -89,57 +291,10 @@ public class Schedule_SingelEvent extends Fragment {
                     }
                 });
                 builder.show();
-
-            }
-        });
-        SaveStarttime=new Button(getActivity());
-        SaveStarttime=(Button)singelevent.findViewById(R.id.Event_Show_startbtn);
-        SaveStarttime.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                TimePicker mytime=new TimePicker(getActivity());
-                int Hours_int=((TimePicker)singelevent.findViewById(R.id.timePicker)).getCurrentHour();
-                int Minute_int=((TimePicker)singelevent.findViewById(R.id.timePicker)).getCurrentMinute();
-                String Hours="";
-                String Minute="";
-                if(Hours_int<10){
-                    Hours=("0"+Integer.toString(Hours_int));
-                }else{
-                    Hours=(Integer.toString(Hours_int));
-                }
-                if(Minute_int<10){
-                    Minute=("0"+Integer.toString(Minute_int));
-                }else{
-                    Minute=(Integer.toString(Minute_int));
-                }
-                Set_Start_Time.setText(Hours + ":" + Minute);
-            }
-        });
-        SaveEndtime=new Button(getActivity());
-        SaveEndtime=(Button)singelevent.findViewById(R.id.Event_Show_endtime);
-        SaveEndtime.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                TimePicker mytime=new TimePicker(getActivity());
-                int Hours_int=((TimePicker)singelevent.findViewById(R.id.timePicker)).getCurrentHour();
-                int Minute_int=((TimePicker)singelevent.findViewById(R.id.timePicker)).getCurrentMinute();
-                String Hours="";
-                String Minute="";
-                if(Hours_int<10){
-                    Hours=("0"+Integer.toString(Hours_int));
-                }else{
-                    Hours=(Integer.toString(Hours_int));
-                }
-                if(Minute_int<10){
-                    Minute=("0"+Integer.toString(Minute_int));
-                }else{
-                    Minute=(Integer.toString(Minute_int));
-                }
-                Set_End_Time.setText(Hours + ":" + Minute);
             }
         });
         SaveEvent=new Button(getActivity());
-        SaveEvent=(Button)singelevent.findViewById(R.id.Event_Save_btn);
+        SaveEvent=(Button)singelevent.findViewById(R.id.SingleEv_Savebtn);
         SaveEvent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -151,7 +306,13 @@ public class Schedule_SingelEvent extends Fragment {
                     newevent.put("Address",Schedule_SingelEvent.AddressEvent.getText().toString());
                     newevent.put("StartEvent",Schedule_SingelEvent.Set_Start_Time.getText().toString());
                     newevent.put("EndEvent", Schedule_SingelEvent.Set_End_Time.getText().toString());
-                    newevent.put("Day", Schedule_Mange.Current_day);
+                    if(checkBoxday.isChecked()){
+                        newevent.put("Day",day.getText().toString());
+                        newevent.put("Date","");
+                    }else if(checkBoxdate.isChecked()){
+                        newevent.put("Date",date.getText().toString());
+                        newevent.put("Day","");
+                    }
                     newevent.put("Kid_ID", Schedule_Mange.kidID);
                     newevent.saveInBackground();
                     Schedule_Mange.newevent=false;
@@ -162,12 +323,26 @@ public class Schedule_SingelEvent extends Fragment {
                         public void done(final ParseObject parseObject, ParseException e2) {
                             if (e2 == null) {
                                 Toast.makeText(getActivity(), "old", Toast.LENGTH_SHORT).show();
-                                parseObject.put("NameEvent", Schedule_SingelEvent.NameEvent.getText().toString());
-                                parseObject.put("Address", Schedule_SingelEvent.AddressEvent.getText().toString());
-                                parseObject.put("StartEvent", Schedule_SingelEvent.Set_Start_Time.getText().toString());
-                                parseObject.put("EndEvent", Schedule_SingelEvent.Set_End_Time.getText().toString());
-                                parseObject.put("Day", Schedule_SingelEvent.day.getText().toString());
-                                parseObject.saveInBackground();
+                                parseObject.put("NameEvent", NameEvent.getText().toString());
+                                parseObject.put("Address", AddressEvent.getText().toString());
+                                parseObject.put("StartEvent", Set_Start_Time.getText().toString());
+                                parseObject.put("EndEvent",Set_End_Time.getText().toString());
+                                if(checkBoxday.isChecked()){
+                                    parseObject.put("Day",day.getText().toString());
+                                    parseObject.put("Date","");
+                                }else if(checkBoxdate.isChecked()){
+                                    parseObject.put("Date",date.getText().toString());
+                                    parseObject.put("Day","");
+                                }
+                                parseObject.saveInBackground(new SaveCallback() {
+                                    @Override
+                                    public void done(ParseException e) {
+                                        if(e==null){
+                                        }else{
+
+                                        }
+                                    }
+                                });
                                 AlertDialog alertDialog = new AlertDialog.Builder(getActivity()).create();
                                 alertDialog.setTitle("successful update");
                                 alertDialog.setMessage("your changes is update");
@@ -187,7 +362,6 @@ public class Schedule_SingelEvent extends Fragment {
                         }
                     });
                 }
-
             }
         });
         return singelevent;

@@ -21,305 +21,162 @@
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="First Name:"
-                android:id="@+id/textView25"
-                android:textSize="20sp"
-                android:layout_below="@+id/button8"
-                android:layout_alignStart="@+id/MessCount"
-                android:textColor="#000000"
-                android:textStyle="bold" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Last Name:"
-                android:id="@+id/MessCount"
-                android:textSize="20sp"
-                android:layout_below="@+id/Setting_F_Name"
-                android:layout_centerHorizontal="true"
-                android:textColor="#000000"
-                android:textStyle="bold" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="User Name:"
-                android:id="@+id/textView24"
-                android:textSize="20sp"
-                android:layout_below="@+id/Setting_L_name"
-                android:layout_centerHorizontal="true"
-                android:textColor="#000000"
-                android:textStyle="bold" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Address:"
-                android:id="@+id/textView17"
-                android:textSize="20sp"
-                android:layout_below="@+id/Setting_U_Name"
-                android:layout_centerHorizontal="true"
-                android:textColor="#000000"
-                android:textStyle="bold" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Phone NUmber:"
-                android:id="@+id/textView26"
-                android:textSize="20sp"
-                android:layout_below="@+id/Setting_Address"
-                android:layout_centerHorizontal="true"
-                android:textColor="#000000"
-                android:textStyle="bold" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Email:"
-                android:id="@+id/textView27"
-                android:textSize="20sp"
-                android:layout_below="@+id/Setting_Phone_Number"
-                android:layout_centerHorizontal="true"
-                android:textColor="#000000"
-                android:textStyle="bold" />
-
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Change Password"
-                android:id="@+id/button4"
-                android:layout_below="@+id/Setting_ContactAmergency2"
-                android:layout_alignParentStart="true"
-                android:background="@android:drawable/editbox_background_normal" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Birthday:"
-                android:id="@+id/textView28"
-                android:textSize="20sp"
-                android:layout_below="@+id/Setting_Email"
-                android:layout_alignEnd="@+id/textView17"
-                android:textColor="#000000"
-                android:textStyle="bold" />
-
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Log out"
-                android:id="@+id/logoutbtn"
-                android:onClick="logout"
+                android:id="@+id/Setting_logoutBTN"
                 android:background="@android:drawable/editbox_background_normal"
-                android:layout_below="@+id/imageView"
-                android:layout_alignLeft="@+id/button6"
-                android:layout_alignStart="@+id/button6"
+                android:layout_below="@+id/Setting_User_Image"
                 android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Contact number to Emergency"
-                android:id="@+id/textView29"
-                android:textSize="18sp"
-                android:layout_below="@+id/Setting_Birthday"
-                android:layout_centerHorizontal="true"
-                android:textColor="#000000"
-                android:textStyle="bold" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="1."
-                android:id="@+id/textView30"
-                android:textSize="18sp"
-                android:layout_below="@+id/textView29"
-                android:layout_alignParentStart="true"
-                android:textColor="#000000"
-                android:textStyle="bold" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="2."
-                android:id="@+id/textView31"
-                android:textSize="18sp"
-                android:layout_above="@+id/Setting_ContactAmergency1"
-                android:layout_alignParentStart="true"
-                android:textColor="#000000"
-                android:textStyle="bold" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="3."
-                android:id="@+id/textView32"
-                android:textSize="18sp"
-                android:layout_alignBottom="@+id/Setting_ContactAmergency1"
-                android:layout_alignParentStart="true"
-                android:textColor="#000000"
-                android:textStyle="bold" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="4."
-                android:id="@+id/textView33"
-                android:textSize="18sp"
-                android:layout_above="@+id/button4"
-                android:layout_alignParentStart="true"
-                android:textColor="#000000"
-                android:textStyle="bold" />
-
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="back to menu"
-                android:id="@+id/button7"
-                android:onClick="menu"
-                android:background="@android:drawable/editbox_background_normal"
-                android:layout_below="@+id/button6"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true" />
+                android:layout_alignParentEnd="true"
+                android:layout_toRightOf="@+id/Setting_changeimgBTN"
+                android:layout_toEndOf="@+id/Setting_changeimgBTN" />
 
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="change image"
-                android:id="@+id/button8"
+                android:id="@+id/Setting_changeimgBTN"
                 android:onClick="SettingchooseImage"
                 android:background="@android:drawable/editbox_background_normal"
-                android:layout_below="@+id/Setting_User_Image"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_alignRight="@+id/Setting_User_Image"
-                android:layout_alignEnd="@+id/Setting_User_Image" />
+                android:layout_alignTop="@+id/Setting_logoutBTN"
+                android:layout_centerHorizontal="true" />
 
             <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/Setting_Address"
                 android:textSize="20sp"
-                android:layout_below="@+id/textView17"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentStart="true"
-                android:background="@android:drawable/editbox_background_normal" />
+                android:background="@android:drawable/editbox_background_normal"
+                android:hint="Address"
+                android:layout_below="@+id/Setting_U_Name" />
 
             <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/Setting_F_Name"
                 android:textSize="20sp"
-                android:layout_below="@+id/textView25"
                 android:layout_alignParentEnd="true"
-                android:layout_toEndOf="@+id/textView24"
                 android:layout_alignParentStart="true"
-                android:background="@android:drawable/editbox_background_normal" />
+                android:background="@android:drawable/editbox_background_normal"
+                android:textColorHint="#625252"
+                android:hint="First Name"
+                android:layout_below="@+id/Setting_changeimgBTN" />
 
             <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/Setting_L_name"
                 android:textSize="20sp"
+                android:background="@android:drawable/editbox_background_normal"
+                android:hint="Lest Name"
                 android:layout_below="@+id/Setting_F_Name"
-                android:layout_alignParentEnd="true"
-                android:layout_marginTop="22dp"
+                android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
-                android:background="@android:drawable/editbox_background_normal" />
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true" />
 
             <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/Setting_U_Name"
                 android:textSize="20sp"
-                android:layout_below="@+id/textView24"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
-                android:background="@android:drawable/editbox_background_normal" />
+                android:background="@android:drawable/editbox_background_normal"
+                android:hint="User Name"
+                android:layout_below="@+id/Setting_L_name" />
 
             <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/Setting_Phone_Number"
                 android:textSize="20sp"
-                android:layout_below="@+id/textView26"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentStart="true"
-                android:background="@android:drawable/editbox_background_normal" />
+                android:background="@android:drawable/editbox_background_normal"
+                android:hint="Phone Number"
+                android:layout_below="@+id/Setting_Address" />
 
             <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/Setting_Email"
                 android:textSize="20sp"
-                android:layout_below="@+id/textView27"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentStart="true"
-                android:background="@android:drawable/editbox_background_normal" />
+                android:background="@android:drawable/editbox_background_normal"
+                android:hint="Email"
+                android:layout_below="@+id/Setting_Phone_Number"
+                android:inputType="textWebEmailAddress" />
 
             <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/Setting_Birthday"
                 android:textSize="20sp"
-                android:layout_below="@+id/textView28"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentStart="true"
-                android:background="@android:drawable/editbox_background_normal" />
+                android:background="@android:drawable/editbox_background_normal"
+                android:hint="Birthday"
+                android:layout_below="@+id/Setting_Email" />
 
             <EditText
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/Setting_ContactAmergency1"
                 android:textSize="20sp"
                 android:layout_below="@+id/Setting_ContactAmergency3"
                 android:layout_alignParentEnd="true"
                 android:layout_alignStart="@+id/Setting_ContactAmergency3"
-                android:background="@android:drawable/editbox_background_normal" />
+                android:background="@android:drawable/editbox_background_normal"
+                android:hint="Amergency Phone 1" />
 
             <EditText
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/Setting_ContactAmergency2"
                 android:textSize="20sp"
                 android:layout_below="@+id/Setting_ContactAmergency1"
                 android:layout_alignParentEnd="true"
                 android:layout_alignStart="@+id/Setting_ContactAmergency1"
-                android:background="@android:drawable/editbox_background_normal" />
+                android:background="@android:drawable/editbox_background_normal"
+                android:hint="Amergency Phone 2" />
 
             <EditText
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/Setting_ContactAmergency3"
                 android:textSize="20sp"
                 android:layout_below="@+id/Setting_ContactAmergency4"
                 android:layout_alignParentEnd="true"
-                android:layout_toEndOf="@+id/textView31"
-                android:background="@android:drawable/editbox_background_normal" />
+                android:background="@android:drawable/editbox_background_normal"
+                android:hint="Amergency Phone 3" />
 
             <EditText
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/Setting_ContactAmergency4"
                 android:textSize="20sp"
                 android:layout_alignParentEnd="true"
-                android:layout_below="@+id/textView29"
                 android:layout_alignStart="@+id/Setting_ContactAmergency3"
-                android:background="@android:drawable/editbox_background_normal" />
+                android:background="@android:drawable/editbox_background_normal"
+                android:hint="Amergency Phone 4"
+                android:layout_below="@+id/Setting_Birthday" />
 
             <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="130dp"
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
                 android:id="@+id/Setting_User_Image"
                 android:focusable="false"
                 android:layout_below="@+id/imageView"
-                android:layout_toStartOf="@+id/textView26"
-                android:layout_alignBottom="@+id/button6"
-                android:layout_toLeftOf="@+id/textView26" />
+                android:layout_alignLeft="@+id/Setting_changeimgBTN"
+                android:layout_alignStart="@+id/Setting_changeimgBTN"
+                android:layout_alignRight="@+id/Setting_changeimgBTN"
+                android:layout_alignEnd="@+id/Setting_changeimgBTN" />
 
             <ImageView
                 android:layout_width="50dp"
@@ -333,11 +190,58 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Save changes"
-                android:id="@+id/button6"
+                android:id="@+id/Setting_saveBTN"
                 android:background="@android:drawable/editbox_background_normal"
-                android:layout_below="@+id/logoutbtn"
+                android:layout_alignTop="@+id/Setting_changeimgBTN"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_toLeftOf="@+id/Setting_changeimgBTN"
+                android:layout_toStartOf="@+id/Setting_changeimgBTN" />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="numberPassword"
+                android:ems="10"
+                android:id="@+id/Setting_ConfPassword"
+                android:background="@android:drawable/editbox_background_normal"
+                android:textSize="20sp"
+                android:layout_below="@+id/Setting_Newpassword"
                 android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true" />
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:hint="Confirm Password" />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="numberPassword"
+                android:ems="10"
+                android:id="@+id/Setting_Newpassword"
+                android:background="@android:drawable/editbox_background_normal"
+                android:textSize="20sp"
+                android:layout_below="@+id/Setting_Oldpassword"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:hint="New password" />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="numberPassword"
+                android:ems="10"
+                android:id="@+id/Setting_Oldpassword"
+                android:background="@android:drawable/editbox_background_normal"
+                android:textSize="20sp"
+                android:layout_alignParentEnd="true"
+                android:layout_below="@+id/Setting_ContactAmergency2"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:hint="Old password" />
+
 
         </RelativeLayout>
     </ScrollView>
