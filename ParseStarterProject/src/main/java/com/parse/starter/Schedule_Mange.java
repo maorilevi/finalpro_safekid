@@ -137,6 +137,8 @@ public class Schedule_Mange extends Fragment {
             lay.addView(kidImage);
             LayotKidImage.addView(lay);
         }
+
+
     }
     //day function
 
