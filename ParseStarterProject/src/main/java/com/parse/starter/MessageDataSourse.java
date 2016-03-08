@@ -21,7 +21,7 @@ public class MessageDataSourse {
             creatingmydbSQLite.COLUMN_TEXT,
             creatingmydbSQLite.COLUMN_SENDER,
             creatingmydbSQLite.COLUMN_RECEIVER,
-            creatingmydbSQLite.COLUMN_PARSEID,
+            creatingmydbSQLite.COLUMN_P_ID_MESS,
             creatingmydbSQLite.COLUMN_DATE,
             creatingmydbSQLite.COLUMN_CHATROOM,
             creatingmydbSQLite.COLUMN_READE
@@ -42,7 +42,7 @@ public class MessageDataSourse {
         values.put(creatingmydbSQLite.COLUMN_TEXT, message.getMessage());
         values.put(creatingmydbSQLite.COLUMN_SENDER, message.getSender());
         values.put(creatingmydbSQLite.COLUMN_RECEIVER, message.getReceiver());
-        values.put(creatingmydbSQLite.COLUMN_PARSEID, message.getParseid());
+        values.put(creatingmydbSQLite.COLUMN_P_ID_MESS, message.getParseid());
         values.put(creatingmydbSQLite.COLUMN_DATE, message.getDate());
         values.put(creatingmydbSQLite.COLUMN_CHATROOM, message.getChatRoom_ID());
         if(message.isReade()){
@@ -56,7 +56,7 @@ public class MessageDataSourse {
             DeleteMessage(messlis.get(messlis.size()-1));
         }
         Message newMessage=new Message();
-        Cursor cursor2 = database.query(creatingmydbSQLite.TABLE_MESSAGE, allColumns, creatingmydbSQLite.COLUMN_PARSEID + " =? ",
+        Cursor cursor2 = database.query(creatingmydbSQLite.TABLE_MESSAGE, allColumns, creatingmydbSQLite.COLUMN_P_ID_MESS + "=?",
                 new String[]{message.getParseid()}, null, null, null);
         cursor2.moveToFirst();
         if(!cursor2.moveToFirst()&&cursor2.getCount()==0){
@@ -85,14 +85,11 @@ public class MessageDataSourse {
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
             Message message = cursorToMessage(cursor);
-            messages.add(message);
+            DeleteMessage(message);
             cursor.moveToNext();
         }
         // make sure to close the cursor
         cursor.close();
-        int listsize=messages.size();
-        for(int indx=0;indx<listsize;indx++)
-            database.delete(creatingmydbSQLite.TABLE_MESSAGE, creatingmydbSQLite.COLUMN_MID + " = " + 0,null);
     }
     public int GetTableSize(){
         List<Message> messages = new ArrayList<Message>();
@@ -112,7 +109,7 @@ public class MessageDataSourse {
         values.put(creatingmydbSQLite.COLUMN_TEXT,message.getMessage());
         values.put(creatingmydbSQLite.COLUMN_SENDER,message.getSender());
         values.put(creatingmydbSQLite.COLUMN_RECEIVER, message.getReceiver());
-        values.put(creatingmydbSQLite.COLUMN_PARSEID, message.getParseid());
+        values.put(creatingmydbSQLite.COLUMN_P_ID_MESS, message.getParseid());
         values.put(creatingmydbSQLite.COLUMN_DATE, message.getDate());
         values.put(creatingmydbSQLite.COLUMN_CHATROOM, message.getChatRoom_ID());
         if(message.isReade()){
@@ -124,10 +121,13 @@ public class MessageDataSourse {
                 values, creatingmydbSQLite.COLUMN_ID + "=" + message.getId(), null);
     }
     public ArrayList<Message> getAllMessage(String x) {
+        Log.i("GETALLMESSAGEfunc","STRING:"+x);
+
         ArrayList<Message> messages = new ArrayList<Message>();
-        Cursor cursor = database.query(creatingmydbSQLite.TABLE_MESSAGE, allColumns, null, null, null, null, null);
+        Cursor cursor = database.query(creatingmydbSQLite.TABLE_MESSAGE, allColumns,null, null, null, null, null);
         cursor.moveToFirst();
-        while (!cursor.isAfterLast()) {
+        while (!cursor.isAfterLast()&&cursor.getCount()>0) {
+            Log.i("GETALLMESSAGEfunc","NOT NULL");
             Message message = cursorToMessage(cursor);
             if(message!=null){
                 if(message.getChatRoom_ID().matches(x)){
@@ -143,14 +143,16 @@ public class MessageDataSourse {
     }
     private Message cursorToMessage(Cursor cursor) {
         Message message=new Message();
-        message.setId(cursor.getLong(0));
-        message.setMessage(cursor.getString(1));
-        message.setSender(cursor.getString(2));
-        message.setReceiver(cursor.getString(3));
-        message.setParseid(cursor.getString(4));
-        message.setDate(cursor.getString(5));
-        message.setChatRoom_ID(cursor.getString(6));
-        message.setReade(cursor.getInt(7)==1?true:false);
+        if(!cursor.isNull(0)){
+            message.setId(cursor.getLong(0));
+            message.setMessage(cursor.getString(1));
+            message.setSender(cursor.getString(2));
+            message.setReceiver(cursor.getString(3));
+            message.setParseid(cursor.getString(4));
+            message.setDate(cursor.getString(5));
+            message.setChatRoom_ID(cursor.getString(6));
+            message.setReade(cursor.getInt(7)==1?true:false);
+        }
         return message;
     }
 }

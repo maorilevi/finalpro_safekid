@@ -1,6 +1,7 @@
 package com.parse.starter;
 
 import android.annotation.TargetApi;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
@@ -14,6 +15,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -21,9 +23,14 @@ import android.widget.Toast;
 
 import com.parse.GetCallback;
 import com.parse.ParseException;
+import com.parse.ParseInstallation;
 import com.parse.ParseObject;
+import com.parse.ParsePush;
 import com.parse.ParseQuery;
 import com.parse.SaveCallback;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -36,11 +43,18 @@ public class Schedule_SingelEvent extends Fragment {
     public Button SaveEvent;
     public Button DeleteEventBTN;
     public Button calbtn;
-    public CheckBox checkBoxday;
-    public CheckBox checkBoxdate;
+    public Button START;
+    public Button END;
+    public CheckBox checkBox_day;
+    public CheckBox checkBox_date;
     static protected int dayposition=0;
     public ScrollView scrollView;
     static protected boolean newevent=false;
+    static protected boolean updateevent=false;
+
+    static protected ProgressBar ProgressUpdate;
+
+
     static protected Event CurrentEvent;
     static protected EditText NameEvent;
     static protected EditText AddressEvent;
@@ -61,17 +75,20 @@ public class Schedule_SingelEvent extends Fragment {
         if(Main2Activity.MainActionBar.isShowing()){
             Main2Activity.MainActionBar.hide();
         }
+        START=(Button)singelevent.findViewById(R.id.Event_Show_startbtn);
+        END=(Button)singelevent.findViewById(R.id.Event_Show_endbtn);
+        ProgressUpdate=(ProgressBar)singelevent.findViewById(R.id.lodingupdate);
         Main2Activity.text_date = (TextView) singelevent.findViewById(R.id.SingleEv_Date);
         calbtn = (Button) singelevent.findViewById(R.id.calbtn);
         dayrel = (RelativeLayout) singelevent.findViewById(R.id.dayrelative);
         daterel = (RelativeLayout) singelevent.findViewById(R.id.daterelative);
-        checkBoxday = (CheckBox) singelevent.findViewById(R.id.checkBoxday);
-        checkBoxday.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        checkBox_day = (CheckBox) singelevent.findViewById(R.id.checkBoxday);
+        checkBox_day.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
-                    if (checkBoxdate.isEnabled()) {
-                        checkBoxdate.setEnabled(false);
+                    if (checkBox_date.isEnabled()) {
+                        checkBox_date.setEnabled(false);
                     }
                     if (!dayrel.isEnabled())
                         dayrel.setEnabled(true);
@@ -86,8 +103,8 @@ public class Schedule_SingelEvent extends Fragment {
                     if (daterel.isEnabled())
                         daterel.setEnabled(false);
                 } else {
-                    if (!checkBoxdate.isEnabled()) {
-                        checkBoxdate.setEnabled(true);
+                    if (!checkBox_date.isEnabled()) {
+                        checkBox_date.setEnabled(true);
                     }
                     if (dayrel.isEnabled())
                         dayrel.setEnabled(false);
@@ -98,13 +115,13 @@ public class Schedule_SingelEvent extends Fragment {
                 }
             }
         });
-        checkBoxdate = (CheckBox) singelevent.findViewById(R.id.checkBoxdate);
-        checkBoxdate.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        checkBox_date = (CheckBox) singelevent.findViewById(R.id.checkBoxdate);
+        checkBox_date.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
-                    if (checkBoxday.isEnabled()) {
-                        checkBoxday.setEnabled(false);
+                    if (checkBox_day.isEnabled()) {
+                        checkBox_day.setEnabled(false);
                     }
                     if (dayrel.isEnabled())
                         dayrel.setEnabled(false);
@@ -119,8 +136,8 @@ public class Schedule_SingelEvent extends Fragment {
                     if (!calbtn.isEnabled())
                         calbtn.setEnabled(true);
                 } else {
-                    if (!checkBoxday.isEnabled()) {
-                        checkBoxday.setEnabled(true);
+                    if (!checkBox_day.isEnabled()) {
+                        checkBox_day.setEnabled(true);
                         if (daterel.isEnabled())
                             daterel.setEnabled(false);
                         if (calbtn.isEnabled())
@@ -169,14 +186,14 @@ public class Schedule_SingelEvent extends Fragment {
             }
         });
         if (newevent) {
-            if(!checkBoxday.isChecked()){
-                checkBoxday.setChecked(true);
+            if(!checkBox_day.isChecked()){
+                checkBox_day.setChecked(true);
             }
-            if(checkBoxdate.isEnabled()){
-                checkBoxdate.setEnabled(false);
+            if(checkBox_date.isEnabled()){
+                checkBox_date.setEnabled(false);
             }
-            if (checkBoxdate.isEnabled())
-                checkBoxdate.setEnabled(false);
+            if (checkBox_date.isEnabled())
+                checkBox_date.setEnabled(false);
             if (!dayrel.isEnabled())
                 dayrel.setEnabled(true);
             if (!pravdaybtn.isEnabled())
@@ -190,12 +207,12 @@ public class Schedule_SingelEvent extends Fragment {
             if (daterel.isEnabled())
                 daterel.setEnabled(false);
         }else{
-            if(CurrentEvent.getDay().isEmpty()){
-                if(!checkBoxdate.isEnabled())
-                    checkBoxdate.setEnabled(true);
-                checkBoxdate.setChecked(true);
-                    if (checkBoxday.isEnabled()) {
-                        checkBoxday.setEnabled(false);
+            if(!CurrentEvent.getDate().isEmpty()){
+                if(!checkBox_date.isEnabled())
+                    checkBox_date.setEnabled(true);
+                checkBox_date.setChecked(true);
+                    if (checkBox_day.isEnabled()) {
+                        checkBox_day.setEnabled(false);
                     }
                     if (dayrel.isEnabled())
                         dayrel.setEnabled(false);
@@ -210,11 +227,11 @@ public class Schedule_SingelEvent extends Fragment {
                     if (!calbtn.isEnabled())
                         calbtn.setEnabled(true);
             }else{
-                if(!checkBoxday.isEnabled())
-                    checkBoxday.setEnabled(true);
-                checkBoxday.setChecked(true);
-                if (checkBoxdate.isEnabled()) {
-                    checkBoxdate.setEnabled(false);
+                if(!checkBox_day.isEnabled())
+                    checkBox_day.setEnabled(true);
+                checkBox_day.setChecked(true);
+                if (checkBox_date.isEnabled()) {
+                    checkBox_date.setEnabled(false);
                 }
                 if (!dayrel.isEnabled())
                     dayrel.setEnabled(true);
@@ -260,6 +277,8 @@ public class Schedule_SingelEvent extends Fragment {
                 mytransaction2.remove(Main2Activity.Lest_Fram);
                 mytransaction2.show(Main2Activity.current_Fram);
                 mytransaction2.commit();
+                Schedule_Mange.setallevent(getActivity(),Schedule_Mange.Current_day,Schedule_Mange.kidID);
+                newevent=false;
                 if(!Main2Activity.MainActionBar.isShowing()){
                     Main2Activity.MainActionBar.show();
                 }
@@ -275,13 +294,14 @@ public class Schedule_SingelEvent extends Fragment {
                 builder.setPositiveButton("yse", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        delete(CurrentEvent, getActivity());
                         Main2Activity.Lest_Fram = Main2Activity.current_Fram;
                         Main2Activity.current_Fram = Main2Activity.Schedule_Fram;
                         FragmentTransaction mytransaction2 = Main2Activity.myFramManager.beginTransaction();
                         mytransaction2.remove(Main2Activity.Lest_Fram);
                         mytransaction2.show(Main2Activity.current_Fram);
                         mytransaction2.commit();
-                        delete();
+                        Schedule_Mange.setallevent(getActivity(), Schedule_Mange.Current_day, Schedule_Mange.kidID);
                     }
                 });
                 builder.setNegativeButton("no", new DialogInterface.OnClickListener() {
@@ -298,89 +318,164 @@ public class Schedule_SingelEvent extends Fragment {
         SaveEvent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(Schedule_SingelEvent.newevent){
-                    //Create new event
-                    Toast.makeText(getActivity(), "new", Toast.LENGTH_SHORT).show();
-                    ParseObject newevent = new ParseObject("Event");
-                    newevent.put("NameEvent", Schedule_SingelEvent.NameEvent.getText().toString());
-                    newevent.put("Address",Schedule_SingelEvent.AddressEvent.getText().toString());
-                    newevent.put("StartEvent",Schedule_SingelEvent.Set_Start_Time.getText().toString());
-                    newevent.put("EndEvent", Schedule_SingelEvent.Set_End_Time.getText().toString());
-                    if(checkBoxday.isChecked()){
-                        newevent.put("Day",day.getText().toString());
-                        newevent.put("Date","");
-                    }else if(checkBoxdate.isChecked()){
-                        newevent.put("Date",date.getText().toString());
-                        newevent.put("Day","");
+                if(!updateevent){
+                    DISABLE_ALL_BUTTON();
+                    ProgressUpdate.setVisibility(View.VISIBLE);
+                    updateevent=true;
+                    final Event event=new Event();
+                    if(checkBox_day.isChecked()){
+                        event.setDay(day.getText().toString());
+                        event.setDate("");
+                    }else if(checkBox_date.isChecked()){
+                        event.setDay(day.getText().toString());
+                        event.setDate(date.getText().toString());
                     }
-                    newevent.put("Kid_ID", Schedule_Mange.kidID);
-                    newevent.saveInBackground();
-                    Schedule_Mange.newevent=false;
-                }else{
-                    final ParseQuery<ParseObject> getevent = ParseQuery.getQuery("Event");
-                    getevent.getInBackground(Schedule_SingelEvent.CurrentEvent.getParseid(), new GetCallback<ParseObject>() {
-                        @Override
-                        public void done(final ParseObject parseObject, ParseException e2) {
-                            if (e2 == null) {
-                                Toast.makeText(getActivity(), "old", Toast.LENGTH_SHORT).show();
-                                parseObject.put("NameEvent", NameEvent.getText().toString());
-                                parseObject.put("Address", AddressEvent.getText().toString());
-                                parseObject.put("StartEvent", Set_Start_Time.getText().toString());
-                                parseObject.put("EndEvent",Set_End_Time.getText().toString());
-                                if(checkBoxday.isChecked()){
-                                    parseObject.put("Day",day.getText().toString());
-                                    parseObject.put("Date","");
-                                }else if(checkBoxdate.isChecked()){
-                                    parseObject.put("Date",date.getText().toString());
-                                    parseObject.put("Day","");
-                                }
-                                parseObject.saveInBackground(new SaveCallback() {
-                                    @Override
-                                    public void done(ParseException e) {
-                                        if(e==null){
-                                        }else{
-
-                                        }
-                                    }
-                                });
-                                AlertDialog alertDialog = new AlertDialog.Builder(getActivity()).create();
-                                alertDialog.setTitle("successful update");
-                                alertDialog.setMessage("your changes is update");
-                                alertDialog.setButton("OK", new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        Main2Activity.Lest_Fram = Main2Activity.current_Fram;
-                                        Main2Activity.current_Fram = Main2Activity.Schedule_Fram;
-                                        FragmentTransaction mytransaction2 = Main2Activity.myFramManager.beginTransaction();
-                                        mytransaction2.remove(Main2Activity.Lest_Fram);
-                                        mytransaction2.show(Main2Activity.current_Fram);
-                                        mytransaction2.commit();
-                                    }
-                                });
-                                alertDialog.show();
-                            } else {
-                            }
+                    event.setStart_time(Set_Start_Time.getText().toString());
+                    event.setEnd_time(Set_End_Time.getText().toString());
+                    event.setKidID(Schedule_Mange.kidID);
+                    event.setName(NameEvent.getText().toString());
+                    event.setAddress(AddressEvent.getText().toString());
+                    if(Schedule_SingelEvent.newevent){
+                        //Create new event
+                        Toast.makeText(getActivity(), "new", Toast.LENGTH_SHORT).show();
+                        final ParseObject newevent = new ParseObject("Event");
+                        newevent.put("NameEvent", Schedule_SingelEvent.NameEvent.getText().toString());
+                        newevent.put("Address",Schedule_SingelEvent.AddressEvent.getText().toString());
+                        newevent.put("StartEvent",Schedule_SingelEvent.Set_Start_Time.getText().toString());
+                        newevent.put("EndEvent", Schedule_SingelEvent.Set_End_Time.getText().toString());
+                        if(checkBox_day.isChecked()){
+                            newevent.put("Day",day.getText().toString());
+                            newevent.put("Date","");
+                        }else if(checkBox_date.isChecked()){
+                            newevent.put("Date",date.getText().toString());
+                            newevent.put("Day",day.getText().toString());
                         }
-                    });
+                        newevent.put("Kid_ID", Schedule_Mange.kidID);
+                        newevent.saveInBackground(new SaveCallback() {
+                            @Override
+                            public void done(ParseException e) {
+                                if(e==null){
+                                    event.setParseid(newevent.getObjectId());
+                                    Toast.makeText(getActivity(), "old"+NameEvent.getText().toString()+" id"+event.getParseid(), Toast.LENGTH_SHORT).show();
+                                    EventDataSource edb=new EventDataSource(getActivity());
+                                    edb.open();
+                                    edb.CreateNewEvent(event);
+                                    edb.close();
+                                    updateevent=false;
+                                    ProgressUpdate.setVisibility(View.INVISIBLE);
+                                    ENABLE_ALL_BUTTON();
+                                    SEND_PUSH_EVENT(event);
+                                }
+                            }
+                        });
+                        Schedule_Mange.newevent=false;
+                    }else{
+                        final ParseQuery<ParseObject> getevent = ParseQuery.getQuery("Event");
+                        getevent.getInBackground(Schedule_SingelEvent.CurrentEvent.getParseid(), new GetCallback<ParseObject>() {
+                            @Override
+                            public void done(final ParseObject parseObject, ParseException e2) {
+                                if (e2 == null) {
+                                    parseObject.put("NameEvent", NameEvent.getText().toString());
+                                    parseObject.put("Address", AddressEvent.getText().toString());
+                                    parseObject.put("StartEvent", Set_Start_Time.getText().toString());
+                                    parseObject.put("EndEvent", Set_End_Time.getText().toString());
+                                    if (checkBox_day.isChecked()) {
+                                        parseObject.put("Day", day.getText().toString());
+                                        parseObject.put("Date", "");
+                                    } else if (checkBox_date.isChecked()) {
+                                        parseObject.put("Date", date.getText().toString());
+                                        parseObject.put("Day",  day.getText().toString());
+                                    }
+                                    parseObject.saveInBackground();
+                                    Toast.makeText(getActivity(), "old"+NameEvent.getText().toString()+" id"+CurrentEvent.getParseid(), Toast.LENGTH_SHORT).show();
+                                    event.setParseid(parseObject.getObjectId());
+                                    EventDataSource edb=new EventDataSource(getActivity());
+                                    edb.open();
+                                    edb.UpdateEventFROMPARSE(event);
+                                    edb.close();
+                                    updateevent=false;
+                                    ProgressUpdate.setVisibility(View.INVISIBLE);
+                                    ENABLE_ALL_BUTTON();
+                                    SEND_PUSH_EVENT(event);
+                                } else {
+                                }
+                            }
+                        });
+                    }
                 }
             }
         });
         return singelevent;
     }
-    public void delete() {
+    public void delete(final Event event,final Activity activity) {
         final ParseQuery<ParseObject> getevent = ParseQuery.getQuery("Event");
         getevent.getInBackground(Schedule_SingelEvent.CurrentEvent.getParseid(), new GetCallback<ParseObject>() {
             @Override
             public void done(final ParseObject parseObject, ParseException e2) {
-                if (e2 == null)
+                if (e2 == null){
                     parseObject.deleteInBackground();
+                    EventDataSource edb=new EventDataSource(activity);
+                    edb.open();
+                    if(edb.exist(event)){
+                        edb.DeleteEvent(event);
+                    }
+                    edb.close();
+                }
                 else
-                    delete();
+                    delete(event,activity);
             }
         });
     }
-    public String getTime(){
-        String time="";
+    public void SEND_PUSH_EVENT(Event event){
+        JSONObject data = new JSONObject();
+        try {
+            data.put("status", "editevent");
+            data.put("EVENT_PARSE_ID", event.getParseid());
+            data.put("EVENT_NAME",event.getName());
+            data.put("DATE", event.getDate());
+            data.put("DAY", event.getDay());
+            data.put("ADDRESS",event.getAddress());
+            data.put("START",event.getStart_time());
+            data.put("END", event.getEnd_time());
+            data.put("KID_ID",event.getKidID());
+        } catch (JSONException e2) {
+            // TODO Auto-generated catch block
+            e2.printStackTrace();
+        }
+        ParseQuery pushQuery = ParseInstallation.getQuery();
+        pushQuery.whereEqualTo("channels", event.getKidID()); // Set the channel
+        ParsePush push = new ParsePush();
+        push.setQuery(pushQuery);// Set our Installation query
+        push.setData(data);
+        push.sendInBackground();
 
-        return time;
+    }
+    public void DISABLE_ALL_BUTTON(){
+        if(NameEvent.isEnabled())      NameEvent.setEnabled(false);
+        if(AddressEvent.isEnabled())   AddressEvent.setEnabled(false);
+        if(START.isEnabled())          START.setEnabled(false);
+        if(END.isEnabled())            END.setEnabled(false);
+        if(backtomanage.isEnabled())   backtomanage.setEnabled(false);
+        if(pravdaybtn.isEnabled())     pravdaybtn.setEnabled(false);
+        if(nextdaybtn.isEnabled())     nextdaybtn.setEnabled(false);
+        if(SaveEvent.isEnabled())      SaveEvent.setEnabled(false);
+        if(DeleteEventBTN.isEnabled()) DeleteEventBTN.setEnabled(false);
+        if(calbtn.isEnabled())         calbtn.setEnabled(false);
+        if(checkBox_day.isEnabled())   checkBox_day.setEnabled(false);
+        if(checkBox_date.isEnabled())  checkBox_date.setEnabled(false);
+    }
+    public void ENABLE_ALL_BUTTON(){
+        if(!NameEvent.isEnabled())      NameEvent.setEnabled(true);
+        if(!AddressEvent.isEnabled())   AddressEvent.setEnabled(true);
+        if(!START.isEnabled())          START.setEnabled(true);
+        if(!END.isEnabled())            END.setEnabled(true);
+        if(!backtomanage.isEnabled())   backtomanage.setEnabled(true);
+        if(!pravdaybtn.isEnabled())     pravdaybtn.setEnabled(true);
+        if(!nextdaybtn.isEnabled())     nextdaybtn.setEnabled(true);
+        if(!SaveEvent.isEnabled())      SaveEvent.setEnabled(true);
+        if(!DeleteEventBTN.isEnabled()) DeleteEventBTN.setEnabled(true);
+        if(!calbtn.isEnabled())         calbtn.setEnabled(true);
+        if(!checkBox_day.isEnabled())   checkBox_day.setEnabled(true);
+        if(!checkBox_date.isEnabled())  checkBox_date.setEnabled(true);
     }
 }

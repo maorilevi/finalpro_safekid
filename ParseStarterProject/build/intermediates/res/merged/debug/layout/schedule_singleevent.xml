@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="projact.finalprojact.projact.Schedule_Event1"
-    android:background="#6f73e0">
+    android:background="#adadb4">
 
     <EditText
         android:layout_width="wrap_content"
@@ -20,7 +20,7 @@
         android:layout_alignEnd="@+id/Event_Show_endbtn" />
 
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="120dp"
         android:layout_height="wrap_content"
         android:text="Save event"
         android:id="@+id/SingleEv_Savebtn"
@@ -30,9 +30,7 @@
         android:textStyle="bold"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignRight="@+id/SingleEv_Start"
-        android:layout_alignEnd="@+id/SingleEv_Start" />
+        android:layout_alignParentStart="true" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -49,7 +47,7 @@
         android:layout_alignParentStart="true" />
 
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="120dp"
         android:layout_height="wrap_content"
         android:text="Delete"
         android:id="@+id/SingleEv_Deletebtn"
@@ -60,8 +58,8 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:layout_alignLeft="@+id/SingleEv_End"
-        android:layout_alignStart="@+id/SingleEv_End" />
+        android:layout_toRightOf="@+id/textView"
+        android:layout_toEndOf="@+id/textView" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -94,7 +92,7 @@
         android:layout_alignStart="@+id/Event_Show_endbtn" />
 
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="120dp"
         android:layout_height="wrap_content"
         android:id="@+id/SingleEv_Menubtn"
         android:visibility="visible"
@@ -244,6 +242,19 @@
         android:textColor="#000000"
         android:textStyle="bold|italic"
         android:textSize="30sp" />
+
+    <ProgressBar
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/lodingupdate"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignRight="@+id/SingleEv_Deletebtn"
+        android:layout_alignEnd="@+id/SingleEv_Deletebtn"
+        android:visibility="invisible"
+        android:layout_below="@+id/SingleEv_Address"
+        android:layout_alignBottom="@+id/daterelative" />
 
 </RelativeLayout>
 <!-- From: file:/C:/Users/Admin/AndroidStudioProjects/finalpro_safekid/ParseStarterProject/src/main/res/layout/schedule_singleevent.xml -->

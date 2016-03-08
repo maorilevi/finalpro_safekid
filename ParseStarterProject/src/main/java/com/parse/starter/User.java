@@ -12,6 +12,8 @@ public class User {
     private String Firstname;
 
 
+    protected String Family_id;
+
     protected String Password;
     protected String LestName;
     protected String UserName;
@@ -163,6 +165,12 @@ public class User {
     }
     public void setId(long id) {
         this.id = id;
+    }
+    public String getFamily_id() {
+        return Family_id;
+    }
+    public void setFamily_id(String family_id) {
+        Family_id = family_id;
     }
 
 

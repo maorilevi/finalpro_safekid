@@ -130,26 +130,27 @@ public class Chat_ConversationWindow extends Fragment {
         newmessage.put("Read", false);
         newmessage.put("Time",time[0]);
         newmessage.put("Chat_ID", cont_user.getChatroom());
+        newmessageDB.setDate(time[0]);
+        newmessageDB.setSender(MY_ID);
+        newmessageDB.setReceiver(cont_user.getUserParseID());
+        newmessageDB.setMessage(userMessage);
+        newmessageDB.setChatRoom_ID(cont_user.getChatroom());
+        newmessageDB.setSide(false);
+        abp.add(newmessageDB);
+        chattext.setText("");
         newmessage.saveInBackground(new SaveCallback() {
             @Override
             public void done(ParseException e) {
                 if (e == null) {
                     MessageDB = new MessageDataSourse(getActivity());
                     MessageDB.open();
-                    newmessageDB.setDate(time[0]);
-                    newmessageDB.setSender(MY_ID);
-                    newmessageDB.setReceiver(cont_user.getUserParseID());
-                    newmessageDB.setMessage(userMessage);
-                    newmessageDB.setChatRoom_ID(cont_user.getChatroom());
-                    newmessageDB.setSide(false);
                     newmessageDB.setParseid(newmessage.getObjectId());
                     MessageDB.CreateNewMessage(newmessageDB);
                     MessageDB.close();
-                    abp.add(newmessageDB);
                     JSONObject data = new JSONObject();
                     try {
-                        data.put("alert", cont_user.getUserName());
-                        data.put("title", "new message from:");
+                        data.put("sendername", cont_user.getUserName());
+                        data.put("status", "message");
                         data.put("SENDER", MY_ID);
                         data.put("RECEIVER", cont_user.getUserParseID());
                         data.put("DATE", newmessageDB.getDate());
@@ -169,9 +170,8 @@ public class Chat_ConversationWindow extends Fragment {
                     push.setMessage(users.get(0).getUserName() + " send you new message");
                     push.setData(data);
                     push.sendInBackground();
-                    chattext.setText("");
                 } else {
-                    Toast.makeText(getActivity(), "PROBLOEM", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "connection problem", Toast.LENGTH_SHORT).show();
                 }
             }
         });

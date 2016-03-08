@@ -26,7 +26,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Created By Ziv And Maor"
-        android:textColor="#FFFFFF"
+        android:textColor="#7c7a7a"
+        android:id="@+id/textView3"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true" />
 
@@ -37,5 +38,44 @@
         android:id="@+id/progressBar"
         android:layout_below="@+id/textLowding2"
         android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Wait while we prepare your profile"
+        android:id="@+id/lodingdetails"
+        android:layout_below="@+id/progressBar"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="internet problem click to try again "
+        android:id="@+id/refreshmessage"
+        android:layout_alignRight="@+id/imageView1"
+        android:layout_alignEnd="@+id/imageView1"
+        android:layout_below="@+id/lodingdetails"
+        android:visibility="invisible" />
+
+    <ImageView
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:id="@+id/refreshicon"
+        android:background="@drawable/alarmicom"
+        android:layout_alignBottom="@+id/refreshmessage"
+        android:layout_toLeftOf="@+id/refreshmessage"
+        android:layout_toStartOf="@+id/refreshmessage"
+        android:visibility="invisible" />
+
+    <ImageButton
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:id="@+id/refreshlogin"
+        android:background="@drawable/refresh"
+        android:layout_above="@+id/textView3"
+        android:layout_centerHorizontal="true"
+        android:visibility="invisible" />
+
 </RelativeLayout>
 <!-- From: file:/C:/Users/Admin/AndroidStudioProjects/finalpro_safekid/ParseStarterProject/src/main/res/layout/splachscreen.xml -->

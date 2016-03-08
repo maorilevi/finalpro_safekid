@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +24,7 @@ public class EventDataSource {
             creatingmydbSQLite.COLUMN_DAY,
             creatingmydbSQLite.COLUMN_EVENT_ADDRESS,
             creatingmydbSQLite.COLUMN_KID_ID,
-            creatingmydbSQLite.COLUMN_PARSE,
+            creatingmydbSQLite.COLUMN_P_ID_EVENT,
             creatingmydbSQLite.COLUMN_LOCATION,
             creatingmydbSQLite.COLUMN_EDATE
     };
@@ -37,7 +38,37 @@ public class EventDataSource {
         dbHelper.close();
     }
 
-    public Event CreateNewEvent(Event event) {
+
+    public boolean exist(Event event){
+        Log.i("DELETE_EVENT","checking exist");
+        boolean exist=true;
+        Cursor cursor2 = database.query(creatingmydbSQLite.TABLE_EVENT, allColumns, creatingmydbSQLite.COLUMN_P_ID_EVENT + " =? ",
+                new String[]{event.getParseid()}, null, null, null);
+        cursor2.moveToFirst();
+        if(!cursor2.moveToFirst()&&cursor2.getCount()==0) {
+            exist = false;
+        }
+        cursor2.close();
+        return exist;
+    }
+    public ArrayList<Event> GetEventByDay(String day){
+        Log.i("DBEVENT", "IN DB");
+        ArrayList<Event> events=new ArrayList<Event>();
+        Cursor cursor2 = database.query(creatingmydbSQLite.TABLE_EVENT,
+                allColumns, creatingmydbSQLite.COLUMN_DAY + " =? ",
+                new String[]{day}, null, null, null);
+        cursor2.moveToFirst();
+        while (!cursor2.isAfterLast()) {
+            Event event = cursorToEvent(cursor2);
+            events.add(event);
+            cursor2.moveToNext();
+        }
+        cursor2.close();
+        return events;
+    }
+
+    public boolean CreateNewEvent(Event event) {
+        boolean create=false;
         ContentValues values = new ContentValues();
         values.put(creatingmydbSQLite.COLUMN_NAME,event.getName());
         values.put(creatingmydbSQLite.COLUMN_START_TIME,event.getStart_time());
@@ -45,22 +76,31 @@ public class EventDataSource {
         values.put(creatingmydbSQLite.COLUMN_DAY, event.getDay());
         values.put(creatingmydbSQLite.COLUMN_EVENT_ADDRESS,event.getAddress());
         values.put(creatingmydbSQLite.COLUMN_KID_ID, event.getKidID());
-        values.put(creatingmydbSQLite.COLUMN_PARSE,event.getParseid());
+        values.put(creatingmydbSQLite.COLUMN_P_ID_EVENT,event.getParseid());
         values.put(creatingmydbSQLite.COLUMN_LOCATION,event.getLocation());
         values.put(creatingmydbSQLite.COLUMN_EDATE,event.getDate());
-        long insertId = database.insert(creatingmydbSQLite.TABLE_EVENT, null,
-                values);
-        Cursor cursor = database.query(creatingmydbSQLite.TABLE_EVENT,
-                allColumns, creatingmydbSQLite.COLUMN_EID + " = " + insertId, null,
-                null, null, null);
-        cursor.moveToFirst();
-        Event newEvent = cursorToUser(cursor);
-        cursor.close();
-        return newEvent;
+        Event newevent=new Event();
+        Cursor cursor2 = database.query(creatingmydbSQLite.TABLE_EVENT, allColumns, creatingmydbSQLite.COLUMN_P_ID_EVENT + " =? ",
+                new String[]{event.getParseid()}, null, null, null);
+        cursor2.moveToFirst();
+        if(!cursor2.moveToFirst()&&cursor2.getCount()==0){
+            create=true;
+            Log.i("UPDATEEVENT", "create new");
+            long insertId = database.insert(creatingmydbSQLite.TABLE_EVENT, null,
+                    values);
+            Cursor cursor = database.query(creatingmydbSQLite.TABLE_EVENT,
+                    allColumns, creatingmydbSQLite.COLUMN_EID + " = " + insertId, null,
+                    null, null, null);
+            cursor.moveToFirst();
+            newevent = cursorToEvent(cursor);
+            cursor.close();
+        }
+        cursor2.close();
+        return create;
     }
     public void DeleteEvent(Event event) {
         long id = event.getId();
-        System.out.println("Comment deleted with id: " + id);
+        Log.i("DELETE_EVENT",""+id);
         database.delete(creatingmydbSQLite.TABLE_EVENT, creatingmydbSQLite.COLUMN_EID + " = " + id, null);
     }
     public void DeleteAllEvent(){
@@ -68,22 +108,19 @@ public class EventDataSource {
         Cursor cursor = database.query(creatingmydbSQLite.TABLE_EVENT, allColumns, null, null, null, null, null);
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
-            Event event = cursorToUser(cursor);
-            events.add(event);
+            Event event = cursorToEvent(cursor);
+            DeleteEvent(event);
             cursor.moveToNext();
         }
         // make sure to close the cursor
         cursor.close();
-        int listsize=events.size();
-        for(int indx=0;indx<listsize;indx++)
-            database.delete(creatingmydbSQLite.TABLE_EVENT, creatingmydbSQLite.COLUMN_EID + " = " + 0,null);
     }
     public int GetTableSize(){
         List<Event> events = new ArrayList<Event>();
         Cursor cursor = database.query(creatingmydbSQLite.TABLE_EVENT, allColumns, null, null, null, null, null);
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
-            Event event  = cursorToUser(cursor);
+            Event event  = cursorToEvent(cursor);
             events.add(event);
             cursor.moveToNext();
         }
@@ -91,7 +128,30 @@ public class EventDataSource {
         cursor.close();
         return events.size();
     }
+    public void UpdateEventFROMPARSE(Event event){
+        Log.i("UPDATEEVENT", "update event");
+        ContentValues values = new ContentValues();
+        values.put(creatingmydbSQLite.COLUMN_NAME,event.getName());
+        values.put(creatingmydbSQLite.COLUMN_START_TIME, event.getStart_time());
+        values.put(creatingmydbSQLite.COLUMN_END_TIME,event.getEnd_time());
+        values.put(creatingmydbSQLite.COLUMN_DAY, event.getDay());
+        values.put(creatingmydbSQLite.COLUMN_EVENT_ADDRESS,event.getAddress());
+        values.put(creatingmydbSQLite.COLUMN_KID_ID, event.getKidID());
+        values.put(creatingmydbSQLite.COLUMN_P_ID_EVENT, event.getParseid());
+        values.put(creatingmydbSQLite.COLUMN_LOCATION, event.getLocation());
+        values.put(creatingmydbSQLite.COLUMN_EDATE, event.getDate());
+        Cursor cursor2 = database.query(creatingmydbSQLite.TABLE_EVENT, allColumns, creatingmydbSQLite.COLUMN_P_ID_EVENT + " =? ",
+                new String[]{event.getParseid()}, null, null, null);
+        cursor2.moveToFirst();
+        Log.i("UPDATEEVENT", "create new");
+        Event eventtoupdate = cursorToEvent(cursor2);
+        Log.i("UPDATEEVENT", eventtoupdate.getName());
+        database.update(creatingmydbSQLite.TABLE_EVENT,
+                values, creatingmydbSQLite.COLUMN_ID + "=" + eventtoupdate.getId(), null);
+        cursor2.close();
+    }
     public void UpdateEvent(Event event){
+        Log.i("UPDATEEVENT", "update event");
         ContentValues values = new ContentValues();
         values.put(creatingmydbSQLite.COLUMN_NAME,event.getName());
         values.put(creatingmydbSQLite.COLUMN_START_TIME,event.getStart_time());
@@ -99,7 +159,7 @@ public class EventDataSource {
         values.put(creatingmydbSQLite.COLUMN_DAY, event.getDay());
         values.put(creatingmydbSQLite.COLUMN_EVENT_ADDRESS,event.getAddress());
         values.put(creatingmydbSQLite.COLUMN_KID_ID, event.getKidID());
-        values.put(creatingmydbSQLite.COLUMN_PARSE,event.getParseid());
+        values.put(creatingmydbSQLite.COLUMN_P_ID_EVENT,event.getParseid());
         values.put(creatingmydbSQLite.COLUMN_LOCATION,event.getLocation());
         values.put(creatingmydbSQLite.COLUMN_EDATE,event.getDate());
         database.update(creatingmydbSQLite.TABLE_EVENT,
@@ -110,7 +170,7 @@ public class EventDataSource {
         Cursor cursor = database.query(creatingmydbSQLite.TABLE_EVENT, allColumns, null, null, null, null, null);
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
-            Event event = cursorToUser(cursor);
+            Event event = cursorToEvent(cursor);
             events.add(event);
             cursor.moveToNext();
         }
@@ -119,7 +179,7 @@ public class EventDataSource {
         //database.close();
         return events;
     }
-    private Event cursorToUser(Cursor cursor) {
+    private Event cursorToEvent(Cursor cursor) {
         Event event=new Event();
         event.setId(cursor.getLong(0));
         event.setName(cursor.getString(1));

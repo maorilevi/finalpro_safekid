@@ -8,13 +8,13 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/scrollView2"
-        android:background="#6f73e0">
+        android:background="#adadb4">
 
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#6f73e0">
+            android:background="#adadb4">
 
             <ImageView
                 android:layout_width="100dp"

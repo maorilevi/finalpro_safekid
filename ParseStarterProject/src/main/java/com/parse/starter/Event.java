@@ -1,5 +1,9 @@
 package com.parse.starter;
 
+import android.util.Log;
+
+import java.util.Calendar;
+
 /**
  * Created by Admin on 08/02/2016.
  */
@@ -16,6 +20,8 @@ public class Event {
     private long id;
     private long Location;
     private String date;
+
+
     public Event(String name, String address, String start_time, String end_time, String day, String parseid, String kidID, String kidName) {
         this.name = name;
         this.address = address;
@@ -29,6 +35,9 @@ public class Event {
     public Event() {
 
     }
+
+
+
     public String getName() {
         return name;
     }
@@ -94,5 +103,54 @@ public class Event {
     }
     public void setId(long id) {
         this.id = id;
+    }
+
+
+    public int Convertstarttoint(){
+        int starttime=0;
+        String[] timesplited=this.getStart_time().split(":");
+        int hours=(Integer.parseInt(timesplited[0]));
+        int minute=(Integer.parseInt(timesplited[1]));
+        starttime=hours*60+minute;
+        return starttime;
+    }
+    public int Convertendtoint(){
+        int EndTime=0;
+        String[] timesplited=this.getEnd_time().split(":");
+        int hours=(Integer.parseInt(timesplited[0]));
+        int minute=(Integer.parseInt(timesplited[1]));
+        EndTime=hours*60+minute;
+        return EndTime;
+    }
+    public boolean CheckMatches(int time){
+        int mystarttime=Convertstarttoint();
+        int myendtime=Convertendtoint();
+        if(time>mystarttime&&time<myendtime){
+            return true;
+        }
+        return false;
+    }
+    public boolean CHECK_DATE_MATCHES(){
+        boolean metches=false;
+        if(date.isEmpty()){
+            metches=true;
+        }else{
+            Calendar cal=Calendar.getInstance();
+            int year  = 0;    year  = cal.get(Calendar.YEAR);
+            int month = 0;    month = cal.get(Calendar.MONTH);
+            int day   = 0;    day   = cal.get(Calendar.DAY_OF_MONTH);
+            String[] datesplit=date.split("/");
+            Log.i("CHECKINGEVENTSINGLE","DATE:"+date);
+
+            int thisyear=0;    thisyear=Integer.parseInt(datesplit[2]);
+            int thismonth=0;   thismonth=Integer.parseInt(datesplit[1]);
+            int thisday=0;     thisday=Integer.parseInt(datesplit[0]);
+
+
+            if(year==thisyear&&month==thismonth&&day==thisday){
+                metches=true;
+            }
+        }
+        return metches;
     }
 }

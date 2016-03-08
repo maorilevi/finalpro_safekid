@@ -14,7 +14,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
@@ -25,7 +24,7 @@ import java.util.ArrayList;
 public class Chat_Contact_List extends Fragment {
     static protected UsersDataSource UserDB;//user database
 
-    static protected RelativeLayout contectrel;
+    static protected LinearLayout contectrel;
     static protected ScrollView contectscroll;
     static protected ArrayList<User> contUser=new ArrayList<User>();
     @Override
@@ -41,8 +40,8 @@ public class Chat_Contact_List extends Fragment {
         Main2Activity.ContactList=true;
         View myView = inflater.inflate(R.layout.chat__contact__list, container, false);
         //open contact list withe the function-fullList .....
-        contectrel=new RelativeLayout(getActivity());
-        contectrel=(RelativeLayout)myView.findViewById(R.id.relscrollcontect);
+        contectrel=new LinearLayout(getActivity());
+        contectrel=(LinearLayout)myView.findViewById(R.id.relscrollcontect);
         contectscroll=new ScrollView(getActivity());
         contectscroll=(ScrollView)myView.findViewById(R.id.ScrollContect);
         fulllist(getActivity());
@@ -53,7 +52,7 @@ public class Chat_Contact_List extends Fragment {
         contectrel.removeAllViews();
         UserDB = new UsersDataSource(activity);
         UserDB.open();
-        final ArrayList<User> allusers = UserDB.getAllUsers();
+        ArrayList<User> allusers = UserDB.getAllUsers();
         UserDB.close();
         Log.i("openfram", "chat " + allusers.size());
         if (allusers.size() > 0) {
@@ -61,13 +60,15 @@ public class Chat_Contact_List extends Fragment {
             for (int Uindx = 1; Uindx < allusers.size(); Uindx++) {
                 Log.i("openfram", "in for");
                 final int CpyUndx = Uindx;
+                final User user=allusers.get(CpyUndx);
                 LinearLayout mainlayout = new LinearLayout(activity);
                 mainlayout.setOrientation(LinearLayout.HORIZONTAL);
-                //mainlayout.setLayoutParams(new ViewGroup.LayoutParams(Main2Activity.Mainwidth, mainlayout.getHeight()));
+
                 LinearLayout name_and_lest_message = new LinearLayout(activity);
                 name_and_lest_message.setOrientation(LinearLayout.VERTICAL);
                 name_and_lest_message.setLayoutParams(new ViewGroup.
                         LayoutParams((int) (Main2Activity.Mainwidth * 0.5), ViewGroup.LayoutParams.MATCH_PARENT));
+
                 ImageView userImage = new ImageView(activity);
                 userImage.setImageBitmap(allusers.get(CpyUndx).getUserImage());
                 userImage.setLayoutParams(new LinearLayout.LayoutParams((int) (Main2Activity.Mainwidth * 0.2),
@@ -85,10 +86,13 @@ public class Chat_Contact_List extends Fragment {
                 messagetime.setTextSize(15);
                 messagetime.setLayoutParams(new ViewGroup.LayoutParams((int) (Main2Activity.Mainwidth * 0.2),
                         ViewGroup.LayoutParams.MATCH_PARENT));
+                Log.i("MESSAGECHATLIST", "chat room:" + allusers.get(CpyUndx).getChatroom() + "/username:" + allusers.get(CpyUndx).getFirstname());
                 MessageDataSourse mmdb = new MessageDataSourse(activity);
                 mmdb.open();
                 ArrayList<Message> mmlist = mmdb.getAllMessage(allusers.get(CpyUndx).getChatroom());
                 mmdb.close();
+                Log.i("MESSAGECHATLIST", "SIZE:" + (Integer.toString(mmlist.size())));
+                Log.i("MESSAGECHATLIST", "chat room:"+allusers.get(CpyUndx).getChatroom()+"/username:"+allusers.get(CpyUndx).getFirstname());
                 if (mmlist.size() > 0) {
                     LestMessage.setText(mmlist.get(mmlist.size() - 1).getMessage());
                     if (!mmlist.get(mmlist.size() - 1).isReade()) {
@@ -109,6 +113,7 @@ public class Chat_Contact_List extends Fragment {
                 mainlayout.addView(messagetime);
                 mainlayout.setBackgroundResource(R.drawable.singeluser);
                 mainlayout.setOnClickListener(new View.OnClickListener() {
+
                     @Override
                     public void onClick(View v) {
                         Fragment newMessage = new Chat_ConversationWindow();
@@ -118,17 +123,12 @@ public class Chat_Contact_List extends Fragment {
                         mytransaction2.hide(Main2Activity.Lest_Fram);
                         mytransaction2.add(R.id.MainRelative, Main2Activity.current_Fram, "newMessage");
                         mytransaction2.commit();
-                        Chat_ConversationWindow.cont_user = allusers.get(CpyUndx);
-                        allusers.get(CpyUndx).setMessCounter(0);
+                        Chat_ConversationWindow.cont_user = user;
                     }
                 });
-                //setview(mainlayout);
                 contectrel.addView(mainlayout);
             }
         }
         return Main2Activity.Mainuserlist.size();
-    }
-    public static void setview(LinearLayout layout){
-        contectrel.addView(layout);
     }
 }

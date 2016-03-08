@@ -11,7 +11,9 @@ public class MyStartServiceReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
+
         Intent service = new Intent(context, CheckEventService.class);
+
         context.startService(service);
     }
 }

@@ -2,21 +2,12 @@
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="projact.finalprojact.projact.Chat_Contact_List"
-    android:background="#6f73e0">
-
-    <ImageView
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:id="@+id/imageView3"
-        android:background="@drawable/chat"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
+    android:background="#adadb4">
 
     <ScrollView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:id="@+id/ScrollContect"
-        android:layout_below="@+id/imageView3"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
@@ -24,10 +15,11 @@
         android:layout_alignParentEnd="true"
         android:background="@android:drawable/editbox_background_normal" >
 
-        <RelativeLayout
+        <LinearLayout
+            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/relscrollcontect"></RelativeLayout>
+            android:id="@+id/relscrollcontect"></LinearLayout>
     </ScrollView>
 
 </RelativeLayout>

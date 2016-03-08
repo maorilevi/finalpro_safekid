@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.admin.modulo_chat.MainChatWindow"
-    android:background="#6f73e0">
+    android:background="#adadb4">
 
     <EditText
         android:layout_width="wrap_content"
@@ -40,11 +40,10 @@
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:id="@+id/cht2list"
-        android:background="@android:drawable/editbox_background_normal"
+        android:background="@drawable/contact"
         android:textSize="10sp"
         android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true"
-        android:text="back" />
+        android:layout_alignParentStart="true" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -63,9 +62,9 @@
         android:layout_width="50dp"
         android:layout_height="80dp"
         android:id="@+id/ConversationUserImage"
-        android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:layout_alignBottom="@+id/user_name_chat_win" />
+        android:layout_alignBottom="@+id/user_name_chat_win"
+        android:background="@drawable/shado" />
 
 </RelativeLayout>

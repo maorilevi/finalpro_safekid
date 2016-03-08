@@ -2,7 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:weightSum="1">
+    android:weightSum="1"
+    android:background="#adadb4">
 
 
     <HorizontalScrollView
@@ -15,7 +16,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="221dp"
-        android:background="#6f73e0"
+        android:background="#adadb4"
         android:layout_weight="0.94">
 
         <Button
@@ -34,46 +35,59 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/scrollevent"
-            android:background="#fffff1fd"
+            android:background="#ffffff"
             android:layout_above="@+id/neweventbtn"
             android:layout_alignParentEnd="true"
             android:layout_alignParentStart="true"
             android:fillViewport="false"
-            android:layout_below="@+id/textView14" />
+            android:layout_below="@+id/relativeLayout" />
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="DAY:"
-            android:id="@+id/textView14"
-            android:textSize="30sp"
-            android:textColor="#fffff1fd"
-            android:typeface="sans"
-            android:textStyle="bold"
-            android:layout_below="@+id/kidNameListEvent"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/ListEvent_Today"
-            android:textSize="30sp"
-            android:textColor="#fffff1fd"
-            android:textStyle="bold"
-            android:layout_alignTop="@+id/textView14"
-            android:layout_toRightOf="@+id/textView14"
-            android:layout_toEndOf="@+id/textView14" />
-
-        <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/kidNameListEvent"
             android:textSize="30sp"
+            android:textColor="#000000"
+            android:textStyle="bold"
             android:layout_alignParentTop="true"
-            android:layout_alignStart="@+id/textView14"
-            android:textColor="#fffff1fd"
-            android:textStyle="bold" />
+            android:layout_centerHorizontal="true"
+            android:background="@android:drawable/editbox_background_normal"
+            android:gravity="center" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:background="@android:drawable/editbox_background_normal"
+            android:id="@+id/relativeLayout"
+            android:layout_below="@+id/kidNameListEvent"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="DAY:"
+                android:id="@+id/textView14"
+                android:textSize="25sp"
+                android:textColor="#000000"
+                android:typeface="sans"
+                android:layout_below="@+id/kidNameListEvent"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/ListEvent_Today"
+                android:textSize="25sp"
+                android:textColor="#000000"
+                android:layout_alignTop="@+id/textView14"
+                android:layout_toRightOf="@+id/textView14"
+                android:layout_toEndOf="@+id/textView14"
+                android:textStyle="bold" />
+        </RelativeLayout>
 
     </RelativeLayout>
 
@@ -92,7 +106,6 @@
                 android:layout_height="70dp"
                 android:text="Sunday"
                 android:id="@+id/Sunday_btn"
-                android:onClick="ChooseDay"
                 android:textColor="#ff000000"
                 android:enabled="true"
                 android:background="@android:drawable/editbox_background_normal" />
@@ -101,7 +114,6 @@
                 android:layout_height="70dp"
                 android:text="Monday"
                 android:id="@+id/Monday_btn"
-                android:onClick="ChooseDay"
                 android:textColor="#ff000000"
                 android:enabled="true"
                 android:background="@android:drawable/editbox_background_normal" />
@@ -110,7 +122,6 @@
                 android:layout_height="70dp"
                 android:text="Tuesday"
                 android:id="@+id/Tuesday_btn"
-                android:onClick="ChooseDay"
                 android:textColor="#ff000000"
                 android:enabled="true"
                 android:background="@android:drawable/editbox_background_normal" />
@@ -119,7 +130,6 @@
                 android:layout_height="70dp"
                 android:text="Wednesday"
                 android:id="@+id/Wednesday_btn"
-                android:onClick="ChooseDay"
                 android:textColor="#ff000000"
                 android:enabled="true"
                 android:background="@android:drawable/editbox_background_normal" />
@@ -128,7 +138,6 @@
                 android:layout_height="70dp"
                 android:text="Thursday"
                 android:id="@+id/Thursday_btn"
-                android:onClick="ChooseDay"
                 android:enabled="true"
                 android:background="@android:drawable/editbox_background_normal" />
             <Button
@@ -136,7 +145,6 @@
                 android:layout_height="70dp"
                 android:text="Friday"
                 android:id="@+id/Friday_btn"
-                android:onClick="ChooseDay"
                 android:enabled="true"
                 android:background="@android:drawable/editbox_background_normal" />
             <Button
@@ -144,7 +152,6 @@
                 android:layout_height="70dp"
                 android:text="Saturday"
                 android:id="@+id/Saturday_btn"
-                android:onClick="ChooseDay"
                 android:enabled="true"
                 android:background="@android:drawable/editbox_background_normal" />
             </TabWidget>
