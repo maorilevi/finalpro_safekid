@@ -2,242 +2,53 @@
 <items version="2" >
 
     <item
-        jar="C:\Users\Admin\AndroidStudioProjects\finalpro_safekid\ParseStarterProject\build\intermediates\exploded-aar\com.google.android.gms\play-services-appinvite\8.4.0\jars\classes.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="9fe026fb4c7fce21bc5142f6e1bdf844f28061ac">
-        <dex dex="C:\Users\Admin\AndroidStudioProjects\finalpro_safekid\ParseStarterProject\build\intermediates\pre-dexed\debug\classes-73ee3609230d356b6f5693c4cd4eb675c20e553f.jar" />
-    </item>
-    <item
-        jar="C:\Users\Admin\AndroidStudioProjects\finalpro_safekid\ParseStarterProject\build\intermediates\exploded-aar\com.google.android.gms\play-services-maps\8.4.0\jars\classes.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="04de44f90606c77f3b28cf44861f306290505aac">
-        <dex dex="C:\Users\Admin\AndroidStudioProjects\finalpro_safekid\ParseStarterProject\build\intermediates\pre-dexed\debug\classes-6baad5bd59786b913994b3f3e6298782c98c603d.jar" />
-    </item>
-    <item
-        jar="C:\Users\Admin\AndroidStudioProjects\finalpro_safekid\ParseStarterProject\build\intermediates\exploded-aar\com.google.android.gms\play-services-drive\8.4.0\jars\classes.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="b36f30ac5ee5d5214f4b1e2ac49f11889d58e71a">
-        <dex dex="C:\Users\Admin\AndroidStudioProjects\finalpro_safekid\ParseStarterProject\build\intermediates\pre-dexed\debug\classes-7dc5d9fa51d185670d7c97f37ede1383c334cd91.jar" />
-    </item>
-    <item
-        jar="C:\Users\Admin\AndroidStudioProjects\finalpro_safekid\ParseStarterProject\build\intermediates\exploded-aar\com.android.support\mediarouter-v7\23.0.0\jars\classes.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="d358b3dd49a7c67844622dcbc9cf4339e13952ce">
-        <dex dex="C:\Users\Admin\AndroidStudioProjects\finalpro_safekid\ParseStarterProject\build\intermediates\pre-dexed\debug\classes-98910fed92f516bdd6003a2b8f4c4b3372dcff89.jar" />
-    </item>
-    <item
-        jar="C:\Users\Admin\AndroidStudioProjects\finalpro_safekid\ParseStarterProject\build\intermediates\exploded-aar\com.google.android.gms\play-services-plus\8.4.0\jars\classes.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="1a78298e7724d5440d210bcb946b3493250d354d">
-        <dex dex="C:\Users\Admin\AndroidStudioProjects\finalpro_safekid\ParseStarterProject\build\intermediates\pre-dexed\debug\classes-fd67ba99561c96ba37635bc44167bed33f184f06.jar" />
-    </item>
-    <item
-        jar="C:\Users\Admin\AndroidStudioProjects\finalpro_safekid\ParseStarterProject\build\intermediates\exploded-aar\com.google.android.gms\play-services-safetynet\8.4.0\jars\classes.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="0194a7409c40de94fb539d4ad9928ec5d47afeb7">
-        <dex dex="C:\Users\Admin\AndroidStudioProjects\finalpro_safekid\ParseStarterProject\build\intermediates\pre-dexed\debug\classes-91b2d674d82f616ef2d99c0ed394d0e24418cae0.jar" />
-    </item>
-    <item
-        jar="C:\Users\Admin\AndroidStudioProjects\finalpro_safekid\ParseStarterProject\build\intermediates\exploded-aar\com.android.support\support-v4\23.1.1\jars\libs\internal_impl-23.1.1.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="a4de9c81ae239414e1ed0f86441b02abaf29bca9">
-        <dex dex="C:\Users\Admin\AndroidStudioProjects\finalpro_safekid\ParseStarterProject\build\intermediates\pre-dexed\debug\internal_impl-23.1.1-2e81013ff7b0d0e760e9cc77b68dcaa01e971e99.jar" />
-    </item>
-    <item
-        jar="C:\Users\Admin\AndroidStudioProjects\finalpro_safekid\ParseStarterProject\build\intermediates\exploded-aar\com.google.android.gms\play-services-base\8.4.0\jars\classes.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="fef2b3e4b6b1b0e5fe7b69fa137a5fa55a3182ab">
-        <dex dex="C:\Users\Admin\AndroidStudioProjects\finalpro_safekid\ParseStarterProject\build\intermediates\pre-dexed\debug\classes-280bf1b92a64d7eb5ad5419ed741bc48f62c1206.jar" />
-    </item>
-    <item
-        jar="C:\Users\Admin\AndroidStudioProjects\finalpro_safekid\ParseStarterProject\build\intermediates\exploded-aar\com.google.android.gms\play-services-auth\8.4.0\jars\classes.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="966e5771a5a2ebfb31bf00d7cd6cd2546d245517">
-        <dex dex="C:\Users\Admin\AndroidStudioProjects\finalpro_safekid\ParseStarterProject\build\intermediates\pre-dexed\debug\classes-b3264792677d924a7f0a7f0113936f602206f8d5.jar" />
-    </item>
-    <item
-        jar="C:\Users\Admin\.gradle\caches\modules-2\files-2.1\com.parse.bolts\bolts-tasks\1.3.0\8a62fd16fcc1c06f284fc98e6cbded2a5af1dd4c\bolts-tasks-1.3.0.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="8a62fd16fcc1c06f284fc98e6cbded2a5af1dd4c">
-        <dex dex="C:\Users\Admin\AndroidStudioProjects\finalpro_safekid\ParseStarterProject\build\intermediates\pre-dexed\debug\bolts-tasks-1.3.0-db7d963ac518199c2ca6bb75b0b5961bb903469a.jar" />
-    </item>
-    <item
-        jar="C:\Users\Admin\AndroidStudioProjects\finalpro_safekid\ParseStarterProject\build\intermediates\exploded-aar\com.google.android.gms\play-services-cast\8.4.0\jars\classes.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="551e78f21acf69ebfb489c0e79647824c838013e">
-        <dex dex="C:\Users\Admin\AndroidStudioProjects\finalpro_safekid\ParseStarterProject\build\intermediates\pre-dexed\debug\classes-9b4360c110947a2232ffde4816c8ac5387b90d2b.jar" />
-    </item>
-    <item
-        jar="C:\Users\Admin\AndroidStudioProjects\finalpro_safekid\ParseStarterProject\build\intermediates\exploded-aar\com.google.android.gms\play-services-identity\8.4.0\jars\classes.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="b82b8e847173c28efffcd291b2a0b1ae9ad17fa4">
-        <dex dex="C:\Users\Admin\AndroidStudioProjects\finalpro_safekid\ParseStarterProject\build\intermediates\pre-dexed\debug\classes-60d38ce30e7cb0d9240a7bc3f27b6363fe712f83.jar" />
-    </item>
-    <item
-        jar="C:\Users\Admin\AndroidStudioProjects\finalpro_safekid\ParseStarterProject\build\intermediates\exploded-aar\com.google.android.gms\play-services-location\8.4.0\jars\classes.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="a8412b654dab86d57bf90683367488211c8a81f1">
-        <dex dex="C:\Users\Admin\AndroidStudioProjects\finalpro_safekid\ParseStarterProject\build\intermediates\pre-dexed\debug\classes-e14753a9f7b175da3508ab12d3097dc54dadf2d2.jar" />
-    </item>
-    <item
-        jar="C:\Users\Admin\AndroidStudioProjects\finalpro_safekid\ParseStarterProject\build\intermediates\exploded-aar\com.google.android.gms\play-services-analytics\8.4.0\jars\classes.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="1c9f35e952b212c843f7bd2c7eec8e82ad95602e">
-        <dex dex="C:\Users\Admin\AndroidStudioProjects\finalpro_safekid\ParseStarterProject\build\intermediates\pre-dexed\debug\classes-712ab9a5687583aa2514b181717ee1f04655c271.jar" />
-    </item>
-    <item
-        jar="C:\Users\Admin\AndroidStudioProjects\finalpro_safekid\ParseStarterProject\build\intermediates\exploded-aar\com.google.android.gms\play-services-ads\8.4.0\jars\classes.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="b5e7892fb0708e792e0e933c4c0a0ca0ac7831fb">
-        <dex dex="C:\Users\Admin\AndroidStudioProjects\finalpro_safekid\ParseStarterProject\build\intermediates\pre-dexed\debug\classes-72a6d81a2858d30f46b854add2b96df5ce089456.jar" />
-    </item>
-    <item
-        jar="C:\Users\Admin\AndroidStudioProjects\finalpro_safekid\ParseStarterProject\build\intermediates\exploded-aar\com.android.support\recyclerview-v7\23.1.1\jars\classes.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="09c5e804bc67fc0580360043dff067df574a60d4">
-        <dex dex="C:\Users\Admin\AndroidStudioProjects\finalpro_safekid\ParseStarterProject\build\intermediates\pre-dexed\debug\classes-ce56ac66575ea69f12e48bdf9dac694c7314b3e7.jar" />
-    </item>
-    <item
-        jar="C:\Users\Admin\AndroidStudioProjects\finalpro_safekid\ParseStarterProject\build\intermediates\exploded-aar\com.google.android.gms\play-services-wallet\8.4.0\jars\classes.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="f2df436a8f02ce7e4d7d209671fc45f97c470f0e">
-        <dex dex="C:\Users\Admin\AndroidStudioProjects\finalpro_safekid\ParseStarterProject\build\intermediates\pre-dexed\debug\classes-ca1c8e5e5f510951f14fe8ff092a843f8a299057.jar" />
-    </item>
-    <item
-        jar="C:\Users\Admin\AndroidStudioProjects\finalpro_safekid\ParseStarterProject\build\intermediates\exploded-aar\com.google.android.gms\play-services-basement\8.4.0\jars\classes.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="8e673cdfadd8f2d98fdb2fda2285c30f6e449782">
-        <dex dex="C:\Users\Admin\AndroidStudioProjects\finalpro_safekid\ParseStarterProject\build\intermediates\pre-dexed\debug\classes-aa89ac7c3d5de25914cd27b3b4e0f8dcedb58ffb.jar" />
-    </item>
-    <item
-        jar="C:\Users\Admin\AndroidStudioProjects\finalpro_safekid\ParseStarterProject\build\intermediates\exploded-aar\com.google.android.gms\play-services-nearby\8.4.0\jars\classes.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="9cad249cf62751a323d9af568caf12284b7d6062">
-        <dex dex="C:\Users\Admin\AndroidStudioProjects\finalpro_safekid\ParseStarterProject\build\intermediates\pre-dexed\debug\classes-67035fdf32cbb3093424a81cb6700091136bbb16.jar" />
-    </item>
-    <item
-        jar="C:\Users\Admin\AndroidStudioProjects\finalpro_safekid\ParseStarterProject\build\intermediates\exploded-aar\com.google.android.gms\play-services-vision\8.4.0\jars\classes.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="dfecc4d835cdabcdecf7e95f0d20a3ef1e9d8ef4">
-        <dex dex="C:\Users\Admin\AndroidStudioProjects\finalpro_safekid\ParseStarterProject\build\intermediates\pre-dexed\debug\classes-a7a0e15ec53b5d7f3370680713f46c785d1317c5.jar" />
-    </item>
-    <item
-        jar="C:\Users\Admin\AndroidStudioProjects\finalpro_safekid\ParseStarterProject\build\intermediates\exploded-aar\com.android.support\support-v4\23.1.1\jars\classes.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="6cbc7773921fcfedbe55657578f0cbfe614778dc">
-        <dex dex="C:\Users\Admin\AndroidStudioProjects\finalpro_safekid\ParseStarterProject\build\intermediates\pre-dexed\debug\classes-1ed0e0561fa3c8e8c3af5948aad8ebeda91ce152.jar" />
-    </item>
-    <item
-        jar="C:\Users\Admin\AndroidStudioProjects\finalpro_safekid\ParseStarterProject\build\intermediates\exploded-aar\com.google.android.gms\play-services-fitness\8.4.0\jars\classes.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="c54246475c1bb64ac6857d1320364bfbfeda2c46">
-        <dex dex="C:\Users\Admin\AndroidStudioProjects\finalpro_safekid\ParseStarterProject\build\intermediates\pre-dexed\debug\classes-f51fe339a80a23d5b658f3fa6ecbc71ad963117f.jar" />
-    </item>
-    <item
-        jar="C:\Users\Admin\AndroidStudioProjects\finalpro_safekid\ParseStarterProject\build\intermediates\exploded-aar\com.google.android.gms\play-services-games\8.4.0\jars\classes.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="3a364cc6b698d1b3b2d284f64618daaa7fe77ddf">
-        <dex dex="C:\Users\Admin\AndroidStudioProjects\finalpro_safekid\ParseStarterProject\build\intermediates\pre-dexed\debug\classes-4ba990c56c052c825934e38a07a525d56e3ba6e6.jar" />
-    </item>
-    <item
-        jar="C:\Users\Admin\AndroidStudioProjects\finalpro_safekid\ParseStarterProject\build\intermediates\exploded-aar\com.google.android.gms\play-services-wearable\8.4.0\jars\classes.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="e167a34eaca0b31704212f43f9576ea84e05046f">
-        <dex dex="C:\Users\Admin\AndroidStudioProjects\finalpro_safekid\ParseStarterProject\build\intermediates\pre-dexed\debug\classes-a08cdc64abfb3318cf8194d8d7aa57d5138e84ff.jar" />
-    </item>
-    <item
-        jar="C:\Users\Admin\AndroidStudioProjects\finalpro_safekid\ParseStarterProject\build\intermediates\exploded-aar\com.google.android.gms\play-services-gcm\8.4.0\jars\classes.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="2d7fe76982677315c4dc4edfb459c8ca718a9d4c">
-        <dex dex="C:\Users\Admin\AndroidStudioProjects\finalpro_safekid\ParseStarterProject\build\intermediates\pre-dexed\debug\classes-62697f8373da59c9c1f887bbeb5dce4456918dae.jar" />
-    </item>
-    <item
-        jar="C:\Users\Admin\AndroidStudioProjects\finalpro_safekid\ParseStarterProject\build\intermediates\exploded-aar\com.android.support\mediarouter-v7\23.0.0\jars\libs\internal_impl-23.0.0.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="03d38bb042efe3e5ce27ba66b729a9523c36d8fe">
-        <dex dex="C:\Users\Admin\AndroidStudioProjects\finalpro_safekid\ParseStarterProject\build\intermediates\pre-dexed\debug\internal_impl-23.0.0-568a3d0520105c6c7d438b8c67241478f88db634.jar" />
-    </item>
-    <item
-        jar="C:\Users\Admin\AndroidStudioProjects\finalpro_safekid\ParseStarterProject\build\intermediates\exploded-aar\com.android.support\cardview-v7\23.1.1\jars\classes.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="5e412e954a24c5310a459c09870e4e2081aceb03">
-        <dex dex="C:\Users\Admin\AndroidStudioProjects\finalpro_safekid\ParseStarterProject\build\intermediates\pre-dexed\debug\classes-d92812b09019881b035a134a1f9864cebec47016.jar" />
-    </item>
-    <item
         jar="C:\Users\Admin\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\23.1.1\support-annotations-23.1.1.jar"
         jumboMode="false"
         revision="23.0.1"
         sha1="8d680ba5a623724d1fb0e81c36a790f023a6cede">
-        <dex dex="C:\Users\Admin\AndroidStudioProjects\finalpro_safekid\ParseStarterProject\build\intermediates\pre-dexed\debug\support-annotations-23.1.1-ccd81682849331a0d1ebde7d37dc512d0cd3805a.jar" />
+        <dex dex="C:\Users\Admin\AndroidStudioProjects\finalpro_safekid_OR\ParseStarterProject\build\intermediates\pre-dexed\debug\support-annotations-23.1.1-ccd81682849331a0d1ebde7d37dc512d0cd3805a.jar" />
     </item>
     <item
-        jar="C:\Users\Admin\AndroidStudioProjects\finalpro_safekid\ParseStarterProject\build\intermediates\exploded-aar\com.android.support\appcompat-v7\23.1.1\jars\classes.jar"
+        jar="C:\Users\Admin\AndroidStudioProjects\finalpro_safekid_OR\ParseStarterProject\build\intermediates\exploded-aar\com.android.support\support-v4\23.1.1\jars\classes.jar"
         jumboMode="false"
         revision="23.0.1"
-        sha1="5c5699834e9722f1c288fea2de82725d078ba127">
-        <dex dex="C:\Users\Admin\AndroidStudioProjects\finalpro_safekid\ParseStarterProject\build\intermediates\pre-dexed\debug\classes-08f4b577b3f377ad4ab9cddb907e8a12025289d2.jar" />
+        sha1="6cbc7773921fcfedbe55657578f0cbfe614778dc">
+        <dex dex="C:\Users\Admin\AndroidStudioProjects\finalpro_safekid_OR\ParseStarterProject\build\intermediates\pre-dexed\debug\classes-38c41493bc8fd7993158c4da6bea221ae1cc484e.jar" />
     </item>
     <item
-        jar="C:\Users\Admin\AndroidStudioProjects\finalpro_safekid\ParseStarterProject\build\intermediates\exploded-aar\com.android.support\design\23.1.1\jars\classes.jar"
+        jar="C:\Users\Admin\AndroidStudioProjects\finalpro_safekid_OR\ParseStarterProject\build\intermediates\exploded-aar\com.android.support\cardview-v7\23.1.1\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="5e412e954a24c5310a459c09870e4e2081aceb03">
+        <dex dex="C:\Users\Admin\AndroidStudioProjects\finalpro_safekid_OR\ParseStarterProject\build\intermediates\pre-dexed\debug\classes-643ac9bb0e1dce71f6b21c15e0e9ef7884baf676.jar" />
+    </item>
+    <item
+        jar="C:\Users\Admin\AndroidStudioProjects\finalpro_safekid_OR\ParseStarterProject\build\intermediates\exploded-aar\com.android.support\support-v4\23.1.1\jars\libs\internal_impl-23.1.1.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="a4de9c81ae239414e1ed0f86441b02abaf29bca9">
+        <dex dex="C:\Users\Admin\AndroidStudioProjects\finalpro_safekid_OR\ParseStarterProject\build\intermediates\pre-dexed\debug\internal_impl-23.1.1-d0fadf78339759a39b3637bfc5fb5f9eb034d89b.jar" />
+    </item>
+    <item
+        jar="C:\Users\Admin\AndroidStudioProjects\finalpro_safekid_OR\ParseStarterProject\build\intermediates\exploded-aar\com.android.support\recyclerview-v7\23.1.1\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="09c5e804bc67fc0580360043dff067df574a60d4">
+        <dex dex="C:\Users\Admin\AndroidStudioProjects\finalpro_safekid_OR\ParseStarterProject\build\intermediates\pre-dexed\debug\classes-5195cc3143a84508ad56a0598b8ee34786fb61de.jar" />
+    </item>
+    <item
+        jar="C:\Users\Admin\AndroidStudioProjects\finalpro_safekid_OR\ParseStarterProject\build\intermediates\exploded-aar\com.android.support\design\23.1.1\jars\classes.jar"
         jumboMode="false"
         revision="23.0.1"
         sha1="379471b2bd17d9737c050345c08e8c7d16589784">
-        <dex dex="C:\Users\Admin\AndroidStudioProjects\finalpro_safekid\ParseStarterProject\build\intermediates\pre-dexed\debug\classes-55af98374a10d45f4e702982862d6274c5becf84.jar" />
+        <dex dex="C:\Users\Admin\AndroidStudioProjects\finalpro_safekid_OR\ParseStarterProject\build\intermediates\pre-dexed\debug\classes-5da5c3b053ddc2cd12a5b5023ee89fa455f3a3b1.jar" />
     </item>
     <item
-        jar="C:\Users\Admin\AndroidStudioProjects\finalpro_safekid\ParseStarterProject\build\intermediates\exploded-aar\com.google.android.gms\play-services-panorama\8.4.0\jars\classes.jar"
+        jar="C:\Users\Admin\AndroidStudioProjects\finalpro_safekid_OR\ParseStarterProject\build\intermediates\exploded-aar\com.android.support\appcompat-v7\23.1.1\jars\classes.jar"
         jumboMode="false"
         revision="23.0.1"
-        sha1="08d34b2d135c1cc96ab506fd8bf6916d1e2f391a">
-        <dex dex="C:\Users\Admin\AndroidStudioProjects\finalpro_safekid\ParseStarterProject\build\intermediates\pre-dexed\debug\classes-f1df0723428d343692ee9199876562a3486c1bc9.jar" />
-    </item>
-    <item
-        jar="C:\Users\Admin\AndroidStudioProjects\finalpro_safekid\ParseStarterProject\build\intermediates\exploded-aar\com.google.android.gms\play-services-measurement\8.4.0\jars\classes.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="613298b7aa012f121ce542881c0a599ebd8078f2">
-        <dex dex="C:\Users\Admin\AndroidStudioProjects\finalpro_safekid\ParseStarterProject\build\intermediates\pre-dexed\debug\classes-53539938fb6865d3b3206caa26a602791e14f72e.jar" />
-    </item>
-    <item
-        jar="C:\Users\Admin\.gradle\caches\modules-2\files-2.1\com.parse\parse-android\1.11.0\6592129dec2caa8791d322c7e4b6b7a30e8eadae\parse-android-1.11.0.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="6592129dec2caa8791d322c7e4b6b7a30e8eadae">
-        <dex dex="C:\Users\Admin\AndroidStudioProjects\finalpro_safekid\ParseStarterProject\build\intermediates\pre-dexed\debug\parse-android-1.11.0-4e4afb24731cf94ebeb7cc260486362a64007c99.jar" />
-    </item>
-    <item
-        jar="C:\Users\Admin\AndroidStudioProjects\finalpro_safekid\ParseStarterProject\build\intermediates\exploded-aar\com.google.android.gms\play-services-appindexing\8.4.0\jars\classes.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="65d086ee9daaf87b5af62ad24471edafa433354c">
-        <dex dex="C:\Users\Admin\AndroidStudioProjects\finalpro_safekid\ParseStarterProject\build\intermediates\pre-dexed\debug\classes-571dc70c3b22377639af08f0785045e5d1ed9b62.jar" />
+        sha1="5c5699834e9722f1c288fea2de82725d078ba127">
+        <dex dex="C:\Users\Admin\AndroidStudioProjects\finalpro_safekid_OR\ParseStarterProject\build\intermediates\pre-dexed\debug\classes-9e10fd7b2e8fff240380db147724e3fac20070f1.jar" />
     </item>
 
 </items>

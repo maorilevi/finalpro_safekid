@@ -31,7 +31,8 @@
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true"
                 android:layout_toRightOf="@+id/Setting_changeimgBTN"
-                android:layout_toEndOf="@+id/Setting_changeimgBTN" />
+                android:layout_toEndOf="@+id/Setting_changeimgBTN"
+                android:layout_above="@+id/Setting_F_Name" />
 
             <Button
                 android:layout_width="wrap_content"
@@ -40,8 +41,9 @@
                 android:id="@+id/Setting_changeimgBTN"
                 android:onClick="loadImagefromGallery"
                 android:background="@android:drawable/editbox_background_normal"
-                android:layout_alignTop="@+id/Setting_logoutBTN"
-                android:layout_centerHorizontal="true" />
+                android:layout_alignBottom="@+id/Setting_saveBTN"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@+id/Setting_User_Image" />
 
             <EditText
                 android:layout_width="wrap_content"
@@ -180,9 +182,7 @@
                 android:text="Save changes"
                 android:id="@+id/Setting_saveBTN"
                 android:background="@android:drawable/editbox_background_normal"
-                android:layout_alignTop="@+id/Setting_changeimgBTN"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
+                android:layout_below="@+id/Setting_User_Image"
                 android:layout_toLeftOf="@+id/Setting_changeimgBTN"
                 android:layout_toStartOf="@+id/Setting_changeimgBTN" />
 
@@ -236,4 +236,4 @@
 
 
 </RelativeLayout>
-<!-- From: file:/C:/Users/Admin/AndroidStudioProjects/finalpro_safekid/ParseStarterProject/src/main/res/layout/setting.xml -->
+<!-- From: file:/C:/Users/Admin/AndroidStudioProjects/finalpro_safekid_OR/ParseStarterProject/src/main/res/layout/setting.xml -->
