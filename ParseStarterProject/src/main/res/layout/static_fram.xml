@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#adadb4">
+
+        <HorizontalScrollView
+            android:layout_width="wrap_content"
+            android:layout_height="120dp"
+            android:id="@+id/Static_Scrolimage"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" >
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/Static_Layoutimage"></LinearLayout>
+        </HorizontalScrollView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="name"
+            android:id="@+id/Static_kidnam"
+            android:layout_below="@+id/Static_Scrolimage"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:background="@android:drawable/editbox_background_normal"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:gravity="center" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" daily report"
+            android:id="@+id/textView13"
+            android:layout_row="0"
+            android:layout_column="0"
+            android:background="@android:drawable/editbox_background_normal"
+            android:layout_below="@+id/Static_kidnam"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:textSize="15sp"
+            android:textColor="#3a3a3a" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="100%"
+            android:id="@+id/Static_MonthlyRep_Pre"
+            android:layout_row="0"
+            android:layout_column="1"
+            android:background="@android:drawable/editbox_background_normal"
+            android:layout_alignParentBottom="true"
+            android:textSize="15sp"
+            android:textColor="#3a3a3a"
+            android:layout_alignRight="@+id/scrollView3"
+            android:layout_alignEnd="@+id/scrollView3"
+            android:layout_alignLeft="@+id/scrollView3"
+            android:layout_alignStart="@+id/scrollView3"
+            android:gravity="center" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="100%"
+            android:id="@+id/Static_DailyRep_Pre"
+            android:layout_row="0"
+            android:layout_column="2"
+            android:background="@android:drawable/editbox_background_normal"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:textSize="15sp"
+            android:textColor="#3a3a3a"
+            android:layout_alignRight="@+id/scrollView4"
+            android:layout_alignEnd="@+id/scrollView4"
+            android:gravity="center" />
+
+        <ScrollView
+            android:layout_width="wrap_content"
+            android:layout_height="100dp"
+            android:id="@+id/scrollView4"
+            android:layout_row="1"
+            android:layout_column="0"
+            android:layout_below="@+id/textView13"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_above="@+id/Static_DailyRep_Pre"
+            android:layout_alignRight="@+id/textView13"
+            android:layout_alignEnd="@+id/textView13" >
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/Static_dailyreportLiner"></LinearLayout>
+        </ScrollView>
+
+        <ScrollView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/scrollView3"
+            android:layout_row="1"
+            android:layout_column="1"
+            android:layout_below="@+id/textView18"
+            android:layout_alignLeft="@+id/textView18"
+            android:layout_alignStart="@+id/textView18"
+            android:layout_above="@+id/Static_MonthlyRep_Pre"
+            android:layout_alignRight="@+id/textView18"
+            android:layout_alignEnd="@+id/textView18" >
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/Static_monthlyreportLiner"></LinearLayout>
+        </ScrollView>
+
+        <ScrollView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_row="1"
+            android:layout_column="2"
+            android:layout_below="@+id/textView19"
+            android:layout_alignLeft="@+id/textView19"
+            android:layout_alignStart="@+id/textView19"
+            android:layout_above="@+id/Static_AnnualRep_pra"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:id="@+id/scrollView5">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/Static_AnnualReportLLiner"></LinearLayout>
+        </ScrollView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="100%"
+            android:id="@+id/Static_AnnualRep_pra"
+            android:layout_row="2"
+            android:layout_column="0"
+            android:background="@android:drawable/editbox_background_normal"
+            android:textSize="15sp"
+            android:textColor="#3a3a3a"
+            android:layout_alignParentBottom="true"
+            android:layout_alignRight="@+id/scrollView5"
+            android:layout_alignEnd="@+id/scrollView5"
+            android:layout_alignLeft="@+id/scrollView5"
+            android:layout_alignStart="@+id/scrollView5"
+            android:gravity="center" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Annual Report "
+            android:id="@+id/textView19"
+            android:layout_row="2"
+            android:layout_column="1"
+            android:background="@android:drawable/editbox_background_normal"
+            android:layout_below="@+id/Static_kidnam"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:textSize="15sp"
+            android:textColor="#3a3a3a" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="monthly report"
+            android:id="@+id/textView18"
+            android:layout_row="2"
+            android:layout_column="2"
+            android:background="@android:drawable/editbox_background_normal"
+            android:layout_below="@+id/Static_kidnam"
+            android:layout_centerHorizontal="true"
+            android:textSize="15sp"
+            android:textColor="#3a3a3a" />
+
+    </RelativeLayout>
+</LinearLayout>
