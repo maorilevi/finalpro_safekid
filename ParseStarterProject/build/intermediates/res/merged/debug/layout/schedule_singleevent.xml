@@ -32,7 +32,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
-    <EditText
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/SingleEv_Address"
@@ -44,7 +44,8 @@
         android:layout_alignRight="@+id/Event_Show_endbtn"
         android:layout_alignEnd="@+id/Event_Show_endbtn"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:onClick="PicAddraesEvent" />
 
     <Button
         android:layout_width="120dp"

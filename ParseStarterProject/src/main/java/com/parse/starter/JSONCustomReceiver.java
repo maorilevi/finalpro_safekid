@@ -85,10 +85,6 @@ public class JSONCustomReceiver extends ParsePushBroadcastReceiver  {
                 warningMessage.setLoc_y(pushData.getDouble("KID_LOCATION_Y"));
                 warningMessage.setDate(pushData.getString("FULL_DATE"));
                 warningMessage.setWarning_parse_id(pushData.getString("WAR_P_ID"));
-                WarningDataSource WDB=new WarningDataSource(context);
-                WDB.open();
-                WDB.CreateWarning(warningMessage);
-                WDB.close();
             }else if(title.matches("editevent")){
 
                 Event event=new Event();
@@ -150,6 +146,12 @@ public class JSONCustomReceiver extends ParsePushBroadcastReceiver  {
                 push.setData(data);
                 push.sendInBackground();
 
+            }else if(title.matches("DeletEvent")){
+                String parseid=pushData.getString("EVENT_PARSE_ID");
+                EventDataSource EDB=new EventDataSource(context);
+                EDB.open();
+                EDB.DeleteEventByparseID(parseid);
+                EDB.close();
             }
         } catch (JSONException e) {}
         Log.i(TAG,"alert is " + alert);

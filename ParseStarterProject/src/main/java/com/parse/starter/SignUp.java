@@ -12,8 +12,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.parse.ParseException;
@@ -32,7 +32,6 @@ public class SignUp extends Fragment {
 
 
 
-    private Button Save;
     private EditText FirstName;
     private EditText LastName;
     private EditText UserName;
@@ -40,8 +39,8 @@ public class SignUp extends Fragment {
     private EditText ConfirmPasword;
     private EditText PhonNamber;
     private EditText Email;
-    private EditText Address;
-    private EditText Birthday;
+    private TextView Address;
+    private TextView Birthday;
 
     private String userFirstName;
     private String UserLastName;
@@ -67,8 +66,8 @@ public class SignUp extends Fragment {
         ConfirmPasword=(EditText)myView.findViewById(R.id.SignUp_ConfPass);
         PhonNamber=(EditText)myView.findViewById(R.id.SignUp_Phone);
         Email=(EditText)myView.findViewById(R.id.SignUp_Email);
-        Address=(EditText)myView.findViewById(R.id.SignUp_Address);
-        Birthday=(EditText)myView.findViewById(R.id.SignUp_Birthday);
+        Address=(TextView)myView.findViewById(R.id.SignUp_Address);
+        Birthday=(TextView)myView.findViewById(R.id.SignUp_Birthday);
         // OnClick on Save Button
         myView.findViewById(R.id.SignUp_SaveDetails).setOnClickListener(new View.OnClickListener() {
             @Override

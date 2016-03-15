@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.parse.GetCallback;
@@ -45,8 +46,8 @@ public class Setting extends Fragment {
     private EditText Conf_New_Password;
     private EditText PhoneNumber;
     private EditText Email;
-    private EditText Birthday;
-    private EditText Address;
+    private TextView Birthday;
+    private TextView Address;
     private EditText ContactAmergency1;
     private EditText ContactAmergency2;
     private EditText ContactAmergency3;
@@ -91,8 +92,8 @@ public class Setting extends Fragment {
         LastName = (EditText) setting.findViewById(R.id.Setting_L_name);
         PhoneNumber = (EditText) setting.findViewById(R.id.Setting_Phone_Number);
         Email = (EditText) setting.findViewById(R.id.Setting_Email);
-        Birthday = (EditText) setting.findViewById(R.id.Setting_Birthday);
-        Address = (EditText) setting.findViewById(R.id.Setting_Address);
+        Birthday = (TextView) setting.findViewById(R.id.Setting_Birthday);
+        Address = (TextView) setting.findViewById(R.id.Setting_Address);
         ContactAmergency1 = (EditText) setting.findViewById(R.id.Setting_ContactAmergency1);
         ContactAmergency2 = (EditText) setting.findViewById(R.id.Setting_ContactAmergency2);
         ContactAmergency3 = (EditText) setting.findViewById(R.id.Setting_ContactAmergency3);
@@ -244,7 +245,7 @@ public class Setting extends Fragment {
         Email.setText(Email_STR);
         Birthday.setText(Birthday_STR);
         Address.setText(Address_STR);
-        if(Main2Activity.Mainuserlist.get(0).isPerant()){
+        if(!Main2Activity.Mainuserlist.get(0).isPerant()){
             ContactAmergency1.setVisibility(View.GONE);
             ContactAmergency2.setVisibility(View.GONE);
             ContactAmergency3.setVisibility(View.GONE);

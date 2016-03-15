@@ -478,6 +478,9 @@
     <string name="create_calendar_message">Allow Ad to create a calendar event?</string>
     <string name="create_calendar_title">Create calendar event</string>
     <string name="decline">Decline</string>
+    <!-- From: file:/C:/Users/Admin/AndroidStudioProjects/finalpro_safekid_OR/ParseStarterProject/src/debug/res/values/google_maps_api.xml -->
+    <eat-comment/>
+    <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">AIzaSyBPKAKDKPbXWq92V9BZeBs5qk2VuFIidVE</string>
     <!-- From: file:/C:/Users/Admin/AndroidStudioProjects/finalpro_safekid_OR/ParseStarterProject/src/main/res/values/strings.xml -->
     <eat-comment/>
     <string name="hello_world">Hello World!</string>

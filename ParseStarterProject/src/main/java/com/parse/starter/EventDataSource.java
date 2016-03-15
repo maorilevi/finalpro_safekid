@@ -26,6 +26,8 @@ public class EventDataSource {
             creatingmydbSQLite.COLUMN_KID_ID,
             creatingmydbSQLite.COLUMN_P_ID_EVENT,
             creatingmydbSQLite.COLUMN_LOCATION,
+            creatingmydbSQLite.COLUMN_LONGITUDE,
+            creatingmydbSQLite.COLUMN_LATITUDE,
             creatingmydbSQLite.COLUMN_EDATE
     };
     public EventDataSource(Context context) {
@@ -78,6 +80,8 @@ public class EventDataSource {
         values.put(creatingmydbSQLite.COLUMN_KID_ID, event.getKidID());
         values.put(creatingmydbSQLite.COLUMN_P_ID_EVENT,event.getParseid());
         values.put(creatingmydbSQLite.COLUMN_LOCATION,event.getLocation());
+        values.put(creatingmydbSQLite.COLUMN_LONGITUDE,event.getLongitude());
+        values.put(creatingmydbSQLite.COLUMN_LATITUDE,event.getLatitude());
         values.put(creatingmydbSQLite.COLUMN_EDATE,event.getDate());
         Event newevent=new Event();
         Cursor cursor2 = database.query(creatingmydbSQLite.TABLE_EVENT, allColumns, creatingmydbSQLite.COLUMN_P_ID_EVENT + " =? ",
@@ -102,6 +106,9 @@ public class EventDataSource {
         long id = event.getId();
         Log.i("DELETE_EVENT",""+id);
         database.delete(creatingmydbSQLite.TABLE_EVENT, creatingmydbSQLite.COLUMN_EID + " = " + id, null);
+    }
+    public void DeleteEventByparseID(String PARSEID) {
+        database.delete(creatingmydbSQLite.TABLE_EVENT, creatingmydbSQLite.COLUMN_P_ID_EVENT + " = " + PARSEID, null);
     }
     public void DeleteAllEvent(){
         List<Event> events = new ArrayList<Event>();
@@ -139,6 +146,8 @@ public class EventDataSource {
         values.put(creatingmydbSQLite.COLUMN_KID_ID, event.getKidID());
         values.put(creatingmydbSQLite.COLUMN_P_ID_EVENT, event.getParseid());
         values.put(creatingmydbSQLite.COLUMN_LOCATION, event.getLocation());
+        values.put(creatingmydbSQLite.COLUMN_LONGITUDE,event.getLongitude());
+        values.put(creatingmydbSQLite.COLUMN_LATITUDE,event.getLatitude());
         values.put(creatingmydbSQLite.COLUMN_EDATE, event.getDate());
         Cursor cursor2 = database.query(creatingmydbSQLite.TABLE_EVENT, allColumns, creatingmydbSQLite.COLUMN_P_ID_EVENT + " =? ",
                 new String[]{event.getParseid()}, null, null, null);
@@ -154,13 +163,15 @@ public class EventDataSource {
         Log.i("UPDATEEVENT", "update event");
         ContentValues values = new ContentValues();
         values.put(creatingmydbSQLite.COLUMN_NAME,event.getName());
-        values.put(creatingmydbSQLite.COLUMN_START_TIME,event.getStart_time());
+        values.put(creatingmydbSQLite.COLUMN_START_TIME, event.getStart_time());
         values.put(creatingmydbSQLite.COLUMN_END_TIME,event.getEnd_time());
         values.put(creatingmydbSQLite.COLUMN_DAY, event.getDay());
         values.put(creatingmydbSQLite.COLUMN_EVENT_ADDRESS,event.getAddress());
         values.put(creatingmydbSQLite.COLUMN_KID_ID, event.getKidID());
         values.put(creatingmydbSQLite.COLUMN_P_ID_EVENT,event.getParseid());
         values.put(creatingmydbSQLite.COLUMN_LOCATION,event.getLocation());
+        values.put(creatingmydbSQLite.COLUMN_LONGITUDE,event.getLongitude());
+        values.put(creatingmydbSQLite.COLUMN_LATITUDE,event.getLatitude());
         values.put(creatingmydbSQLite.COLUMN_EDATE,event.getDate());
         database.update(creatingmydbSQLite.TABLE_EVENT,
                 values, creatingmydbSQLite.COLUMN_ID + "=" + event.getId(), null);
@@ -190,7 +201,9 @@ public class EventDataSource {
         event.setKidID(cursor.getString(6));
         event.setParseid(cursor.getString(7));
         event.setLocation(cursor.getLong(8));
-        event.setDate(cursor.getString(9));
+        event.setLongitude(cursor.getDouble(9));
+        event.setLatitude(cursor.getDouble(10));
+        event.setDate(cursor.getString(11));
         return event;
     }
 }

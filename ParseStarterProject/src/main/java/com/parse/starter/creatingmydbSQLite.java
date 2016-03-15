@@ -13,26 +13,6 @@ public class creatingmydbSQLite extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "users.db";
     private static final int DATABASE_VERSION =1;
 
-    //warning message
-    public static final String TABLE_WARNING="war_Tab";
-    public static final String COLUMN_WARID="_id";
-    public static final String COLUMN_KIDID="kidid";
-    public static final String COLUMN_KID_NAME="name";
-    public static final String COLUMN_EVENT_ID="event";
-    public static final String COLUMN_WAR_DATE="date";
-    public static final String COLUMN_LOC_x="x";
-    public static final String COLUMN_LOC_Y="y";
-    public static final String COLUMN_WAR_P_ID="parse_id";
-
-    private static final String DATABASE_WARNING_CREATE = "create table " + TABLE_WARNING +
-            "(" + COLUMN_WARID + " integer primary key autoincrement, "
-            + COLUMN_KIDID      + " text,"
-            + COLUMN_KID_NAME   + " text,"
-            + COLUMN_EVENT_ID   + " text,"
-            + COLUMN_WAR_DATE   + " text,"
-            + COLUMN_WAR_P_ID   + " text,"
-            + COLUMN_LOC_x      + " integer,"
-            + COLUMN_LOC_Y      + " integer)";
     //users database
     public static final String TABLE_USERS = "users";
     public static final String COLUMN_ID = "_id";
@@ -98,6 +78,8 @@ public class creatingmydbSQLite extends SQLiteOpenHelper {
     public static final String COLUMN_P_ID_EVENT = "parse";
     public static final String COLUMN_LOCATION = "location";
     public static final String COLUMN_EDATE = "date";
+    public static final String COLUMN_LONGITUDE = "longitude";
+    public static final String COLUMN_LATITUDE = "latitude";
     private static final String DATABASE_EVENT_CREATE =
             "create table " + TABLE_EVENT +
                     "(" + COLUMN_EID + " integer primary key autoincrement, "
@@ -109,6 +91,8 @@ public class creatingmydbSQLite extends SQLiteOpenHelper {
                     + COLUMN_KID_ID        + " text,"
                     + COLUMN_P_ID_EVENT    + " text,"
                     + COLUMN_LOCATION      + " integer,"
+                    + COLUMN_LONGITUDE     + " integer,"
+                    + COLUMN_LATITUDE      + " integer,"
                     + COLUMN_EDATE         + " text)";
     public creatingmydbSQLite(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -118,7 +102,6 @@ public class creatingmydbSQLite extends SQLiteOpenHelper {
         database.execSQL(DATABASE_CREATE);
         database.execSQL(DATABASE_MESSAGE_CREATE);
         database.execSQL(DATABASE_EVENT_CREATE);
-        database.execSQL(DATABASE_WARNING_CREATE);
     }
 
     @Override
@@ -131,8 +114,6 @@ public class creatingmydbSQLite extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + DATABASE_MESSAGE_CREATE);
         onCreate(db);
         db.execSQL("DROP TABLE IF EXISTS " + DATABASE_EVENT_CREATE);
-        onCreate(db);
-        db.execSQL("DROP TABLE IF EXISTS " + DATABASE_WARNING_CREATE);
         onCreate(db);
     }
 

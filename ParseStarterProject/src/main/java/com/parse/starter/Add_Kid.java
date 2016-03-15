@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.parse.ParseException;
@@ -50,9 +51,9 @@ public class Add_Kid extends Fragment {
     static public EditText Password;
     static public EditText Confirm_Password;
     static public EditText Phone_NUmber;
-    static public EditText Address;
+    static public TextView Address;
     static public EditText Email;
-    static public EditText Birthday;
+    static public TextView Birthday;
     static public ImageView kid_image;
 
 
@@ -90,9 +91,9 @@ public class Add_Kid extends Fragment {
                 Password = (EditText) Kid.findViewById(R.id.AddKid_Pass);
                 Confirm_Password = (EditText) Kid.findViewById(R.id.AddKid_ConfPass);
                 Phone_NUmber = (EditText) Kid.findViewById(R.id.AddKid_Phone);
-                Address = (EditText) Kid.findViewById(R.id.AddKid_Address);
+                Address = (TextView) Kid.findViewById(R.id.AddKid_Address);
                 Email = (EditText) Kid.findViewById(R.id.AddKid_Email);
-                Birthday = (EditText) Kid.findViewById(R.id.AddKid_Birthday);
+                Birthday = (TextView) Kid.findViewById(R.id.AddKid_Birthday);
                 kid_image = (ImageView) Kid.findViewById(R.id.AddKid_Image);
                 //put all the user kid details value in string....
                 First_Name_STR = First_Name.getText().toString();
@@ -131,7 +132,6 @@ public class Add_Kid extends Fragment {
                         addkid.put("Birthday", Birthday_STR);
                         addkid.put("Parent", false);
                         addkid.put("FAMILY_ID", users.get(0).getFamily_id());
-
                         addkid.saveInBackground(new SaveCallback() {
                             @Override
                             public void done(ParseException e) {

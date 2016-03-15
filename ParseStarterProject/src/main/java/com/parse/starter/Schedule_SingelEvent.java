@@ -51,13 +51,14 @@ public class Schedule_SingelEvent extends Fragment {
     public ScrollView scrollView;
     static protected boolean newevent=false;
     static protected boolean updateevent=false;
-
+    static public double longitude = 0;
+    static public double latitude = 0;
     static protected ProgressBar ProgressUpdate;
 
 
     static protected Event CurrentEvent;
     static protected EditText NameEvent;
-    static protected EditText AddressEvent;
+    static protected TextView AddressEvent;
     static protected TextView day;
     static protected TextView date;
     static protected TextView Set_Start_Time;
@@ -247,11 +248,13 @@ public class Schedule_SingelEvent extends Fragment {
                     daterel.setEnabled(false);
             }
         }
+        longitude=CurrentEvent.getLongitude();
+        latitude=CurrentEvent.getLatitude();
         //event name
         NameEvent=(EditText)singelevent.findViewById(R.id.SingleEv_Name);
         NameEvent.setText(CurrentEvent.getName());
         //event address
-        AddressEvent=(EditText)singelevent.findViewById(R.id.SingleEv_Address);
+        AddressEvent=(TextView)singelevent.findViewById(R.id.SingleEv_Address);
         AddressEvent.setText(CurrentEvent.getAddress());
         //event day
         day=(TextView)singelevent.findViewById(R.id.SingleEv_Day);
@@ -350,6 +353,8 @@ public class Schedule_SingelEvent extends Fragment {
                             newevent.put("Date",date.getText().toString());
                             newevent.put("Day",day.getText().toString());
                         }
+                        newevent.put("longitude",longitude);
+                        newevent.put("latitude",latitude);
                         newevent.put("Kid_ID", Schedule_Mange.kidID);
                         newevent.saveInBackground(new SaveCallback() {
                             @Override
@@ -386,6 +391,8 @@ public class Schedule_SingelEvent extends Fragment {
                                         parseObject.put("Date", date.getText().toString());
                                         parseObject.put("Day",  day.getText().toString());
                                     }
+                                    parseObject.put("longitude",longitude);
+                                    parseObject.put("latitude",latitude);
                                     parseObject.saveInBackground();
                                     Toast.makeText(getActivity(), "old"+NameEvent.getText().toString()+" id"+CurrentEvent.getParseid(), Toast.LENGTH_SHORT).show();
                                     event.setParseid(parseObject.getObjectId());
@@ -417,7 +424,16 @@ public class Schedule_SingelEvent extends Fragment {
                     EventDataSource edb=new EventDataSource(activity);
                     edb.open();
                     if(edb.exist(event)){
+                        JSONObject data = new JSONObject();
+                        try {
+                            data.put("status", "DeletEvent");
+                            data.put("EVENT_PARSE_ID", event.getParseid());
+                        } catch (JSONException e3) {
+                            // TODO Auto-generated catch block
+                            e3.printStackTrace();
+                        }
                         edb.DeleteEvent(event);
+
                     }
                     edb.close();
                 }
@@ -478,4 +494,10 @@ public class Schedule_SingelEvent extends Fragment {
         if(!checkBox_day.isEnabled())   checkBox_day.setEnabled(true);
         if(!checkBox_date.isEnabled())  checkBox_date.setEnabled(true);
     }
+    public static TextView ReturnAddras(String x)
+    {
+        AddressEvent.setText(x);
+        return AddressEvent;
+    }
+
 }

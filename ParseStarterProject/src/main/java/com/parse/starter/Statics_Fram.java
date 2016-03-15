@@ -15,7 +15,6 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.TimeZone;
 
 /**
  * Created by Admin on 05/03/2016.
@@ -65,7 +64,7 @@ public class Statics_Fram extends Fragment {
                 userName.setText(users.get(indx).getFirstname());
                 kidname_STR=users.get(indx).getFirstname();
                 kidID=users.get(indx).getUserParseID();
-                OPEN_ALL_STATISTICS(kidID,activity);
+                //OPEN_ALL_STATISTICS(kidID,activity);
             }
             LinearLayout lay=new LinearLayout(activity);
             lay.setOrientation(LinearLayout.VERTICAL);
@@ -87,7 +86,7 @@ public class Statics_Fram extends Fragment {
             LayotKidImage.addView(lay);
         }
     }
-    public static void OPEN_ALL_STATISTICS(String kidid,Activity activity){
+    /*public static void OPEN_ALL_STATISTICS(String kidid,Activity activity){
         WarningDataSource WDB=new WarningDataSource(activity);
         WDB.open();
         ArrayList<WarningMessage> warlist=WDB.getAllWarning();
@@ -123,6 +122,5 @@ public class Statics_Fram extends Fragment {
             warning_4_this_year.setText("noting for this year");
             yearreport.addView(warning_4_this_year);
         }
-    }
-
+    }*/
 }

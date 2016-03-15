@@ -78,7 +78,7 @@ public class Location extends Fragment implements OnMapReadyCallback {
         if (googleMap == null) {
             googleMap = ((MapFragment) getFragmentManager().findFragmentById(R.id.map)).getMap();
         }
-        googleMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
+        googleMap.setMapType(GoogleMap.MAP_TYPE_TERRAIN);
         onMapReady(googleMap);
         SetImageeUsers(getActivity());
         return myview;
@@ -157,19 +157,12 @@ public class Location extends Fragment implements OnMapReadyCallback {
     static public void updatemap(GoogleMap googleMap){
         if(googleMap!=null){
             LatLng KidLocation = new LatLng(Latitude2, Longitude2);
+            googleMap.clear();
             googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(KidLocation, 16));
             googleMap.addMarker(new MarkerOptions().position(KidLocation).title(Latitude2.toString() + '\n' + Longitude2.toString()));
         }
     }
     @Override
     public void onMapReady(GoogleMap googleMap) {
-        if(googleMap!=null){
-            Toast.makeText(getActivity(),"not null",Toast.LENGTH_SHORT).show();
-            LatLng KidLocation = new LatLng(33.217786,35.573403);
-            googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(KidLocation, 16));
-            googleMap.addMarker(new MarkerOptions().position(KidLocation));
-        }else{
-            Toast.makeText(getActivity(),"null",Toast.LENGTH_SHORT).show();
-        }
     }
 }

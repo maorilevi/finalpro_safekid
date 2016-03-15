@@ -31,7 +31,6 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -46,6 +45,7 @@ import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
 import com.google.android.gms.common.GooglePlayServicesRepairableException;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.ui.PlacePicker;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
@@ -58,6 +58,7 @@ import java.util.TimeZone;
 @TargetApi(Build.VERSION_CODES.HONEYCOMB)
 public class Main2Activity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     //google maps
+    private static int FUNC_ADDRESS1_IMAGE2 = 0;
     private static final int PLACE_PICKER_REQUEST = 1;
     private static final LatLngBounds BOUNDS_MOUNTAIN_VIEW = new LatLngBounds(
             new LatLng(37.398160, -122.180831), new LatLng(37.430610, -121.972090));
@@ -336,10 +337,6 @@ public class Main2Activity extends AppCompatActivity implements NavigationView.O
 
     }
 
-    static public void openservice(Activity activity) {
-
-
-    }
 
     public static void update(final Activity activity) {
         final boolean[] run = {true};
@@ -396,21 +393,28 @@ public class Main2Activity extends AppCompatActivity implements NavigationView.O
         }
     };
 
-    public void PicAddraesEvent() {
+    public void PicAddraesEvent(View view) {
         try {
+            FUNC_ADDRESS1_IMAGE2=1;
+            if(view==findViewById(R.id.SignUp_Address)){
+                screncount = 4;
+            }else if(view==findViewById(R.id.AddKid_Address)){
+                screncount = 5;
+            }else if(view==findViewById(R.id.SingleEv_Address)){
+                screncount = 6;
+            }else if(view==findViewById(R.id.Setting_Address)) {
+                screncount = 7;
+            }
             PlacePicker.IntentBuilder builder = new PlacePicker.IntentBuilder();
-
             builder.setLatLngBounds(BOUNDS_MOUNTAIN_VIEW);
-
             startActivityForResult((builder.build(this)), PLACE_PICKER_REQUEST);
-
         } catch (GooglePlayServicesRepairableException
                 | GooglePlayServicesNotAvailableException e) {
             e.printStackTrace();
         }
     }
-
     public void loadImagefromGallery(View view) {
+        FUNC_ADDRESS1_IMAGE2=2;
         if (view == findViewById(R.id.SignUp_ChooseImage)) {
             screncount = 1;
             Addkidscreen = false;
@@ -430,41 +434,80 @@ public class Main2Activity extends AppCompatActivity implements NavigationView.O
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
         try {
-            // When an Image is picked
-            if (requestCode == RESULT_LOAD_IMG && resultCode == RESULT_OK && null != data) {
-                // Get the Image from data
-                Uri selectedImage = data.getData();
-                String[] filePathColumn = {MediaStore.Images.Media.DATA};
-                // Get the cursor
-                Cursor cursor = getContentResolver().query(selectedImage,
-                        filePathColumn, null, null, null);
-                // Move to first row
-                cursor.moveToFirst();
-                int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
-                imgDecodableString = cursor.getString(columnIndex);
-                cursor.close();
-                // Set the Image in ImageView after decoding the String
-                switch (screncount) {
-                    case 1:
-                        ImageView imageView = (ImageView) findViewById(R.id.SignUp_Image);
-                        imageView.setImageBitmap(BitmapFactory.decodeFile(imgDecodableString));
-                        break;
-                    case 2:
-                        ImageView imageView2 = (ImageView) findViewById(R.id.AddKid_Image);
-                        imageView2.setImageBitmap(BitmapFactory.decodeFile(imgDecodableString));
-                        break;
-                    case 3:
-                        ImageView imageView3 = (ImageView) findViewById(R.id.Setting_User_Image);
-                        imageView3.setImageBitmap(BitmapFactory.decodeFile(imgDecodableString));
-                        break;
-                    default:
-                        break;
+            if (FUNC_ADDRESS1_IMAGE2 == 2) {
+                super.onActivityResult(requestCode, resultCode, data);
+                Toast.makeText(this, "image", Toast.LENGTH_SHORT).show();
+                // When an Image is picked
+                if (requestCode == RESULT_LOAD_IMG && resultCode == RESULT_OK && null != data) {
+                    // Get the Image from data
+                    Uri selectedImage = data.getData();
+                    String[] filePathColumn = {MediaStore.Images.Media.DATA};
+                    // Get the cursor
+                    Cursor cursor = getContentResolver().query(selectedImage,
+                            filePathColumn, null, null, null);
+                    // Move to first row
+                    cursor.moveToFirst();
+                    int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+                    imgDecodableString = cursor.getString(columnIndex);
+                    cursor.close();
+                    // Set the Image in ImageView after decoding the String
+                    switch (screncount) {
+                        case 1:
+                            ImageView imageView = (ImageView) findViewById(R.id.SignUp_Image);
+                            imageView.setImageBitmap(BitmapFactory.decodeFile(imgDecodableString));
+                            break;
+                        case 2:
+                            ImageView imageView2 = (ImageView) findViewById(R.id.AddKid_Image);
+                            imageView2.setImageBitmap(BitmapFactory.decodeFile(imgDecodableString));
+                            break;
+                        case 3:
+                            ImageView imageView3 = (ImageView) findViewById(R.id.Setting_User_Image);
+                            imageView3.setImageBitmap(BitmapFactory.decodeFile(imgDecodableString));
+                            break;
+                        default:
+                            break;
+                    }
+                } else {
+                    Toast.makeText(this, "You haven't picked Image",
+                            Toast.LENGTH_LONG).show();
                 }
-            } else {
-                Toast.makeText(this, "You haven't picked Image",
-                        Toast.LENGTH_LONG).show();
+            } else if (FUNC_ADDRESS1_IMAGE2 == 1) {
+                Toast.makeText(this, "address", Toast.LENGTH_SHORT).show();
+                if (requestCode == PLACE_PICKER_REQUEST && resultCode == RESULT_OK && null != data) {
+                    Toast.makeText(this, "address 2", Toast.LENGTH_SHORT).show();
+                    final Place place = PlacePicker.getPlace(data, this);
+                    final CharSequence name = place.getName();
+                    Lat = place.getLatLng();
+                    Schedule_SingelEvent.longitude = Lat.longitude;
+                    Schedule_SingelEvent.latitude = Lat.latitude;
+                    final CharSequence address = place.getAddress();
+                    String attributions = (String) place.getId();
+                    Toast.makeText(this, "address 3:"+attributions, Toast.LENGTH_SHORT).show();
+
+                    if (attributions == null) {
+                        attributions = "";
+                    }
+                    AddressEvent=name.toString()+" "+address.toString();
+                    //Schedule_SingelEvent.ReturnAddras(AddressEvent);
+
+                    switch (screncount) {
+                        case 4:
+                            ((TextView) findViewById(R.id.SignUp_Address)).setText(AddressEvent);
+                            break;
+                        case 5:
+                            ((TextView) findViewById(R.id.AddKid_Address)).setText(AddressEvent);
+                            break;
+                        case 6:
+                            ((TextView) findViewById(R.id.SingleEv_Address)).setText(AddressEvent);
+                            break;
+                        case 7:
+                            ((TextView) findViewById(R.id.Setting_Address)).setText(AddressEvent);
+                            break;
+                    }
+                } else {
+                    Toast.makeText(this, "address xxx", Toast.LENGTH_SHORT).show();
+                }
             }
         } catch (Exception e) {
             Toast.makeText(this, "Something went wrong", Toast.LENGTH_LONG).show();
@@ -479,7 +522,7 @@ public class Main2Activity extends AppCompatActivity implements NavigationView.O
     private int dayfromweek = 0;
     static final int DATE_DIALOG_ID = 100;
     static final int TIME_DIALOG_ID = 1111;
-
+    static int DATAINDX=0;
     public void opendatetime(View view) {
         if (view == findViewById(R.id.Event_Show_endbtn)) {
             text_Time = (TextView) findViewById(R.id.SingleEv_End);
@@ -487,8 +530,19 @@ public class Main2Activity extends AppCompatActivity implements NavigationView.O
         } else if (view == findViewById(R.id.Event_Show_startbtn)) {
             text_Time = (TextView) findViewById(R.id.SingleEv_Start);
             showDialog(TIME_DIALOG_ID);
-        } else if (view == findViewById(R.id.calbtn))
+        } else if (view == findViewById(R.id.calbtn)){
+            DATAINDX=1;
             showDialog(DATE_DIALOG_ID);
+        }else if(view==findViewById(R.id.SignUp_Birthday)){
+            DATAINDX=2;
+            showDialog(DATE_DIALOG_ID);
+        }else if(view==findViewById(R.id.AddKid_Birthday)){
+            DATAINDX=3;
+            showDialog(DATE_DIALOG_ID);
+        }else if(view==findViewById(R.id.Setting_Birthday)){
+            DATAINDX=4;
+            showDialog(DATE_DIALOG_ID);
+        }
     }
 
     @Override
@@ -528,15 +582,6 @@ public class Main2Activity extends AppCompatActivity implements NavigationView.O
         }
     };
 
-    private static String utilTime(int value) {
-        if (value < 10)
-            return "0" + String.valueOf(value);
-        else
-            return String.valueOf(value);
-    }
-
-
-    // Used to convert 24hr format to 12hr format with AM/PM values
     private void updateTime(int hours, int mins) {
         String timeSet = "";
         if (hours > 23) {
@@ -585,45 +630,35 @@ public class Main2Activity extends AppCompatActivity implements NavigationView.O
             dayfromweek = cal.get(Calendar.DAY_OF_WEEK);
             String day_STR = "";
             switch (dayfromweek) {
+                case 1:day_STR = "Sunday";break;
+                case 2:day_STR = "Monday";break;
+                case 3:day_STR = "Tuesday";break;
+                case 4:day_STR = "Wednesday";break;
+                case 5:day_STR = "Thursday";break;
+                case 6:day_STR = "Friday";break;
+                case 7:day_STR = "Saturday";break;
+                default:break;
+            }
+            switch (DATAINDX){
                 case 1:
-                    day_STR = "Sunday";
+                    ((TextView) findViewById(R.id.SingleEv_Day)).setText(day_STR);
+                    text_date.setText(Day + "/" + Month + "/" + Year);
                     break;
                 case 2:
-                    day_STR = "Monday";
+                    ((TextView)findViewById(R.id.SignUp_Birthday)).setText(Day + "/" + Month + "/" + Year);
                     break;
                 case 3:
-                    day_STR = "Tuesday";
+                    ((TextView)findViewById(R.id.AddKid_Birthday)).setText(Day + "/" + Month + "/" + Year);
                     break;
                 case 4:
-                    day_STR = "Wednesday";
-                    break;
-                case 5:
-                    day_STR = "Thursday";
-                    break;
-                case 6:
-                    day_STR = "Friday";
-                    break;
-                case 7:
-                    day_STR = "Saturday";
+                    ((TextView)findViewById(R.id.Setting_Birthday)).setText(Day + "/" + Month + "/" + Year);
                     break;
                 default:
                     break;
             }
-            ((TextView) findViewById(R.id.SingleEv_Day)).setText(day_STR);
-            text_date.setText(Day + "/" + Month + "/" + Year);
+            DATAINDX=0;
         }
     };
-
-    public void myshow(View view) {
-        UsersDataSource udb = new UsersDataSource(Main2Activity.this);
-        udb.open();
-        ArrayList<User> list = new ArrayList<User>();
-        list = udb.getAllUsers();
-        udb.close();
-        for (int indx = 0; indx < list.size(); indx++) {
-            Log.i("USERDETAILS:", "" + Integer.toString(indx) + ":" + list.get(indx).getFirstname());
-        }
-    }
 
     private boolean isMyServiceRunning(Class<?> serviceClass) {
         ActivityManager manager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);

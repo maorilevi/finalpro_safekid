@@ -287,6 +287,8 @@ public class UPDATE_DETAILS_CLASS {
                                                     event.setKidID(results.get(indx).getString("Kid_ID"));
                                                     event.setDay(results.get(indx).getString("Day"));
                                                     event.setDate(results.get(indx).getString("Date"));
+                                                    event.setLongitude(results.get(indx).getDouble("longitude"));
+                                                    event.setLatitude(results.get(indx).getDouble("latitude"));
                                                     EventDataSource eventDB = new EventDataSource(context);
                                                     eventDB.open();
                                                     if (eventDB.CreateNewEvent(event)) {
